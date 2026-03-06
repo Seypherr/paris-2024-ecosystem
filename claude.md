@@ -26,8 +26,7 @@ Le projet est réalisé dans le cadre d'un exercice académique (Ynov 2025-2026)
 │   ├── mentions-legales.html   # Mentions légales
 │   └── politique-confidentialite.html  # Politique de confidentialité
 ├── claude.md                   # Documentation du projet (ce fichier)
-├── PROMPTS.md                  # Journal des prompts utilisés
-└── design-*.html               # Maquette HTML originale (fichier source)
+└── PROMPTS.md                  # Journal des prompts utilisés
 ```
 
 ---
