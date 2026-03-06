@@ -98,11 +98,37 @@ Créer un site web interactif multi-pages présentant l'écosystème des Jeux Ol
 
 ---
 
+### Prompt 11 — Migration des pages et lazy loading
+
+> « Il faut passer toutes les pages dans pages/. Mettre du lazy loading afin de ne pas faire de bug. Créer une page 404 avec les redirections dessus en cas de chemin non existant. Mettre l'image de Leon_Marchand dans sa rubrique. »
+
+**Résultat** :
+- Les 4 pages de contenu (écosystème, dashboard, héritage, innovations) déplacées dans `pages/`
+- Tous les liens internes (nav, footer, CSS, images) mis à jour dans les 7 fichiers HTML
+- Lazy loading via `IntersectionObserver` ajouté sur écosystème (réseau SVG), dashboard (graphiques + table) et innovations (jauges, radar, grille)
+- Page `404.html` créée avec navbar, liens de redirection et countdown automatique de 10s
+- Photo `Leon_Marchand.jpg` intégrée dans le profil athlète du dashboard
+
+---
+
+### Prompt 12 — Correction graphiques héritage
+
+> « Le graphique de répartitions des investissements ne marche pas, est-ce que tu peux le corriger. Le graphique Carte des Infrastructures manque de clarté sur quelle axe est quoi. »
+
+**Résultat** :
+- Bug des barres d'investissement corrigé : les éléments dynamiques étaient créés avec la classe `appear` (opacity: 0) après que l'observer ait scanné le DOM — remplacé par des transitions inline déclenchées par un observer dédié
+- Carte des infrastructures améliorée : ajout d'un titre, d'indications d'orientation (Nord/Sud/Est/Ouest avec zones géographiques), du tracé du Périphérique, du label « La Seine » et d'une légende couleur
+
+---
+
 ## Résultat final
 
-Un site de 5 pages fonctionnel, responsive et interactif avec :
-- 15+ visualisations SVG (courbes, barres, radar, jauges, réseau)
+Un site de 5 pages + page 404 fonctionnel, responsive et interactif avec :
+- 15+ visualisations SVG (courbes, barres, radar, jauges, réseau, carte)
 - 5 formes d'interactivité (filtres, clics, drag, scroll, modals)
-- Navigation cohérente et footer complet
+- Navigation cohérente et footer complet avec pages légales
+- Lazy loading sur tous les contenus lourds
+- Page 404 avec redirection automatique
 - Design dark mode uniforme
+- Photos réelles intégrées (Anne Hidalgo, Léon Marchand)
 - Déploiement sur GitHub Pages
