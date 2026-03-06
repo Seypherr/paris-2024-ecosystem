@@ -320,32 +320,24 @@
             let html = '';
             data.forEach((d,i) => {
                 html += `
-                <div class="invest-bar-row" style="opacity:0;transform:translateY(20px);transition:opacity 0.5s ease ${i*0.1}s,transform 0.5s ease ${i*0.1}s;">
+                <div class="invest-bar-row">
                     <div class="invest-bar-label">${d.label}</div>
                     <div class="invest-bar-track">
-                        <div class="invest-bar-fill" style="background:${d.color};transition-delay:${i*0.15 + 0.3}s;" data-width="${(d.val/maxVal)*100}%"></div>
+                        <div class="invest-bar-fill" style="background:${d.color};" data-width="${(d.val/maxVal)*100}%"></div>
                     </div>
                     <div class="invest-bar-value" style="color:${d.color};">${d.val}%</div>
                 </div>`;
             });
             el.innerHTML = html;
 
-            /* Animate bars on scroll */
-            const barObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        el.querySelectorAll('.invest-bar-row').forEach(row => {
-                            row.style.opacity = '1';
-                            row.style.transform = 'translateY(0)';
-                        });
-                        document.querySelectorAll('.invest-bar-fill').forEach(bar => {
-                            bar.style.width = bar.dataset.width;
-                        });
-                        barObserver.disconnect();
-                    }
+            /* Animate bar widths after a short delay to allow DOM paint */
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    el.querySelectorAll('.invest-bar-fill').forEach((bar, i) => {
+                        setTimeout(() => { bar.style.width = bar.dataset.width; }, i * 150);
+                    });
                 });
-            }, { threshold: 0.2 });
-            barObserver.observe(el);
+            });
         })();
 
         /* ---- Map Info ---- */
