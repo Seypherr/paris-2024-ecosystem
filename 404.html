@@ -29,30 +29,30 @@
         </div>
     </nav>
 
-    <main class="page-main" style="min-height:80vh;display:flex;align-items:center;justify-content:center;">
-        <div class="container" style="text-align:center;max-width:600px;padding:4rem 1.5rem;">
+    <main class="page-main error-page">
+        <div class="container error-container">
 
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:8rem;font-weight:800;line-height:1;margin-bottom:1rem;">
-                <span style="background:linear-gradient(135deg,#00c4a0,#e91e8c);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;display:inline-block;">404</span>
+            <div class="error-code">
+                <span>404</span>
             </div>
 
-            <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:700;text-transform:uppercase;color:#fff;margin-bottom:1rem;">Page non trouvée</h1>
+            <h1 class="error-title">Page non trouvée</h1>
 
-            <p style="color:#9ca3af;font-size:1rem;line-height:1.7;margin-bottom:2.5rem;">
+            <p class="error-desc">
                 La page que vous cherchez n'existe pas ou a été déplacée.<br>
                 Utilisez les liens ci-dessous pour retrouver votre chemin.
             </p>
 
-            <div style="display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;margin-bottom:3rem;">
-                <a href="index.html" class="btn-primary" style="text-decoration:none;">Accueil</a>
-                <a href="pages/ecosysteme.html" class="btn-secondary" style="text-decoration:none;">Écosystème</a>
-                <a href="pages/dashboard.html" class="btn-secondary" style="text-decoration:none;">Dashboard</a>
-                <a href="pages/heritage.html" class="btn-secondary" style="text-decoration:none;">Héritage</a>
-                <a href="pages/innovations.html" class="btn-secondary" style="text-decoration:none;">Innovations</a>
+            <div class="error-links">
+                <a href="index.html" class="btn-primary">Accueil</a>
+                <a href="pages/ecosysteme.html" class="btn-secondary">Écosystème</a>
+                <a href="pages/dashboard.html" class="btn-secondary">Dashboard</a>
+                <a href="pages/heritage.html" class="btn-secondary">Héritage</a>
+                <a href="pages/innovations.html" class="btn-secondary">Innovations</a>
             </div>
 
-            <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:2rem;">
-                <p style="color:#6b7280;font-size:0.85rem;">
+            <div class="error-redirect">
+                <p>
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
                     Vous serez redirigé automatiquement vers l'accueil dans <strong id="countdown" style="color:#00c4a0;">10</strong> secondes.
                 </p>

@@ -236,6 +236,11 @@
                 document.getElementById('panel-connections').innerHTML = conns;
 
                 panel.classList.add('visible');
+
+                /* Auto-scroll to detail panel on mobile */
+                if (window.innerWidth <= 768) {
+                    setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+                }
             }, 300);
 
             /* Highlight node in SVG */

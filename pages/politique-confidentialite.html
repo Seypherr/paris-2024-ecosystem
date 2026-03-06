@@ -13,16 +13,19 @@
     <!-- Navbar -->
     <nav class="site-nav">
         <div class="nav-inner">
-            <a href="../index.html" class="nav-brand">PARIS <span class="accent">2024</span></a>
-            <button class="nav-hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+            <a href="../index.html" class="brand">
+                <div class="brand-icon">Y</div>
+                <span class="brand-text">PARIS 2024 <span>ECOSYSTEM</span></span>
+            </a>
+            <button class="nav-hamburger" id="hamburger" onclick="document.getElementById('hamburger').classList.toggle('open');document.getElementById('nav-links').classList.toggle('open');">
                 <span></span><span></span><span></span>
             </button>
-            <div class="nav-links">
-                <a href="../index.html">Accueil</a>
-                <a href="ecosysteme.html">Écosystème</a>
-                <a href="dashboard.html">Dashboard</a>
-                <a href="heritage.html">Héritage</a>
-                <a href="innovations.html">Innovations</a>
+            <div class="nav-links" id="nav-links">
+                <a href="../index.html" class="gradient-border-bottom">Accueil</a>
+                <a href="ecosysteme.html" class="gradient-border-bottom">Écosystème des JO</a>
+                <a href="dashboard.html" class="gradient-border-bottom">Dashboard Athlète</a>
+                <a href="heritage.html" class="gradient-border-bottom">Héritage Olympique</a>
+                <a href="innovations.html" class="gradient-border-bottom">Innovations</a>
             </div>
         </div>
     </nav>

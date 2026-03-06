@@ -168,7 +168,7 @@
                     <h3>Carte des Infrastructures</h3>
 
                     <div class="map-card">
-                        <svg width="100%" height="100%" viewBox="0 0 800 500" style="min-height:420px;">
+                        <svg width="100%" height="100%" viewBox="0 0 800 500">
                             <!-- Title -->
                             <text x="400" y="30" text-anchor="middle" fill="#6b7280" font-size="11" font-family="Inter" font-weight="500" letter-spacing="0.15em" text-transform="uppercase">PARIS &amp; ÎLE-DE-FRANCE — SITES OLYMPIQUES 2024</text>
 
@@ -380,7 +380,12 @@
             container.addEventListener('mousedown', () => dragging = true);
             window.addEventListener('mouseup', () => dragging = false);
             window.addEventListener('mousemove', e => { if(dragging) move(e.clientX); });
-            container.addEventListener('touchmove', e => move(e.touches[0].clientX));
+            container.addEventListener('touchstart', () => dragging = true, { passive: true });
+            container.addEventListener('touchend', () => dragging = false);
+            container.addEventListener('touchmove', e => {
+                e.preventDefault();
+                move(e.touches[0].clientX);
+            }, { passive: false });
         })();
     </script>
 </body>
