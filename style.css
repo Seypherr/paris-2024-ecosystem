@@ -33,6 +33,7 @@ body {
 .gradient-text {
     background: linear-gradient(135deg, #00c4a0 0%, #e91e8c 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -1102,6 +1103,7 @@ body {
     color: transparent;
     background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent);
     -webkit-background-clip: text;
+    background-clip: text;
     user-select: none;
 }
 .icon-svg {
