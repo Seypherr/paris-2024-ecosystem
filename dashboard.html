@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Performance Athlète | Paris 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <a href="index.html" class="brand">
+                <div class="brand-icon">Y</div>
+                <span class="brand-text">PARIS 2024 <span>ECOSYSTEM</span></span>
+            </a>
+            <button class="nav-hamburger" id="hamburger" onclick="document.getElementById('hamburger').classList.toggle('open');document.getElementById('nav-links').classList.toggle('open');">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" class="gradient-border-bottom">Accueil</a>
+                <a href="ecosysteme.html" class="gradient-border-bottom">Écosystème des JO</a>
+                <a href="dashboard.html" class="gradient-border-bottom active">Dashboard Athlète</a>
+                <a href="heritage.html" class="gradient-border-bottom">Héritage Olympique</a>
+                <a href="innovations.html" class="gradient-border-bottom">Innovations</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-blobs"><div class="blob-teal"></div><div class="blob-magenta"></div></div>
+
+    <main class="page-main page-padded">
+        <div class="container">
+            <!-- Header + Filters -->
+            <div class="section-header row">
+                <div>
+                    <h2>Dashboard Performance Athlète</h2>
+                    <p>Analyse des performances d'un athlète olympique — <strong class="color-teal">Léon Marchand</strong></p>
+                </div>
+                <div class="filter-row">
+                    <select class="custom-select" id="filter-year" onchange="updateDashboard()">
+                        <option value="all">Toutes les années</option>
+                        <option value="2024" selected>2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                    </select>
+                    <select class="custom-select" id="filter-competition" onchange="updateDashboard()">
+                        <option value="all">Toutes compétitions</option>
+                        <option value="jo">Jeux Olympiques</option>
+                        <option value="mondiaux">Championnats du Monde</option>
+                        <option value="europe">Championnats d'Europe</option>
+                    </select>
+                    <select class="custom-select" id="filter-epreuve" onchange="updateDashboard()">
+                        <option value="all">Toutes épreuves</option>
+                        <option value="200pap">200m Papillon</option>
+                        <option value="400qn">400m 4 Nages</option>
+                        <option value="200qn">200m 4 Nages</option>
+                        <option value="200br">200m Brasse</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Athlete profile card -->
+            <div class="athlete-profile fade-in-up">
+                <div class="athlete-avatar">LM</div>
+                <div class="athlete-info">
+                    <h3 class="athlete-name">Léon Marchand</h3>
+                    <p class="athlete-sub">Natation — France 🇫🇷 &nbsp;|&nbsp; Né le 17 mai 2002 à Toulouse</p>
+                    <div class="athlete-meta">
+                        <span class="athlete-meta-item">Spécialité: <strong class="highlight">4 Nages / Papillon</strong></span>
+                        <span class="athlete-meta-item">Entraîneur: <strong>Bob Bowman</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stat Cards -->
+            <div class="grid-4 fade-in-up anim-delay-1 mb-2">
+                <div class="stat-card" id="card-medals">
+                    <div class="stat-label">Médailles</div>
+                    <div class="stat-value color-gold" id="stat-medals">5</div>
+                    <div class="stat-sub" id="stat-medals-sub">🥇 4 Or &bull; 🥈 1 Argent</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Records Personnels</div>
+                    <div class="stat-value color-magenta" id="stat-records">4</div>
+                    <div class="stat-sub">Dont 1 record du monde</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Participations Majeures</div>
+                    <div class="stat-value" id="stat-participations">8</div>
+                    <div class="stat-sub">JO, Mondiaux, Europe</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Classement Mondial</div>
+                    <div class="stat-value color-teal">1<sup style="font-size:1.5rem;">er</sup></div>
+                    <div class="stat-sub">400m 4 Nages</div>
+                </div>
+            </div>
+
+            <!-- Charts row -->
+            <div class="grid-2 fade-in-up anim-delay-2 mb-2">
+                <!-- Line Chart -->
+                <div class="chart-card">
+                    <h3>Évolution de la Performance</h3>
+                    <p class="chart-subtitle">Progression des résultats au fil des années (400m 4 Nages — temps en secondes)</p>
+                    <div class="chart-area" id="line-chart"></div>
+                </div>
+
+                <!-- Bar Chart -->
+                <div class="chart-card">
+                    <h3>Résultats en Compétition</h3>
+                    <p class="chart-subtitle">Nombre de médailles par compétition</p>
+                    <div class="chart-area" id="bar-chart"></div>
+                </div>
+            </div>
+
+            <!-- Bottom: table + radar -->
+            <div class="bottom-grid fade-in-up anim-delay-3">
+                <!-- Detailed results table -->
+                <div class="chart-card">
+                    <h3>Détail des Résultats</h3>
+                    <div class="table-scroll">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th class="th-left">Année</th>
+                                    <th>Compétition</th>
+                                    <th>Épreuve</th>
+                                    <th>Temps</th>
+                                    <th class="th-center">Médaille</th>
+                                </tr>
+                            </thead>
+                            <tbody id="results-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Radar -->
+                <div class="chart-card flex-col-center">
+                    <h3>Profil Athlétique</h3>
+                    <p class="chart-subtitle-sm">Dimensions de performance</p>
+                    <div class="flex-center" id="radar-chart"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="brand-icon">Y</div>
+                <div class="footer-info">
+                    <span class="title">Paris 2024 Olympic Ecosystem</span><br>
+                    Projet Ynov Campus
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="team-name">Team Gold</div>
+                <div>Alexandre DUPONT &bull; Sarah MARTIN &bull; Thomas BERNARD</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const colors = { teal:'#00c4a0', magenta:'#e91e8c', dark:'#0e0e0e', gold:'#ffd60a', surface:'#1a1a1a', gray:'#9ca3af' };
+
+        /* ---- DATA ---- */
+        const results = [
+            { year:2021, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m Papillon', eventKey:'200pap', time:'1:55.40', medal:'—', medalColor:colors.gray },
+            { year:2022, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m Papillon', eventKey:'200pap', time:'1:53.37', medal:'🥇', medalColor:colors.gold },
+            { year:2022, comp:'Championnats du Monde', compKey:'mondiaux', event:'400m 4 Nages', eventKey:'400qn', time:'4:04.28', medal:'🥇', medalColor:colors.gold },
+            { year:2023, comp:'Championnats du Monde', compKey:'mondiaux', event:'400m 4 Nages', eventKey:'400qn', time:'4:02.50', medal:'🥇', medalColor:colors.gold },
+            { year:2023, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m 4 Nages', eventKey:'200qn', time:'1:55.22', medal:'🥇', medalColor:colors.gold },
+            { year:2023, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m Brasse', eventKey:'200br', time:'2:05.48', medal:'🥈', medalColor:'#c0c0c0' },
+            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'400m 4 Nages', eventKey:'400qn', time:'4:02.95', medal:'🥇', medalColor:colors.gold },
+            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'200m Papillon', eventKey:'200pap', time:'1:51.21', medal:'🥇', medalColor:colors.gold },
+            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'200m 4 Nages', eventKey:'200qn', time:'1:54.06', medal:'🥇', medalColor:colors.gold },
+            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'200m Brasse', eventKey:'200br', time:'2:05.85', medal:'🥇', medalColor:colors.gold }
+        ];
+
+        const perfEvolution = [
+            { year:2020, time:265 },
+            { year:2021, time:258 },
+            { year:2022, time:244 },
+            { year:2023, time:242 },
+            { year:2024, time:242.95 }
+        ];
+
+        const compMedals = [
+            { label:'Championnats\ndu Monde', gold:3, silver:1, bronze:0 },
+            { label:'Jeux\nOlympiques', gold:4, silver:0, bronze:0 },
+            { label:'Championnats\nd\'Europe', gold:1, silver:0, bronze:0 }
+        ];
+
+        function getFilteredResults() {
+            const year = document.getElementById('filter-year').value;
+            const comp = document.getElementById('filter-competition').value;
+            const epr = document.getElementById('filter-epreuve').value;
+            return results.filter(r => {
+                if(year !== 'all' && r.year !== parseInt(year)) return false;
+                if(comp !== 'all' && r.compKey !== comp) return false;
+                if(epr !== 'all' && r.eventKey !== epr) return false;
+                return true;
+            });
+        }
+
+        /* ---- LINE CHART ---- */
+        function drawLineChart() {
+            const el = document.getElementById('line-chart');
+            const w = 500, h = 280;
+            const pts = perfEvolution;
+            const minT = 235, maxT = 270;
+
+            let svg = `<svg width="100%" height="100%" viewBox="0 0 ${w} ${h}">`;
+            svg += `<defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${colors.teal}" stop-opacity="0.4"/><stop offset="100%" stop-color="${colors.teal}" stop-opacity="0"/></linearGradient></defs>`;
+
+            /* Grid lines */
+            for(let i=0;i<5;i++){
+                const y = 20 + i*(h-60)/4;
+                const val = (maxT - i*(maxT-minT)/4).toFixed(0);
+                svg += `<line x1="50" y1="${y}" x2="${w-20}" y2="${y}" stroke="#222" stroke-width="1" stroke-dasharray="4,4"/>`;
+                svg += `<text x="45" y="${y+4}" text-anchor="end" fill="#666" font-size="10" font-family="Inter">${Math.floor(val/60)}:${String(val%60).padStart(2,'0')}</text>`;
+            }
+
+            /* Build points */
+            const points = pts.map((p,i) => {
+                const x = 70 + i*((w-100)/(pts.length-1));
+                const y = 20 + ((maxT - p.time)/(maxT-minT)) * (h-60);
+                return {x,y,year:p.year,time:p.time};
+            });
+
+            /* Area */
+            const polyPts = points.map(p=>`${p.x},${p.y}`).join(' ');
+            svg += `<polygon points="${points[0].x},${h-40} ${polyPts} ${points[points.length-1].x},${h-40}" fill="url(#areaGrad)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="1.5s" fill="freeze"/></polygon>`;
+
+            /* Line */
+            svg += `<polyline points="${polyPts}" fill="none" stroke="${colors.teal}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><animate attributeName="stroke-dasharray" from="0,2000" to="2000,0" dur="2s" fill="freeze"/></polyline>`;
+
+            /* Dots & labels */
+            points.forEach((p,i) => {
+                const isLast = i === points.length-1;
+                svg += `<circle cx="${p.x}" cy="${p.y}" r="${isLast?6:4}" fill="${isLast?colors.magenta:'white'}" ${isLast?`stroke="white" stroke-width="2"`:''} opacity="0"><animate attributeName="opacity" to="1" dur="0.5s" fill="freeze" begin="${0.5+i*0.3}s"/></circle>`;
+                svg += `<text x="${p.x}" y="${h-22}" text-anchor="middle" fill="${isLast?'white':'#666'}" font-size="11" font-weight="${isLast?'bold':'normal'}" font-family="Inter">${p.year}</text>`;
+                const mn = Math.floor(p.time/60);
+                const sc = (p.time%60).toFixed(2);
+                svg += `<text x="${p.x}" y="${p.y-14}" text-anchor="middle" fill="white" font-size="10" font-family="Inter" font-weight="bold" opacity="0"><animate attributeName="opacity" to="1" dur="0.5s" fill="freeze" begin="${1+i*0.3}s"/>${mn}:${sc.padStart(5,'0')}</text>`;
+            });
+
+            svg += '</svg>';
+            el.innerHTML = svg;
+        }
+
+        /* ---- BAR CHART ---- */
+        function drawBarChart() {
+            const el = document.getElementById('bar-chart');
+            const w = 500, h = 280;
+            const maxVal = 5;
+            const barW = 35;
+            const groupW = 140;
+
+            let svg = `<svg width="100%" height="100%" viewBox="0 0 ${w} ${h}">`;
+
+            /* Grid */
+            for(let i=0;i<=maxVal;i++){
+                const y = 20 + (maxVal-i)*(h-60)/maxVal;
+                svg += `<line x1="40" y1="${y}" x2="${w-20}" y2="${y}" stroke="#222" stroke-width="1"/>`;
+                svg += `<text x="35" y="${y+4}" text-anchor="end" fill="#666" font-size="10" font-family="Inter">${i}</text>`;
+            }
+
+            compMedals.forEach((comp,gi) => {
+                const gx = 80 + gi * groupW;
+                const vals = [
+                    { v:comp.gold, color:colors.gold, label:'Or' },
+                    { v:comp.silver, color:'#c0c0c0', label:'Ag' },
+                    { v:comp.bronze, color:'#cd7f32', label:'Br' }
+                ];
+
+                vals.forEach((bar,bi) => {
+                    const x = gx + bi*(barW+6);
+                    const bh = (bar.v/maxVal)*(h-60);
+                    const y = h-40-bh;
+                    svg += `<rect x="${x}" y="${h-40}" width="${barW}" height="0" fill="${bar.color}" rx="3" opacity="0.85">
+                        <animate attributeName="y" to="${y}" dur="0.8s" fill="freeze" begin="${0.2+gi*0.15}s"/>
+                        <animate attributeName="height" to="${bh}" dur="0.8s" fill="freeze" begin="${0.2+gi*0.15}s"/>
+                    </rect>`;
+                    if(bar.v > 0) {
+                        svg += `<text x="${x+barW/2}" y="${y-6}" text-anchor="middle" fill="white" font-size="12" font-weight="bold" font-family="Inter" opacity="0"><animate attributeName="opacity" to="1" dur="0.5s" fill="freeze" begin="1s"/>${bar.v}</text>`;
+                    }
+                });
+
+                /* Group label */
+                const lines = comp.label.split('\n');
+                lines.forEach((l,li) => {
+                    svg += `<text x="${gx+barW*1.5+6}" y="${h-10+li*13}" text-anchor="middle" fill="#999" font-size="10" font-family="Inter">${l}</text>`;
+                });
+            });
+
+            /* Legend */
+            const legendX = w-160;
+            [{c:colors.gold,l:'Or'},{c:'#c0c0c0',l:'Argent'},{c:'#cd7f32',l:'Bronze'}].forEach((lg,i) => {
+                svg += `<rect x="${legendX}" y="${10+i*18}" width="10" height="10" fill="${lg.c}" rx="2"/>`;
+                svg += `<text x="${legendX+16}" y="${19+i*18}" fill="#999" font-size="10" font-family="Inter">${lg.l}</text>`;
+            });
+
+            svg += '</svg>';
+            el.innerHTML = svg;
+        }
+
+        /* ---- RADAR CHART ---- */
+        function drawRadar() {
+            const el = document.getElementById('radar-chart');
+            const dims = ['Vitesse','Endurance','Technique','Mental','Puissance','Régularité'];
+            const vals = [0.85, 0.92, 0.95, 0.90, 0.80, 0.88];
+            const cx=100, cy=100, r=70;
+
+            let svg = `<svg width="220" height="220" viewBox="0 0 200 200">`;
+
+            /* Webs */
+            [1, 0.66, 0.33].forEach(sc => {
+                const pts = dims.map((_,i)=>{
+                    const a = (i*2*Math.PI/dims.length) - Math.PI/2;
+                    return `${cx+r*sc*Math.cos(a)},${cy+r*sc*Math.sin(a)}`;
+                }).join(' ');
+                svg += `<polygon points="${pts}" fill="none" stroke="#333" stroke-width="1"/>`;
+            });
+
+            /* Axes */
+            dims.forEach((_,i) => {
+                const a = (i*2*Math.PI/dims.length) - Math.PI/2;
+                svg += `<line x1="${cx}" y1="${cy}" x2="${cx+r*Math.cos(a)}" y2="${cy+r*Math.sin(a)}" stroke="#333" stroke-width="1"/>`;
+            });
+
+            /* Data shape */
+            const dataPts = dims.map((_,i)=>{
+                const a = (i*2*Math.PI/dims.length) - Math.PI/2;
+                return `${cx+r*vals[i]*Math.cos(a)},${cy+r*vals[i]*Math.sin(a)}`;
+            }).join(' ');
+            const zeroPts = dims.map(()=>`${cx},${cy}`).join(' ');
+
+            svg += `<polygon points="${zeroPts}" fill="${colors.magenta}" fill-opacity="0.3" stroke="${colors.magenta}" stroke-width="2"><animate attributeName="points" to="${dataPts}" dur="1s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/></polygon>`;
+
+            /* Labels */
+            dims.forEach((d,i) => {
+                const a = (i*2*Math.PI/dims.length) - Math.PI/2;
+                const lx = cx + (r+18)*Math.cos(a);
+                const ly = cy + (r+18)*Math.sin(a);
+                svg += `<text x="${lx}" y="${ly+4}" text-anchor="middle" fill="white" font-size="9" font-family="Inter" font-weight="500">${d}</text>`;
+            });
+
+            svg += '</svg>';
+            el.innerHTML = svg;
+        }
+
+        /* ---- TABLE ---- */
+        function drawTable() {
+            const filtered = getFilteredResults();
+            const tbody = document.getElementById('results-table');
+            tbody.innerHTML = filtered.map(r => `
+                <tr>
+                    <td class="td-year">${r.year}</td>
+                    <td class="td-comp">${r.comp}</td>
+                    <td class="td-event">${r.event}</td>
+                    <td class="td-time">${r.time}</td>
+                    <td class="td-medal">${r.medal}</td>
+                </tr>
+            `).join('');
+
+            if(filtered.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="td-empty">Aucun résultat pour ces filtres</td></tr>';
+            }
+
+            /* Update stat cards */
+            const golds = filtered.filter(r => r.medal === '🥇').length;
+            const silvers = filtered.filter(r => r.medal === '🥈').length;
+            const totalMedals = golds + silvers;
+            document.getElementById('stat-medals').textContent = totalMedals || '—';
+            document.getElementById('stat-medals-sub').innerHTML = `🥇 ${golds} Or &bull; 🥈 ${silvers} Argent`;
+        }
+
+        /* ---- Filtered Bar Chart ---- */
+        function drawFilteredBarChart() {
+            const filtered = getFilteredResults();
+            /* Aggregate medals by competition */
+            const compMap = {};
+            filtered.forEach(r => {
+                if(!compMap[r.comp]) compMap[r.comp] = { gold:0, silver:0, bronze:0 };
+                if(r.medal === '🥇') compMap[r.comp].gold++;
+                else if(r.medal === '🥈') compMap[r.comp].silver++;
+                else if(r.medal === '🥉') compMap[r.comp].bronze++;
+            });
+
+            const compKeys = Object.keys(compMap);
+            if(compKeys.length === 0) {
+                document.getElementById('bar-chart').innerHTML = '<p style="text-align:center;color:#6b7280;padding:3rem 0;">Aucune donnée pour ces filtres</p>';
+                return;
+            }
+
+            const el = document.getElementById('bar-chart');
+            const w = 500, h = 280;
+            const maxVal = Math.max(5, ...compKeys.map(k => compMap[k].gold + compMap[k].silver + compMap[k].bronze));
+            const barW = 35;
+            const groupW = Math.min(140, (w-100)/compKeys.length);
+
+            let svg = `<svg width="100%" height="100%" viewBox="0 0 ${w} ${h}">`;
+
+            for(let i=0;i<=maxVal;i++){
+                const y = 20 + (maxVal-i)*(h-60)/maxVal;
+                svg += `<line x1="40" y1="${y}" x2="${w-20}" y2="${y}" stroke="#222" stroke-width="1"/>`;
+                svg += `<text x="35" y="${y+4}" text-anchor="end" fill="#666" font-size="10" font-family="Inter">${i}</text>`;
+            }
+
+            compKeys.forEach((comp,gi) => {
+                const gx = 80 + gi * groupW;
+                const data = compMap[comp];
+                const vals = [
+                    { v:data.gold, color:colors.gold, label:'Or' },
+                    { v:data.silver, color:'#c0c0c0', label:'Ag' },
+                    { v:data.bronze, color:'#cd7f32', label:'Br' }
+                ];
+
+                vals.forEach((bar,bi) => {
+                    const x = gx + bi*(barW+6);
+                    const bh = (bar.v/maxVal)*(h-60);
+                    const y = h-40-bh;
+                    svg += `<rect x="${x}" y="${h-40}" width="${barW}" height="0" fill="${bar.color}" rx="3" opacity="0.85">
+                        <animate attributeName="y" to="${y}" dur="0.8s" fill="freeze" begin="${0.2+gi*0.15}s"/>
+                        <animate attributeName="height" to="${bh}" dur="0.8s" fill="freeze" begin="${0.2+gi*0.15}s"/>
+                    </rect>`;
+                    if(bar.v > 0) {
+                        svg += `<text x="${x+barW/2}" y="${y-6}" text-anchor="middle" fill="white" font-size="12" font-weight="bold" font-family="Inter" opacity="0"><animate attributeName="opacity" to="1" dur="0.5s" fill="freeze" begin="1s"/>${bar.v}</text>`;
+                    }
+                });
+
+                /* Label under bars */
+                const shortLabel = comp.length > 20 ? comp.substring(0,18)+'…' : comp;
+                svg += `<text x="${gx+barW*1.5+6}" y="${h-10}" text-anchor="middle" fill="#999" font-size="9" font-family="Inter">${shortLabel}</text>`;
+            });
+
+            const legendX = w-160;
+            [{c:colors.gold,l:'Or'},{c:'#c0c0c0',l:'Argent'},{c:'#cd7f32',l:'Bronze'}].forEach((lg,i) => {
+                svg += `<rect x="${legendX}" y="${10+i*18}" width="10" height="10" fill="${lg.c}" rx="2"/>`;
+                svg += `<text x="${legendX+16}" y="${19+i*18}" fill="#999" font-size="10" font-family="Inter">${lg.l}</text>`;
+            });
+
+            svg += '</svg>';
+            el.innerHTML = svg;
+        }
+
+        function updateDashboard() {
+            drawTable();
+            drawFilteredBarChart();
+            drawLineChart();
+        }
+
+        /* ---- INIT ---- */
+        drawLineChart();
+        drawBarChart();
+        drawRadar();
+        drawTable();
+    </script>
+
+
+</body>
+</html>

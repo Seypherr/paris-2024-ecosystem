@@ -1,0 +1,936 @@
+<html lang="en" vid="0"><head vid="1">
+    <meta charset="UTF-8" vid="2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
+    <title vid="4">Paris 2024 Ecosystem | Ynov Campus</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17" vid="5"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet" vid="6">
+    <script vid="7">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ynov: {
+                            dark: '#0e0e0e',
+                            darker: '#080808',
+                            surface: '#1a1a1a',
+                            surfaceHover: '#252525',
+                            teal: '#00c4a0',
+                            tealLight: '#1ed6a4',
+                            magenta: '#e91e8c',
+                            magentaLight: '#ff2d9b',
+                            gold: '#ffd60a',
+                            border: 'rgba(255,255,255,0.08)'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['"Barlow Condensed"', 'sans-serif'],
+                        body: ['"Inter"', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'glow-teal': '0 0 20px -5px rgba(0, 196, 160, 0.3)',
+                        'glow-magenta': '0 0 20px -5px rgba(233, 30, 140, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style vid="8">
+        body {
+            background-color: #0e0e0e;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0e0e0e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00c4a0;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00c4a0 0%, #e91e8c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .gradient-border-bottom {
+            position: relative;
+        }
+        .gradient-border-bottom::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #00c4a0, #e91e8c);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            transform-origin: left;
+        }
+        .gradient-border-bottom:hover::after,
+        .gradient-border-bottom.active::after {
+            transform: scaleX(1);
+        }
+
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .node-pulse {
+            animation: pulse 3s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 196, 160, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 196, 160, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 196, 160, 0); }
+        }
+
+        
+        .network-node {
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .network-node:hover circle {
+            stroke: #e91e8c;
+            stroke-width: 3px;
+            filter: drop-shadow(0 0 8px rgba(233, 30, 140, 0.6));
+        }
+        .network-node:hover text {
+            fill: #e91e8c;
+            font-weight: 700;
+        }
+
+        
+        .float-anim {
+            animation: float 6s ease-in-out infinite;
+        }
+        .float-anim-delay-1 { animation-delay: 1s; }
+        .float-anim-delay-2 { animation-delay: 2s; }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        
+        .timeline-line {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #00c4a0, #e91e8c);
+        }
+    </style>
+</head>
+<body class="font-body text-gray-300" vid="9">
+
+    
+    <nav class="fixed top-0 w-full bg-ynov-darker/90 backdrop-blur-md border-b border-ynov-border z-50" vid="10">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between" vid="11">
+            <div class="flex items-center gap-3" vid="12">
+                <div class="w-8 h-8 bg-gradient-to-br from-ynov-teal to-ynov-magenta rounded-lg flex items-center justify-center font-bold text-white font-heading text-xl" vid="13">Y</div>
+                <span class="font-heading font-bold text-xl tracking-wide text-white" vid="14">PARIS 2024 <span class="text-ynov-teal" vid="15">ECOSYSTEM</span></span>
+            </div>
+            <div class="flex gap-8" vid="16">
+                <button onclick="showSection('home')" class="nav-btn active gradient-border-bottom py-5 text-sm font-medium text-white transition-colors hover:text-ynov-teal uppercase tracking-wider" data-target="home" vid="17">Home</button>
+                <button onclick="showSection('ecosystem')" class="nav-btn gradient-border-bottom py-5 text-sm font-medium text-gray-400 transition-colors hover:text-ynov-teal uppercase tracking-wider" data-target="ecosystem" vid="18">Ecosystem</button>
+                <button onclick="showSection('dashboard')" class="nav-btn gradient-border-bottom py-5 text-sm font-medium text-gray-400 transition-colors hover:text-ynov-teal uppercase tracking-wider" data-target="dashboard" vid="19">Performance</button>
+                <button onclick="showSection('legacy')" class="nav-btn gradient-border-bottom py-5 text-sm font-medium text-gray-400 transition-colors hover:text-ynov-teal uppercase tracking-wider" data-target="legacy" vid="20">Legacy Story</button>
+                <button onclick="showSection('innovations')" class="nav-btn gradient-border-bottom py-5 text-sm font-medium text-gray-400 transition-colors hover:text-ynov-teal uppercase tracking-wider" data-target="innovations" vid="21">Innovations</button>
+            </div>
+        </div>
+    </nav>
+
+    
+    <main class="pt-16 min-h-screen relative" vid="22">
+        
+        
+        <div class="fixed inset-0 pointer-events-none z-0" vid="23">
+            <div class="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-ynov-teal/5 rounded-full blur-[120px]" vid="24"></div>
+            <div class="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-ynov-magenta/5 rounded-full blur-[100px]" vid="25"></div>
+        </div>
+
+        
+        <section id="home" class="section-view active min-h-[calc(100vh-64px)] flex items-center justify-center relative z-10" vid="26">
+            <div class="max-w-7xl w-full mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" vid="27">
+                <div class="space-y-8 fade-in-up" vid="28">
+                    <div class="inline-block px-3 py-1 border border-ynov-teal/30 rounded-full text-ynov-teal text-xs font-bold tracking-widest uppercase bg-ynov-teal/5" vid="29">Interactive Project</div>
+                    <h1 class="font-heading text-7xl lg:text-9xl font-bold leading-[0.9] text-white" vid="30">
+                        PARIS <br vid="31">
+                        <span class="gradient-text" vid="32">2024</span> <br vid="33">
+                        ECOSYSTEM
+                    </h1>
+                    <p class="text-xl text-gray-400 max-w-lg leading-relaxed" vid="34">
+                        Explore the intricate network of stakeholders, athlete performance data, and technological innovations shaping the modern Olympic Games through the Ynov Campus lens.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-4" vid="35">
+                        <button onclick="showSection('ecosystem')" class="group relative px-8 py-4 bg-ynov-teal text-ynov-darker font-bold font-heading text-lg uppercase tracking-wider rounded overflow-hidden transition-transform hover:scale-105" vid="36">
+                            <span class="relative z-10" vid="37">Explore Network</span>
+                            <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-0 transition-transform duration-300" vid="38"></div>
+                        </button>
+                        <button onclick="showSection('dashboard')" class="px-8 py-4 border border-ynov-border bg-ynov-surface hover:border-ynov-magenta hover:text-ynov-magenta text-white font-bold font-heading text-lg uppercase tracking-wider rounded transition-all" vid="39">
+                            View Data
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="relative h-[600px] w-full flex items-center justify-center fade-in-up" style="animation-delay: 0.2s;" vid="40">
+                    
+                    <div class="absolute w-[500px] h-[500px] border border-ynov-border/20 rounded-full animate-[spin_60s_linear_infinite]" vid="41"></div>
+                    <div class="absolute w-[350px] h-[350px] border border-ynov-teal/20 rounded-full animate-[spin_40s_linear_infinite_reverse]" vid="42"></div>
+                    <div class="absolute w-[200px] h-[200px] border border-ynov-magenta/20 rounded-full animate-[spin_20s_linear_infinite]" vid="43"></div>
+                    
+                    
+                    <div class="absolute top-[20%] right-[20%] float-anim bg-ynov-surface border border-ynov-border p-6 rounded-2xl shadow-glow-teal" vid="44">
+                        <svg class="w-10 h-10 text-ynov-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" vid="45"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" vid="46"></path></svg>
+                    </div>
+                    <div class="absolute bottom-[30%] left-[20%] float-anim float-anim-delay-1 bg-ynov-surface border border-ynov-border p-6 rounded-2xl shadow-glow-magenta" vid="47">
+                        <svg class="w-10 h-10 text-ynov-magenta" fill="none" stroke="currentColor" viewBox="0 0 24 24" vid="48"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" vid="49"></path></svg>
+                    </div>
+                    <div class="absolute bottom-[15%] right-[30%] float-anim float-anim-delay-2 bg-ynov-surface border border-ynov-border p-5 rounded-2xl" vid="50">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" vid="51"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" vid="52"></path></svg>
+                    </div>
+                    
+                    <div class="text-center z-10" vid="53">
+                         <div class="text-[12rem] leading-none font-heading font-bold text-transparent bg-clip-text bg-gradient-to-br from-white/10 to-transparent select-none" vid="54">24</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="ecosystem" class="section-view hidden min-h-screen py-10 relative z-10" vid="55">
+            <div class="max-w-7xl mx-auto px-6 h-full flex flex-col" vid="56">
+                <div class="flex justify-between items-end mb-8 border-b border-ynov-border pb-6" vid="57">
+                    <div vid="58">
+                        <h2 class="font-heading text-5xl font-bold uppercase mb-2" vid="59">Olympic Ecosystem</h2>
+                        <p class="text-gray-400" vid="60">Interactive stakeholder mapping and relationship network</p>
+                    </div>
+                    <div class="flex gap-2" vid="61">
+                        <button class="px-4 py-2 text-sm font-bold uppercase tracking-wider bg-ynov-teal text-ynov-darker rounded hover:bg-white transition-colors" onclick="filterNetwork('all')" vid="62">All</button>
+                        <button class="px-4 py-2 text-sm font-bold uppercase tracking-wider border border-ynov-border text-gray-400 rounded hover:border-ynov-magenta hover:text-white transition-colors" onclick="filterNetwork('governance')" vid="63">Governance</button>
+                        <button class="px-4 py-2 text-sm font-bold uppercase tracking-wider border border-ynov-border text-gray-400 rounded hover:border-ynov-magenta hover:text-white transition-colors" onclick="filterNetwork('commercial')" vid="64">Commercial</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[700px]" vid="65">
+                    
+                    <div class="lg:col-span-3 space-y-3 overflow-y-auto pr-2 custom-scrollbar" id="stakeholder-list" vid="66">
+                        
+                    </div>
+
+                    
+                    <div class="lg:col-span-6 bg-ynov-surface/30 rounded-2xl border border-ynov-border relative overflow-hidden flex items-center justify-center" id="network-container" vid="67">
+                        
+                    </div>
+
+                    
+                    <div class="lg:col-span-3 bg-ynov-surface border border-ynov-border rounded-2xl p-6 transform transition-transform duration-500 translate-x-10 opacity-0" id="detail-panel" vid="68">
+                        <div class="h-full flex flex-col" vid="69">
+                            <div class="w-16 h-16 rounded-xl bg-ynov-dark mb-6 flex items-center justify-center text-3xl shadow-glow-teal" id="panel-icon" vid="70">🏛️</div>
+                            <h3 class="font-heading text-4xl font-bold text-white mb-2" id="panel-title" vid="71">IOC</h3>
+                            <div class="inline-block self-start px-3 py-1 bg-ynov-magenta/20 text-ynov-magenta text-xs font-bold uppercase rounded mb-6" id="panel-category" vid="72">Governance</div>
+                            
+                            <p class="text-gray-300 mb-8 leading-relaxed" id="panel-desc" vid="73">
+                                The International Olympic Committee is the guardian of the Olympic Games and the leader of the Olympic Movement.
+                            </p>
+                            
+                            <div class="space-y-4 mb-8" vid="74">
+                                <div class="border-t border-ynov-border pt-4" vid="75">
+                                    <div class="text-xs text-gray-500 uppercase tracking-widest mb-1" vid="76">Key Figures</div>
+                                    <div class="font-heading text-xl text-ynov-teal" id="panel-stat-1" vid="77">206 Members</div>
+                                </div>
+                                <div class="border-t border-ynov-border pt-4" vid="78">
+                                    <div class="text-xs text-gray-500 uppercase tracking-widest mb-1" vid="79">Primary Role</div>
+                                    <div class="font-heading text-xl text-white" id="panel-stat-2" vid="80">Oversight &amp; Strategy</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-auto" vid="81">
+                                <h4 class="font-heading text-lg font-bold mb-3 text-gray-400" vid="82">Connected To</h4>
+                                <div class="flex flex-wrap gap-2" id="panel-connections" vid="83">
+                                    <span class="px-2 py-1 bg-ynov-dark rounded border border-ynov-border text-xs" vid="84">COJO</span>
+                                    <span class="px-2 py-1 bg-ynov-dark rounded border border-ynov-border text-xs" vid="85">Sponsors</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="dashboard" class="section-view hidden min-h-screen py-10 relative z-10" vid="86">
+            <div class="max-w-7xl mx-auto px-6" vid="87">
+                
+                <div class="flex flex-col md:flex-row justify-between items-end mb-10 border-b border-ynov-border pb-6" vid="88">
+                    <div vid="89">
+                        <h2 class="font-heading text-5xl font-bold uppercase mb-2" vid="90">Performance Dashboard</h2>
+                        <p class="text-gray-400" vid="91">Real-time analytics and medal distribution tracking</p>
+                    </div>
+                    <div class="flex gap-4 mt-4 md:mt-0" vid="92">
+                        <select id="year-filter" class="bg-ynov-surface border border-ynov-border text-white px-4 py-2 rounded focus:outline-none focus:border-ynov-teal" onchange="updateDashboard()" vid="93">
+                            <option value="2024" vid="94">Paris 2024</option>
+                            <option value="2020" vid="95">Tokyo 2020</option>
+                            <option value="2016" vid="96">Rio 2016</option>
+                        </select>
+                        <select class="bg-ynov-surface border border-ynov-border text-white px-4 py-2 rounded focus:outline-none focus:border-ynov-teal" vid="97">
+                            <option vid="98">All Events</option>
+                            <option vid="99">Aquatics</option>
+                            <option vid="100">Athletics</option>
+                            <option vid="101">Gymnastics</option>
+                        </select>
+                    </div>
+                </div>
+
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10" vid="102">
+                    <div class="bg-ynov-surface border border-ynov-border rounded-xl p-6 relative overflow-hidden group hover:border-ynov-teal transition-colors" vid="103">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity" vid="104">
+                            <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24" vid="105"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" vid="106"></path></svg>
+                        </div>
+                        <div class="text-gray-400 text-sm font-bold uppercase tracking-wider mb-2" vid="107">Total Medals</div>
+                        <div class="text-5xl font-heading font-bold text-white mb-1" vid="108">329</div>
+                        <div class="text-ynov-teal text-sm font-medium" vid="109">Events Contested</div>
+                    </div>
+                    <div class="bg-ynov-surface border border-ynov-border rounded-xl p-6 relative overflow-hidden group hover:border-ynov-gold transition-colors" vid="110">
+                        <div class="text-gray-400 text-sm font-bold uppercase tracking-wider mb-2" vid="111">Gold Medals</div>
+                        <div class="text-5xl font-heading font-bold text-ynov-gold mb-1" vid="112">113</div>
+                        <div class="text-gray-500 text-sm font-medium" vid="113">Awarded so far</div>
+                    </div>
+                    <div class="bg-ynov-surface border border-ynov-border rounded-xl p-6 relative overflow-hidden group hover:border-ynov-magenta transition-colors" vid="114">
+                        <div class="text-gray-400 text-sm font-bold uppercase tracking-wider mb-2" vid="115">World Records</div>
+                        <div class="text-5xl font-heading font-bold text-ynov-magenta mb-1" vid="116">7</div>
+                        <div class="text-gray-500 text-sm font-medium" vid="117">New records set</div>
+                    </div>
+                    <div class="bg-ynov-surface border border-ynov-border rounded-xl p-6 relative overflow-hidden group hover:border-blue-400 transition-colors" vid="118">
+                        <div class="text-gray-400 text-sm font-bold uppercase tracking-wider mb-2" vid="119">Nations</div>
+                        <div class="text-5xl font-heading font-bold text-white mb-1" vid="120">206</div>
+                        <div class="text-gray-500 text-sm font-medium" vid="121">Participating NOCs</div>
+                    </div>
+                </div>
+
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10" vid="122">
+                    
+                    <div class="bg-ynov-surface border border-ynov-border rounded-xl p-6 h-[400px] flex flex-col" vid="123">
+                        <h3 class="font-heading text-2xl font-bold mb-6" vid="124">Medal Distribution by Country</h3>
+                        <div class="flex-grow w-full relative" id="bar-chart-container" vid="125">
+                            
+                        </div>
+                    </div>
+
+                    
+                    <div class="bg-ynov-surface border border-ynov-border rounded-xl p-6 h-[400px] flex flex-col" vid="126">
+                        <h3 class="font-heading text-2xl font-bold mb-6" vid="127">Performance Evolution (2012-2024)</h3>
+                        <div class="flex-grow w-full relative" id="line-chart-container" vid="128">
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8" vid="129">
+                    
+                    <div class="lg:col-span-2 bg-ynov-surface border border-ynov-border rounded-xl p-6" vid="130">
+                        <h3 class="font-heading text-2xl font-bold mb-6" vid="131">Medal Breakdown</h3>
+                        <div class="overflow-x-auto" vid="132">
+                            <table class="w-full text-left border-collapse" vid="133">
+                                <thead vid="134">
+                                    <tr class="text-xs text-gray-500 uppercase tracking-wider border-b border-ynov-border" vid="135">
+                                        <th class="pb-3 pl-4" vid="136">Rank</th>
+                                        <th class="pb-3" vid="137">Nation</th>
+                                        <th class="pb-3 text-center text-ynov-gold" vid="138">Gold</th>
+                                        <th class="pb-3 text-center text-gray-300" vid="139">Silver</th>
+                                        <th class="pb-3 text-center text-yellow-700" vid="140">Bronze</th>
+                                        <th class="pb-3 text-right pr-4" vid="141">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm" id="medal-table-body" vid="142">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    
+                    <div class="lg:col-span-1 bg-ynov-surface border border-ynov-border rounded-xl p-6 flex flex-col" vid="143">
+                        <h3 class="font-heading text-2xl font-bold mb-2" vid="144">Athlete Metrics</h3>
+                        <p class="text-xs text-gray-500 mb-4" vid="145">Aggregate performance dimensions</p>
+                        <div class="flex-grow flex items-center justify-center relative" id="radar-chart-container" vid="146">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="legacy" class="section-view hidden min-h-screen py-10 relative z-10" vid="147">
+            <div class="max-w-4xl mx-auto px-6" vid="148">
+                <div class="text-center mb-16 fade-in-up" vid="149">
+                    <h2 class="font-heading text-6xl font-bold uppercase mb-4 text-white" vid="150">A Lasting <span class="text-ynov-teal" vid="151">Legacy</span></h2>
+                    <p class="text-xl text-gray-400" vid="152">How Paris 2024 is transforming the city for generations to come.</p>
+                </div>
+
+                <div class="relative pl-10 border-l-2 border-ynov-border/30 space-y-24" id="timeline-container" vid="153">
+                    <div class="timeline-line" vid="154"></div>
+
+                    
+                    <div class="legacy-chapter relative opacity-0 transform translate-y-10 transition-all duration-700" vid="155">
+                        <div class="absolute -left-[50px] top-0 w-5 h-5 bg-ynov-teal rounded-full border-4 border-ynov-dark" vid="156"></div>
+                        <span class="text-ynov-teal font-bold tracking-widest uppercase text-sm mb-2 block" vid="157">Chapter 01</span>
+                        <h3 class="font-heading text-4xl font-bold mb-4" vid="158">The Historic Bid</h3>
+                        <div class="bg-ynov-surface border border-ynov-border p-8 rounded-xl shadow-lg" vid="159">
+                            <p class="text-lg text-gray-300 italic mb-6" vid="160">"This victory is a victory for France. The Games will be a moment of unity for our country and an opportunity to welcome the world."</p>
+                            <div class="flex items-center gap-4" vid="161">
+                                <div class="w-12 h-12 bg-gray-700 rounded-full" vid="162"></div>
+                                <div vid="163">
+                                    <div class="font-bold text-white" vid="164">Emmanuel Macron</div>
+                                    <div class="text-sm text-gray-500" vid="165">President of France</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="legacy-chapter relative opacity-0 transform translate-y-10 transition-all duration-700" vid="166">
+                        <div class="absolute -left-[50px] top-0 w-5 h-5 bg-ynov-magenta rounded-full border-4 border-ynov-dark" vid="167"></div>
+                        <span class="text-ynov-magenta font-bold tracking-widest uppercase text-sm mb-2 block" vid="168">Chapter 02</span>
+                        <h3 class="font-heading text-4xl font-bold mb-4" vid="169">Urban Transformation</h3>
+                        <p class="text-gray-300 mb-6" vid="170">Seine-Saint-Denis has seen an acceleration of public infrastructure by 15 years.</p>
+                        
+                        <div class="grid grid-cols-2 gap-4" vid="171">
+                            <div class="bg-ynov-surface p-4 rounded-xl border border-ynov-border text-center" vid="172">
+                                <div class="text-4xl font-heading font-bold text-ynov-teal mb-1 counter" data-target="50" vid="173">0</div>
+                                <div class="text-xs uppercase tracking-wider text-gray-500" vid="174">% Carbon Reduction</div>
+                            </div>
+                            <div class="bg-ynov-surface p-4 rounded-xl border border-ynov-border text-center" vid="175">
+                                <div class="text-4xl font-heading font-bold text-ynov-magenta mb-1 counter" data-target="6" vid="176">0</div>
+                                <div class="text-xs uppercase tracking-wider text-gray-500" vid="177">New Metro Stations</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="legacy-chapter relative opacity-0 transform translate-y-10 transition-all duration-700" vid="178">
+                        <div class="absolute -left-[50px] top-0 w-5 h-5 bg-white rounded-full border-4 border-ynov-dark" vid="179"></div>
+                        <span class="text-gray-400 font-bold tracking-widest uppercase text-sm mb-2 block" vid="180">Chapter 03</span>
+                        <h3 class="font-heading text-4xl font-bold mb-4" vid="181">Infrastructure Map</h3>
+                        
+                        <div class="bg-ynov-surface border border-ynov-border rounded-xl p-6 h-[400px] relative overflow-hidden group" vid="182">
+                            
+                            <svg class="w-full h-full text-gray-700" viewBox="0 0 800 500" vid="183">
+                                <path fill="none" stroke="currentColor" stroke-width="1" d="M100,250 Q250,150 400,250 T700,250" vid="184"></path>
+                                <path fill="none" stroke="currentColor" stroke-width="1" d="M200,450 Q400,300 600,450" vid="185"></path>
+                                <path fill="none" stroke="currentColor" stroke-width="1" d="M350,50 L350,450" vid="186"></path>
+                                
+                                <circle cx="400" cy="250" r="8" fill="#e91e8c" class="animate-ping origin-center opacity-75" vid="187"></circle>
+                                <circle cx="400" cy="250" r="4" fill="white" vid="188"></circle>
+                                
+                                <circle cx="250" cy="180" r="6" fill="#00c4a0" class="cursor-pointer hover:r-8 transition-all" vid="189"></circle>
+                                <circle cx="550" cy="180" r="6" fill="#00c4a0" class="cursor-pointer hover:r-8 transition-all" vid="190"></circle>
+                                <circle cx="350" cy="350" r="6" fill="#00c4a0" class="cursor-pointer hover:r-8 transition-all" vid="191"></circle>
+                            </svg>
+                            <div class="absolute bottom-6 left-6 bg-ynov-dark/90 backdrop-blur p-4 rounded border border-ynov-border max-w-xs" vid="192">
+                                <h4 class="font-bold text-white mb-1" vid="193">Stade de France</h4>
+                                <p class="text-xs text-gray-400" vid="194">Centerpiece of the games, hosting athletics and rugby sevens. Capacity: 80,000.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="innovations" class="section-view hidden min-h-screen py-10 relative z-10" vid="195">
+            <div class="max-w-7xl mx-auto px-6" vid="196">
+                 <div class="flex flex-col md:flex-row justify-between items-end mb-10 border-b border-ynov-border pb-6" vid="197">
+                    <div vid="198">
+                        <h2 class="font-heading text-5xl font-bold uppercase mb-2" vid="199">Tech Innovations</h2>
+                        <p class="text-gray-400" vid="200">Pioneering technologies powering the Games</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-4 md:mt-0" vid="201">
+                        <button class="tech-filter active px-4 py-2 text-sm font-bold uppercase tracking-wider bg-ynov-teal text-ynov-darker rounded hover:bg-white transition-colors" data-filter="all" vid="202">All</button>
+                        <button class="tech-filter px-4 py-2 text-sm font-bold uppercase tracking-wider border border-ynov-border text-gray-400 rounded hover:border-ynov-magenta hover:text-white transition-colors" data-filter="sustainability" vid="203">Sustainability</button>
+                        <button class="tech-filter px-4 py-2 text-sm font-bold uppercase tracking-wider border border-ynov-border text-gray-400 rounded hover:border-ynov-magenta hover:text-white transition-colors" data-filter="performance" vid="204">Performance</button>
+                        <button class="tech-filter px-4 py-2 text-sm font-bold uppercase tracking-wider border border-ynov-border text-gray-400 rounded hover:border-ynov-magenta hover:text-white transition-colors" data-filter="fan" vid="205">Fan Exp</button>
+                    </div>
+                </div>
+
+                
+                <div class="mb-12 bg-ynov-surface border border-ynov-border rounded-xl p-8 grid grid-cols-1 md:grid-cols-3 gap-8 items-center" vid="206">
+                    <div class="col-span-1" vid="207">
+                        <h3 class="font-heading text-3xl font-bold mb-4" vid="208">Innovation Impact Score</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6" vid="209">
+                            We measure the technological footprint of Paris 2024 across 8 key dimensions, ensuring a balance between advancement and sustainability.
+                        </p>
+                        <div class="flex gap-4" vid="210">
+                            <div class="text-center" vid="211">
+                                <div class="text-3xl font-bold text-ynov-teal" vid="212">95%</div>
+                                <div class="text-xs text-gray-500 uppercase" vid="213">Efficiency</div>
+                            </div>
+                            <div class="text-center" vid="214">
+                                <div class="text-3xl font-bold text-ynov-magenta" vid="215">88%</div>
+                                <div class="text-xs text-gray-500 uppercase" vid="216">Engagement</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-2 h-[300px] flex justify-center" id="tech-radar-container" vid="217">
+                        
+                    </div>
+                </div>
+
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="tech-grid" vid="218">
+                    
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    
+    <footer class="bg-ynov-darker border-t border-ynov-border py-10 mt-auto" vid="219">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6" vid="220">
+            <div class="flex items-center gap-3" vid="221">
+                <div class="w-8 h-8 bg-gradient-to-br from-ynov-teal to-ynov-magenta rounded-lg flex items-center justify-center font-bold text-white font-heading text-xl" vid="222">Y</div>
+                <div class="text-sm text-gray-400" vid="223">
+                    <span class="text-white font-bold" vid="224">Paris 2024 Olympic Ecosystem</span><br vid="225">
+                    Projet Ynov Campus
+                </div>
+            </div>
+            <div class="text-right text-sm text-gray-500" vid="226">
+                <div class="mb-1 text-ynov-teal font-medium uppercase tracking-wider" vid="227">Team Gold</div>
+                <div vid="228">Alexandre DUPONT • Sarah MARTIN • Thomas BERNARD</div>
+            </div>
+        </div>
+    </footer>
+
+    <script vid="229">
+        
+        const colors = {
+            teal: '#00c4a0',
+            magenta: '#e91e8c',
+            dark: '#0e0e0e',
+            gold: '#ffd60a',
+            surface: '#1a1a1a',
+            gray: '#9ca3af'
+        };
+
+        
+        function showSection(id) {
+            
+            document.querySelectorAll('.section-view').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('active');
+            });
+            document.getElementById(id).classList.remove('hidden');
+            setTimeout(() => document.getElementById(id).classList.add('active'), 10);
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active', 'text-ynov-teal');
+                btn.classList.add('text-gray-400');
+                if(btn.dataset.target === id) {
+                    btn.classList.add('active', 'text-ynov-teal');
+                    btn.classList.remove('text-gray-400');
+                }
+            });
+
+            
+            if (id === 'ecosystem') initNetworkGraph();
+            if (id === 'dashboard') initDashboardCharts();
+            if (id === 'innovations') initTechCards();
+            if (id === 'legacy') initLegacyObserver();
+            
+            window.scrollTo(0,0);
+        }
+
+        
+        const stakeholders = [
+            { id: 'ioc', label: 'IOC', cat: 'governance', icon: '🏛️', role: 'Governance', members: '206 Members', desc: 'The International Olympic Committee oversees the Olympic Movement and ensures the regular celebration of the Olympic Games.', connections: ['cojo', 'sponsors', 'media'] },
+            { id: 'athletes', label: 'Athletes', cat: 'public', icon: '🏃', role: 'Participants', members: '10,714 Athletes', desc: 'The heart of the Games. 10,714 athletes from 206 National Olympic Committees competing in 32 sports.', connections: ['cojo', 'fans', 'media'] },
+            { id: 'cojo', label: 'COJO', cat: 'governance', icon: '👔', role: 'Organizer', members: '4,000 Staff', desc: 'The Paris 2024 Organizing Committee plans, organizes, finances and delivers the Olympic and Paralympic Games.', connections: ['ioc', 'city', 'sponsors', 'security'] },
+            { id: 'sponsors', label: 'Partners', cat: 'commercial', icon: '🤝', role: 'Funding', members: '14 TOP Partners', desc: 'Worldwide Olympic Partners like Airbnb, Coca-Cola, and Samsung provide essential funding, technology and services.', connections: ['ioc', 'cojo', 'media'] },
+            { id: 'media', label: 'Media', cat: 'commercial', icon: '🎥', role: 'Broadcast', members: '4B Viewers', desc: 'Olympic Broadcasting Services (OBS) and rights holders bring the games to a global audience.', connections: ['ioc', 'fans'] },
+            { id: 'city', label: 'Host City', cat: 'public', icon: '🏙️', role: 'Infrastructure', members: '8 Cities', desc: 'Paris and other host cities provide venues, transport, and public services to support the event.', connections: ['cojo', 'security', 'fans'] },
+            { id: 'fans', label: 'Spectators', cat: 'public', icon: '🎫', role: 'Experience', members: '13.4M Tickets', desc: 'Millions of spectators attending events and billions watching worldwide create the unique Olympic atmosphere.', connections: ['city', 'athletes'] },
+            { id: 'security', label: 'Security', cat: 'governance', icon: '🛡️', role: 'Safety', members: '45,000 Agents', desc: 'Police, private security, and military ensure the safety of all participants and spectators.', connections: ['city', 'cojo'] }
+        ];
+
+        function initNetworkGraph() {
+            const container = document.getElementById('network-container');
+            const listContainer = document.getElementById('stakeholder-list');
+            
+            
+            listContainer.innerHTML = stakeholders.map(s => `
+                <div onclick="selectNode('${s.id}')" class="p-4 rounded-lg border border-ynov-border bg-ynov-surface cursor-pointer hover:border-ynov-teal transition-all group flex items-center gap-3">
+                    <span class="text-2xl">${s.icon}</span>
+                    <div>
+                        <div class="font-heading font-bold text-lg text-white group-hover:text-ynov-teal">${s.label}</div>
+                        <div class="text-xs text-gray-500 uppercase">${s.role}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            
+            const width = container.clientWidth;
+            const height = 700;
+            const cx = width / 2;
+            const cy = height / 2;
+            const radius = 220;
+
+            let svgContent = `<svg width="100%" height="100%" viewBox="0 0 ${width} ${height}">`;
+            
+            
+            stakeholders.forEach((s, i) => {
+                const angle = (i * 2 * Math.PI) / stakeholders.length;
+                const x = cx + radius * Math.cos(angle);
+                const y = cy + radius * Math.sin(angle);
+                
+                
+                svgContent += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${colors.border}" stroke-width="1" stroke-dasharray="5,5">
+                    <animate attributeName="stroke-dashoffset" from="100" to="0" dur="20s" repeatCount="indefinite" />
+                </line>`;
+            });
+
+            
+            svgContent += `
+                <g class="network-node">
+                    <circle cx="${cx}" cy="${cy}" r="60" fill="${colors.dark}" stroke="${colors.teal}" stroke-width="2" class="node-pulse" />
+                    <text x="${cx}" y="${cy}" dy="5" text-anchor="middle" fill="white" font-family="Barlow Condensed" font-weight="bold" font-size="20">PARIS 2024</text>
+                </g>
+            `;
+
+            
+            stakeholders.forEach((s, i) => {
+                const angle = (i * 2 * Math.PI) / stakeholders.length;
+                const x = cx + radius * Math.cos(angle);
+                const y = cy + radius * Math.sin(angle);
+                
+                svgContent += `
+                    <g class="network-node" onclick="selectNode('${s.id}')" data-cat="${s.cat}">
+                        <circle cx="${x}" cy="${y}" r="40" fill="${colors.surface}" stroke="${colors.border}" stroke-width="2" />
+                        <text x="${x}" y="${y-10}" text-anchor="middle" font-size="24">${s.icon}</text>
+                        <text x="${x}" y="${y+15}" text-anchor="middle" fill="white" font-family="Inter" font-size="12">${s.label}</text>
+                    </g>
+                `;
+            });
+
+            svgContent += `</svg>`;
+            container.innerHTML = svgContent;
+        }
+
+        function selectNode(id) {
+            const s = stakeholders.find(x => x.id === id);
+            if(!s) return;
+
+            const panel = document.getElementById('detail-panel');
+            const icon = document.getElementById('panel-icon');
+            
+            
+            panel.classList.remove('translate-x-0', 'opacity-100');
+            panel.classList.add('translate-x-10', 'opacity-0');
+
+            setTimeout(() => {
+                
+                icon.innerText = s.icon;
+                document.getElementById('panel-title').innerText = s.label;
+                document.getElementById('panel-category').innerText = s.cat;
+                document.getElementById('panel-desc').innerText = s.desc;
+                document.getElementById('panel-stat-1').innerText = s.members;
+                document.getElementById('panel-stat-2').innerText = s.role;
+                
+                const connHTML = s.connections.map(c => {
+                    const linked = stakeholders.find(x => x.id === c);
+                    return linked ? `<span class="px-2 py-1 bg-ynov-dark rounded border border-ynov-border text-xs text-gray-300">${linked.label}</span>` : '';
+                }).join('');
+                document.getElementById('panel-connections').innerHTML = connHTML;
+
+                
+                panel.classList.remove('translate-x-10', 'opacity-0');
+                panel.classList.add('translate-x-0', 'opacity-100');
+            }, 300);
+        }
+
+        function filterNetwork(cat) {
+            const nodes = document.querySelectorAll('.network-node[data-cat]');
+            nodes.forEach(n => {
+                if (cat === 'all' || n.dataset.cat === cat) {
+                    n.style.opacity = '1';
+                } else {
+                    n.style.opacity = '0.1';
+                }
+            });
+        }
+
+        
+        function initDashboardCharts() {
+            
+            const countries = [
+                { code: 'USA', val: 126, color: colors.teal },
+                { code: 'CHN', val: 91, color: colors.magenta },
+                { code: 'GBR', val: 65, color: '#fff' },
+                { code: 'FRA', val: 64, color: '#3b82f6' }, 
+                { code: 'AUS', val: 53, color: colors.gold },
+                { code: 'JPN', val: 45, color: colors.gray }
+            ];
+
+            const barContainer = document.getElementById('bar-chart-container');
+            const barH = 300;
+            const barW = barContainer.clientWidth;
+            const maxVal = 140;
+
+            let barSVG = `<svg width="100%" height="100%" viewBox="0 0 ${barW} ${barH}">`;
+            
+            countries.forEach((c, i) => {
+                const bw = 40;
+                const gap = (barW - (countries.length * bw)) / (countries.length + 1);
+                const x = gap + i * (bw + gap);
+                const h = (c.val / maxVal) * (barH - 40);
+                const y = barH - h - 30;
+
+                barSVG += `
+                    <rect x="${x}" y="${barH-30}" width="${bw}" height="0" fill="${c.color}" rx="4">
+                        <animate attributeName="y" to="${y}" dur="1s" fill="freeze" begin="0.2s" />
+                        <animate attributeName="height" to="${h}" dur="1s" fill="freeze" begin="0.2s" />
+                    </rect>
+                    <text x="${x + bw/2}" y="${barH-10}" text-anchor="middle" fill="#666" font-family="Inter" font-size="12">${c.code}</text>
+                    <text x="${x + bw/2}" y="${y-10}" text-anchor="middle" fill="white" font-family="Inter" font-weight="bold" font-size="12" opacity="0">
+                        ${c.val}
+                        <animate attributeName="opacity" to="1" dur="1s" fill="freeze" begin="1s" />
+                    </text>
+                `;
+            });
+            barSVG += `</svg>`;
+            barContainer.innerHTML = barSVG;
+
+            
+            const lineContainer = document.getElementById('line-chart-container');
+            let lineSVG = `<svg width="100%" height="100%" viewBox="0 0 500 300">
+                <defs>
+                    <linearGradient id="gradTeal" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="${colors.teal}" stop-opacity="0.5" />
+                        <stop offset="100%" stop-color="${colors.teal}" stop-opacity="0" />
+                    </linearGradient>
+                </defs>
+                <!-- Grid -->
+                <line x1="0" y1="250" x2="500" y2="250" stroke="#333" stroke-width="1" />
+                <line x1="0" y1="150" x2="500" y2="150" stroke="#333" stroke-width="1" stroke-dasharray="5,5" />
+                
+                <!-- Polyline -->
+                <polyline points="50,200 150,180 250,120 350,140 450,50" fill="none" stroke="${colors.teal}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <animate attributeName="stroke-dasharray" from="0, 1000" to="1000, 0" dur="2s" fill="freeze" />
+                </polyline>
+                
+                <!-- Area -->
+                <polygon points="50,250 50,200 150,180 250,120 350,140 450,50 450,250" fill="url(#gradTeal)" opacity="0.3">
+                    <animate attributeName="opacity" from="0" to="0.3" dur="2s" />
+                </polygon>
+
+                <!-- Dots -->
+                <circle cx="50" cy="200" r="4" fill="white" />
+                <circle cx="150" cy="180" r="4" fill="white" />
+                <circle cx="250" cy="120" r="4" fill="white" />
+                <circle cx="350" cy="140" r="4" fill="white" />
+                <circle cx="450" cy="50" r="6" fill="${colors.magenta}" stroke="white" stroke-width="2" />
+
+                <!-- Labels -->
+                <text x="50" y="270" text-anchor="middle" fill="#666" font-size="12">2008</text>
+                <text x="150" y="270" text-anchor="middle" fill="#666" font-size="12">2012</text>
+                <text x="250" y="270" text-anchor="middle" fill="#666" font-size="12">2016</text>
+                <text x="350" y="270" text-anchor="middle" fill="#666" font-size="12">2020</text>
+                <text x="450" y="270" text-anchor="middle" fill="white" font-weight="bold" font-size="12">2024</text>
+            </svg>`;
+            lineContainer.innerHTML = lineSVG;
+
+            
+            const radarContainer = document.getElementById('radar-chart-container');
+            radarContainer.innerHTML = `
+            <svg width="250" height="250" viewBox="0 0 200 200">
+                <!-- Web -->
+                <polygon points="100,20 176,65 176,155 100,195 24,155 24,65" fill="none" stroke="#333" stroke-width="1" />
+                <polygon points="100,50 145,75 145,130 100,155 55,130 55,75" fill="none" stroke="#333" stroke-width="1" />
+                
+                <!-- Data Shape -->
+                <polygon points="100,30 160,70 150,140 100,180 40,140 60,70" fill="${colors.magenta}" fill-opacity="0.4" stroke="${colors.magenta}" stroke-width="2">
+                     <animate attributeName="points" from="100,100 100,100 100,100 100,100 100,100 100,100" to="100,30 160,70 150,140 100,180 40,140 60,70" dur="1s" fill="freeze" />
+                </polygon>
+
+                <!-- Labels -->
+                <text x="100" y="15" text-anchor="middle" fill="white" font-size="10">SPEED</text>
+                <text x="185" y="65" text-anchor="middle" fill="white" font-size="10">POWER</text>
+                <text x="185" y="155" text-anchor="middle" fill="white" font-size="10">TECH</text>
+                <text x="100" y="200" text-anchor="middle" fill="white" font-size="10">STAMINA</text>
+                <text x="15" y="155" text-anchor="middle" fill="white" font-size="10">MENTAL</text>
+                <text x="15" y="65" text-anchor="middle" fill="white" font-size="10">TACTICS</text>
+            </svg>`;
+
+            
+            const tableBody = document.getElementById('medal-table-body');
+            tableBody.innerHTML = countries.map((c, i) => `
+                <tr class="border-b border-ynov-border hover:bg-ynov-surface/50 transition-colors">
+                    <td class="py-3 pl-4 font-bold text-gray-500">${i+1}</td>
+                    <td class="py-3 font-medium text-white">${c.code}</td>
+                    <td class="py-3 text-center font-bold">${Math.floor(c.val * 0.4)}</td>
+                    <td class="py-3 text-center text-gray-400">${Math.floor(c.val * 0.35)}</td>
+                    <td class="py-3 text-center text-gray-500">${Math.floor(c.val * 0.25)}</td>
+                    <td class="py-3 text-right pr-4 font-bold text-white">${c.val}</td>
+                </tr>
+            `).join('');
+        }
+
+        
+        function initLegacyObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.remove('opacity-0', 'translate-y-10');
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        
+                        
+                        const counters = entry.target.querySelectorAll('.counter');
+                        counters.forEach(c => {
+                            const target = +c.dataset.target;
+                            let count = 0;
+                            const update = () => {
+                                const inc = target / 50;
+                                if(count < target) {
+                                    count += inc;
+                                    c.innerText = Math.ceil(count);
+                                    requestAnimationFrame(update);
+                                } else {
+                                    c.innerText = target;
+                                }
+                            };
+                            update();
+                        });
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            document.querySelectorAll('.legacy-chapter').forEach(el => observer.observe(el));
+        }
+
+        
+        const innovations = [
+            { title: "Carbon Neutrality", cat: "sustainability", icon: "🌱", impact: 95, desc: "Use of 95% existing venues and renewable energy sources." },
+            { title: "AI Judging", cat: "performance", icon: "🤖", impact: 88, desc: "Computer vision assisting judges for higher accuracy in gymnastics." },
+            { title: "VR Spectating", cat: "fan", icon: "👓", impact: 78, desc: "Immersive VR seats allowing global fans to experience the stadium." },
+            { title: "Smart Swimwear", cat: "performance", icon: "🏊", impact: 70, desc: "Hydrodynamic fabrics reducing drag by 3% for swimmers." },
+            { title: "Solar Venues", cat: "sustainability", icon: "☀️", impact: 60, desc: "Floating solar plants powering the Aquatics Centre." },
+            { title: "8K Streaming", cat: "fan", icon: "📺", impact: 85, desc: "Ultra-high definition broadcast with low latency." }
+        ];
+
+        function initTechCards() {
+            renderTechCards('all');
+            renderTechRadar();
+
+            
+            document.querySelectorAll('.tech-filter').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.tech-filter').forEach(b => {
+                        b.classList.remove('active', 'bg-ynov-teal', 'text-ynov-darker');
+                        b.classList.add('border', 'border-ynov-border', 'text-gray-400');
+                    });
+                    e.target.classList.remove('border', 'border-ynov-border', 'text-gray-400');
+                    e.target.classList.add('active', 'bg-ynov-teal', 'text-ynov-darker');
+                    
+                    renderTechCards(e.target.dataset.filter);
+                });
+            });
+        }
+
+        function renderTechCards(filter) {
+            const grid = document.getElementById('tech-grid');
+            grid.innerHTML = '';
+            
+            const filtered = filter === 'all' ? innovations : innovations.filter(i => i.cat === filter);
+            
+            filtered.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'bg-ynov-surface border border-ynov-border rounded-xl p-6 hover:border-ynov-magenta transition-all duration-300 transform hover:-translate-y-2 fade-in-up';
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-12 h-12 bg-ynov-dark rounded-lg flex items-center justify-center text-2xl border border-ynov-border">${item.icon}</div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-500 border border-gray-700 rounded px-2 py-1">${item.cat}</span>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-white mb-2">${item.title}</h3>
+                    <p class="text-gray-400 text-sm mb-6 h-10">${item.desc}</p>
+                    <div class="space-y-1">
+                        <div class="flex justify-between text-xs font-bold uppercase">
+                            <span class="text-gray-500">Impact Score</span>
+                            <span class="text-ynov-teal">${item.impact}%</span>
+                        </div>
+                        <div class="w-full bg-ynov-dark h-2 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-ynov-teal to-ynov-magenta" style="width: ${item.impact}%"></div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderTechRadar() {
+             const container = document.getElementById('tech-radar-container');
+             
+             container.innerHTML = `
+             <svg width="300" height="300" viewBox="0 0 300 300">
+                <circle cx="150" cy="150" r="100" fill="none" stroke="#333" stroke-width="1" />
+                <circle cx="150" cy="150" r="70" fill="none" stroke="#333" stroke-width="1" />
+                <circle cx="150" cy="150" r="40" fill="none" stroke="#333" stroke-width="1" />
+                
+                <!-- Axis lines -->
+                <line x1="150" y1="50" x2="150" y2="250" stroke="#333" />
+                <line x1="50" y1="150" x2="250" y2="150" stroke="#333" />
+                <line x1="79" y1="79" x2="221" y2="221" stroke="#333" />
+                <line x1="79" y1="221" x2="221" y2="79" stroke="#333" />
+                
+                <!-- Shape -->
+                <path d="M150,60 L210,100 L230,150 L200,210 L150,240 L90,200 L70,150 L100,90 Z" 
+                      fill="${colors.teal}" fill-opacity="0.2" stroke="${colors.teal}" stroke-width="2">
+                      <animate attributeName="d" 
+                        values="M150,150 L150,150 L150,150 L150,150 L150,150 L150,150 L150,150 L150,150 Z; M150,60 L210,100 L230,150 L200,210 L150,240 L90,200 L70,150 L100,90 Z" 
+                        dur="1s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+                </path>
+
+                <!-- Labels -->
+                <text x="150" y="40" text-anchor="middle" fill="white" font-size="10">ECO</text>
+                <text x="260" y="150" text-anchor="middle" fill="white" font-size="10">SOCIAL</text>
+                <text x="150" y="270" text-anchor="middle" fill="white" font-size="10">TECH</text>
+                <text x="40" y="150" text-anchor="middle" fill="white" font-size="10">LEGACY</text>
+             </svg>
+             `;
+        }
+
+        
+        window.onload = () => {
+            
+        };
+
+    </script>
+
+</body></html>

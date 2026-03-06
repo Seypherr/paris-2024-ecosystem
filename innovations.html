@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovations Technologiques | Paris 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <a href="index.html" class="brand">
+                <div class="brand-icon">Y</div>
+                <span class="brand-text">PARIS 2024 <span>ECOSYSTEM</span></span>
+            </a>
+            <button class="nav-hamburger" id="hamburger" onclick="document.getElementById('hamburger').classList.toggle('open');document.getElementById('nav-links').classList.toggle('open');">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" class="gradient-border-bottom">Accueil</a>
+                <a href="ecosysteme.html" class="gradient-border-bottom">Écosystème des JO</a>
+                <a href="dashboard.html" class="gradient-border-bottom">Dashboard Athlète</a>
+                <a href="heritage.html" class="gradient-border-bottom">Héritage Olympique</a>
+                <a href="innovations.html" class="gradient-border-bottom active">Innovations</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-blobs"><div class="blob-teal"></div><div class="blob-magenta"></div></div>
+
+    <main class="page-main page-padded">
+        <div class="container">
+            <!-- Header -->
+            <div class="section-header row">
+                <div>
+                    <h2>Innovations Technologiques</h2>
+                    <p>Les Jeux Olympiques servent de laboratoire pour tester de nouvelles technologies.</p>
+                </div>
+                <div class="filter-row" id="filter-bar">
+                    <button class="filter-btn active" data-filter="all" onclick="filterInnovations('all',this)">Toutes</button>
+                    <button class="filter-btn" data-filter="durabilite" onclick="filterInnovations('durabilite',this)">Durabilité</button>
+                    <button class="filter-btn" data-filter="sport" onclick="filterInnovations('sport',this)">Tech Sportive</button>
+                    <button class="filter-btn" data-filter="media" onclick="filterInnovations('media',this)">Diffusion Média</button>
+                    <button class="filter-btn" data-filter="spectateur" onclick="filterInnovations('spectateur',this)">Exp. Spectateur</button>
+                </div>
+            </div>
+
+            <!-- Radar + Impact Score panel -->
+            <div class="top-panel-grid fade-in-up" id="top-panel">
+                <div class="chart-card">
+                    <h3>Score d'Impact Innovation</h3>
+                    <p class="score-desc">
+                        Nous mesurons l'empreinte technologique de Paris 2024 à travers 4 dimensions clés, assurant un équilibre entre progrès et durabilité.
+                    </p>
+                    <div class="score-panel-grid">
+                        <div class="score-item">
+                            <div class="score-value color-teal">95%</div>
+                            <div class="score-label">Efficacité</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-value color-magenta">88%</div>
+                            <div class="score-label">Engagement</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-value color-gold">92%</div>
+                            <div class="score-label">Durabilité</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-value color-white">84%</div>
+                            <div class="score-label">Héritage</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card flex-col-center">
+                    <h3>Radar des Impacts Technologiques</h3>
+                    <div class="flex-center" id="tech-radar"></div>
+                </div>
+            </div>
+
+            <!-- Gauges row -->
+            <div class="grid-4 fade-in-up" style="animation-delay:0.1s;margin-bottom:2.5rem;" id="gauges-row">
+            </div>
+
+            <!-- Innovation Cards Grid -->
+            <div class="grid-3 fade-in-up" style="animation-delay:0.2s;" id="tech-grid">
+            </div>
+        </div>
+    </main>
+
+    <!-- Detail Modal -->
+    <div class="innovation-modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+        <div class="innovation-modal" id="modal">
+            <button class="close-btn" onclick="document.getElementById('modal-overlay').classList.remove('open');">&times;</button>
+            <div class="modal-icon" id="modal-icon"></div>
+            <h3 class="modal-title" id="modal-title"></h3>
+            <div class="modal-cat-label" id="modal-cat"></div>
+            <p class="modal-desc-text" id="modal-desc"></p>
+            <div id="modal-details"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="brand-icon">Y</div>
+                <div class="footer-info">
+                    <span class="title">Paris 2024 Olympic Ecosystem</span><br>
+                    Projet Ynov Campus
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="team-name">Team Gold</div>
+                <div>Alexandre DUPONT &bull; Sarah MARTIN &bull; Thomas BERNARD</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const colors = { teal:'#00c4a0', magenta:'#e91e8c', dark:'#0e0e0e', gold:'#ffd60a', surface:'#1a1a1a', gray:'#9ca3af' };
+
+        const innovations = [
+            { id:1, title:'Neutralité Carbone', cat:'durabilite', catLabel:'Durabilité', icon:'🌱', impact:95,
+              desc:'Utilisation de 95% de sites existants et d\'énergies renouvelables pour réduire drastiquement l\'empreinte carbone des Jeux.',
+              details:'Paris 2024 est le premier événement sportif à s\'aligner sur l\'Accord de Paris. Les émissions de CO₂ sont réduites de 50% par rapport aux éditions précédentes grâce à l\'utilisation de sites existants et de matériaux recyclés.' },
+            { id:2, title:'Panneaux Solaires Flottants', cat:'durabilite', catLabel:'Durabilité', icon:'☀️', impact:82,
+              desc:'Des panneaux solaires flottants alimentent le Centre Aquatique Olympique en énergie propre.',
+              details:'Cette innovation permet de produire 1 MW d\'électricité verte, suffisant pour alimenter l\'ensemble du centre aquatique pendant les compétitions. Une première mondial pour un événement olympique.' },
+            { id:3, title:'Infrastructures Éco-conçues', cat:'durabilite', catLabel:'Durabilité', icon:'♻️', impact:88,
+              desc:'Bâtiments construits avec des matériaux biosourcés et un bilan carbone minimal.',
+              details:'Le village olympique utilise du bois massif et des matériaux géosourcés. Les bâtiments sont conçus pour être transformés en logements après les Jeux, réduisant le gaspillage de construction.' },
+            { id:4, title:'Capteurs Biométriques', cat:'sport', catLabel:'Tech Sportive', icon:'📡', impact:90,
+              desc:'Des capteurs portables mesurent en temps réel les performances des athlètes.',
+              details:'Les capteurs analysent la fréquence cardiaque, la vitesse, l\'accélération et la fatigue musculaire. Ces données aident les entraîneurs à optimiser les programmes d\'entraînement et à prévenir les blessures.' },
+            { id:5, title:'IA Analyse de Performance', cat:'sport', catLabel:'Tech Sportive', icon:'🤖', impact:88,
+              desc:'L\'intelligence artificielle assiste les juges et analyse les mouvements des athlètes en gymnastique.',
+              details:'Le système utilise la vision par ordinateur pour détecter les mouvements avec une précision de 99.5%. Il assiste les juges en fournissant des données objectives sur la technique et la difficulté des enchaînements.' },
+            { id:6, title:'Combinaisons Intelligentes', cat:'sport', catLabel:'Tech Sportive', icon:'🏊', impact:75,
+              desc:'Textiles hydrodynamiques réduisant la traînée de 3% pour les nageurs.',
+              details:'Développées en collaboration avec des laboratoires textiles, ces combinaisons utilisent des fibres spéciales qui réduisent la friction avec l\'eau et améliorent la glisse des nageurs en compétition.' },
+            { id:7, title:'Caméras 4K / 8K', cat:'media', catLabel:'Diffusion Média', icon:'📺', impact:85,
+              desc:'Diffusion en ultra-haute définition avec faible latence pour une expérience immersive.',
+              details:'Plus de 120 caméras 4K et 30 caméras 8K sont déployées sur les sites. La diffusion utilise le protocole SRT pour une latence inférieure à 200ms, offrant une qualité d\'image sans précédent.' },
+            { id:8, title:'Réalité Augmentée', cat:'media', catLabel:'Diffusion Média', icon:'👓', impact:78,
+              desc:'Expériences AR permettant aux téléspectateurs de visualiser les statistiques en direct.',
+              details:'Grâce à l\'AR, les spectateurs peuvent afficher en temps réel les vitesses, trajectoires et statistiques des athlètes sur leur écran. Compatible avec smartphones et tablettes via l\'application officielle.' },
+            { id:9, title:'Application Mobile Officielle', cat:'spectateur', catLabel:'Exp. Spectateur', icon:'📱', impact:92,
+              desc:'Application centralisant billetterie, résultats en temps réel et navigation dans les sites.',
+              details:'L\'app intègre la navigation GPS dans les sites, les résultats en direct, la billetterie, un système de commande de nourriture et un guide de transport multimodal. Plus de 20 millions de téléchargements.' },
+            { id:10, title:'Statistiques Temps Réel', cat:'spectateur', catLabel:'Exp. Spectateur', icon:'📊', impact:87,
+              desc:'Accès instantané aux données des compétitions pour les spectateurs dans les stades.',
+              details:'Des écrans géants et l\'application mobile affichent les vitesses, records, classements et données biométriques des athlètes en temps réel, enrichissant l\'expérience sur site.' },
+            { id:11, title:'Fan Zones Connectées', cat:'spectateur', catLabel:'Exp. Spectateur', icon:'🎉', impact:70,
+              desc:'Espaces publics avec retransmission et interactivité pour les fans sans billets.',
+              details:'Plus de 30 fan zones dans Paris et les villes hôtes, équipées d\'écrans géants, de Wi-Fi haut débit et d\'expériences interactives. Capacité totale de 500 000 personnes.' },
+            { id:12, title:'Réseau 5G Dédié', cat:'media', catLabel:'Diffusion Média', icon:'📶', impact:80,
+              desc:'Infrastructure 5G déployée sur tous les sites pour une connectivité optimale.',
+              details:'Un réseau 5G privé couvre les 35 sites de compétition, permettant la diffusion en temps réel de données massives, le streaming en haute qualité et la connectivité de 100 000+ appareils simultanés.' }
+        ];
+
+        /* ---- Gauges ---- */
+        function drawGauges() {
+            const categories = [
+                { label:'Durabilité', color:colors.teal, value:88 },
+                { label:'Tech Sportive', color:colors.magenta, value:84 },
+                { label:'Diffusion Média', color:colors.gold, value:81 },
+                { label:'Exp. Spectateur', color:'#3b82f6', value:83 }
+            ];
+
+            const el = document.getElementById('gauges-row');
+            el.innerHTML = categories.map(cat => {
+                const dashLen = 2 * Math.PI * 45;
+                const offset = dashLen - (cat.value/100)*dashLen;
+                return `
+                <div class="gauge-container card" style="padding:1.5rem;">
+                    <svg width="120" height="120" viewBox="0 0 120 120">
+                        <circle cx="60" cy="60" r="45" fill="none" stroke="#222" stroke-width="8"/>
+                        <circle cx="60" cy="60" r="45" fill="none" stroke="${cat.color}" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="${dashLen}" stroke-dashoffset="${dashLen}" transform="rotate(-90 60 60)">
+                            <animate attributeName="stroke-dashoffset" to="${offset}" dur="1.5s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+                        </circle>
+                        <text x="60" y="60" text-anchor="middle" dy="6" fill="${cat.color}" font-family="Barlow Condensed" font-size="28" font-weight="700">${cat.value}%</text>
+                    </svg>
+                    <div class="gauge-label" style="color:${cat.color};">${cat.label}</div>
+                </div>`;
+            }).join('');
+        }
+
+        /* ---- Radar Chart ---- */
+        function drawRadar() {
+            const el = document.getElementById('tech-radar');
+            const dims = ['Écologie','Social','Performance','Médias','Spectateurs','Innovation','Sécurité','Héritage'];
+            const vals = [0.92, 0.78, 0.88, 0.85, 0.82, 0.90, 0.75, 0.80];
+            const cx=150, cy=150, r=100;
+            const n = dims.length;
+
+            let svg = `<svg width="320" height="320" viewBox="0 0 300 300">`;
+
+            /* Webs */
+            [1, 0.75, 0.5, 0.25].forEach(sc => {
+                const pts = dims.map((_,i) => {
+                    const a = (i*2*Math.PI/n) - Math.PI/2;
+                    return `${cx+r*sc*Math.cos(a)},${cy+r*sc*Math.sin(a)}`;
+                }).join(' ');
+                svg += `<polygon points="${pts}" fill="none" stroke="#333" stroke-width="1"/>`;
+            });
+
+            /* Axes */
+            dims.forEach((_,i) => {
+                const a = (i*2*Math.PI/n) - Math.PI/2;
+                svg += `<line x1="${cx}" y1="${cy}" x2="${cx+r*Math.cos(a)}" y2="${cy+r*Math.sin(a)}" stroke="#333" stroke-width="1"/>`;
+            });
+
+            /* Data shape */
+            const dataPts = dims.map((_,i) => {
+                const a = (i*2*Math.PI/n) - Math.PI/2;
+                return `${cx+r*vals[i]*Math.cos(a)},${cy+r*vals[i]*Math.sin(a)}`;
+            }).join(' ');
+            const zeroPts = dims.map(()=>`${cx},${cy}`).join(' ');
+
+            svg += `<polygon points="${zeroPts}" fill="${colors.teal}" fill-opacity="0.2" stroke="${colors.teal}" stroke-width="2">
+                <animate attributeName="points" to="${dataPts}" dur="1s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+            </polygon>`;
+
+            /* Dots */
+            dims.forEach((_,i) => {
+                const a = (i*2*Math.PI/n) - Math.PI/2;
+                const dx = cx+r*vals[i]*Math.cos(a);
+                const dy = cy+r*vals[i]*Math.sin(a);
+                svg += `<circle cx="${dx}" cy="${dy}" r="3" fill="${colors.teal}" opacity="0"><animate attributeName="opacity" to="1" dur="0.3s" fill="freeze" begin="1s"/></circle>`;
+            });
+
+            /* Labels */
+            dims.forEach((d,i) => {
+                const a = (i*2*Math.PI/n) - Math.PI/2;
+                const lx = cx + (r+22)*Math.cos(a);
+                const ly = cy + (r+22)*Math.sin(a);
+                svg += `<text x="${lx}" y="${ly+4}" text-anchor="middle" fill="white" font-size="10" font-family="Inter" font-weight="500">${d}</text>`;
+            });
+
+            svg += '</svg>';
+            el.innerHTML = svg;
+        }
+
+        /* ---- Innovation Cards ---- */
+        function renderCards(filter) {
+            const grid = document.getElementById('tech-grid');
+            const filtered = filter === 'all' ? innovations : innovations.filter(i => i.cat === filter);
+
+            grid.innerHTML = filtered.map((item, index) => `
+                <div class="card fade-in-up" style="animation-delay:${index*0.08}s;cursor:pointer;" onclick="openModal(${item.id})">
+                    <div class="innovation-card-header">
+                        <div class="innovation-icon-box">${item.icon}</div>
+                        <span class="innovation-tag">${item.catLabel}</span>
+                    </div>
+                    <h3 class="innovation-card-title">${item.title}</h3>
+                    <p class="innovation-card-desc">${item.desc}</p>
+                    <div class="impact-bar-wrap">
+                        <div class="bar-label"><span class="lbl">Score d'Impact</span><span class="val">${item.impact}%</span></div>
+                        <div class="impact-bar-track"><div class="impact-bar-fill" style="width:${item.impact}%;"></div></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /* ---- Filter ---- */
+        function filterInnovations(cat, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+            renderCards(cat);
+        }
+
+        /* ---- Modal ---- */
+        function openModal(id) {
+            const item = innovations.find(i => i.id === id);
+            if(!item) return;
+
+            document.getElementById('modal-icon').textContent = item.icon;
+            document.getElementById('modal-title').textContent = item.title;
+            document.getElementById('modal-cat').textContent = item.catLabel;
+            document.getElementById('modal-desc').textContent = item.details;
+
+            document.getElementById('modal-details').innerHTML = `
+                <div class="impact-bar-wrap" style="margin-top:1.5rem;">
+                    <div class="bar-label"><span class="lbl">Score d'Impact</span><span class="val">${item.impact}%</span></div>
+                    <div class="impact-bar-track"><div class="impact-bar-fill" style="width:${item.impact}%;"></div></div>
+                </div>
+            `;
+
+            document.getElementById('modal-overlay').classList.add('open');
+        }
+
+        function closeModal(e) {
+            if(e.target === document.getElementById('modal-overlay')) {
+                document.getElementById('modal-overlay').classList.remove('open');
+            }
+        }
+
+        /* ---- INIT ---- */
+        drawGauges();
+        drawRadar();
+        renderCards('all');
+    </script>
+
+
+</body>
+</html>

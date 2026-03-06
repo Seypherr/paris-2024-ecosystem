@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Écosystème des JO | Paris 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <a href="index.html" class="brand">
+                <div class="brand-icon">Y</div>
+                <span class="brand-text">PARIS 2024 <span>ECOSYSTEM</span></span>
+            </a>
+            <button class="nav-hamburger" id="hamburger" onclick="document.getElementById('hamburger').classList.toggle('open');document.getElementById('nav-links').classList.toggle('open');">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" class="gradient-border-bottom">Accueil</a>
+                <a href="ecosysteme.html" class="gradient-border-bottom active">Écosystème des JO</a>
+                <a href="dashboard.html" class="gradient-border-bottom">Dashboard Athlète</a>
+                <a href="heritage.html" class="gradient-border-bottom">Héritage Olympique</a>
+                <a href="innovations.html" class="gradient-border-bottom">Innovations</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Background blobs -->
+    <div class="bg-blobs">
+        <div class="blob-teal"></div>
+        <div class="blob-magenta"></div>
+    </div>
+
+    <main class="page-main page-padded">
+        <div class="container">
+            <!-- Intro -->
+            <div class="section-header row">
+                <div>
+                    <h2>Écosystème des JO</h2>
+                    <p>Les Jeux Olympiques reposent sur un réseau complexe d'acteurs qui collaborent pour organiser l'événement et assurer son succès.</p>
+                </div>
+                <div class="filter-row">
+                    <button class="filter-btn active" onclick="filterNetwork('all',this)">Tous</button>
+                    <button class="filter-btn" onclick="filterNetwork('governance',this)">Organisation</button>
+                    <button class="filter-btn" onclick="filterNetwork('commercial',this)">Commercial</button>
+                    <button class="filter-btn" onclick="filterNetwork('public',this)">Public</button>
+                </div>
+            </div>
+
+            <!-- 3-column layout -->
+            <div class="eco-layout">
+                <!-- Left: Stakeholder list -->
+                <div id="stakeholder-list" class="stakeholder-list-col"></div>
+
+                <!-- Center: Network diagram -->
+                <div class="network-svg-wrap" id="network-container"></div>
+
+                <!-- Right: Detail panel -->
+                <div class="detail-panel visible" id="detail-panel">
+                    <div class="panel-icon" id="panel-icon">🏅</div>
+                    <h3 id="panel-title">Jeux Olympiques</h3>
+                    <div class="panel-cat" id="panel-category">Centre</div>
+                    <p class="panel-desc" id="panel-desc">Cliquez sur un acteur du schéma ou de la liste pour voir ses détails et comprendre son rôle dans l'écosystème olympique.</p>
+                    <div class="panel-stat">
+                        <div class="label">Chiffres Clés</div>
+                        <div class="value" id="panel-stat-1">206 Nations</div>
+                    </div>
+                    <div class="panel-stat">
+                        <div class="label">Rôle Principal</div>
+                        <div class="value white" id="panel-stat-2">Événement Mondial</div>
+                    </div>
+                    <div class="connections-title">Connecté à</div>
+                    <div id="panel-connections">
+                        <span class="tag">Tous les acteurs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="brand-icon">Y</div>
+                <div class="footer-info">
+                    <span class="title">Paris 2024 Olympic Ecosystem</span><br>
+                    Projet Ynov Campus
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="team-name">Team Gold</div>
+                <div>Alexandre DUPONT &bull; Sarah MARTIN &bull; Thomas BERNARD</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const colors = { teal:'#00c4a0', magenta:'#e91e8c', dark:'#0e0e0e', gold:'#ffd60a', surface:'#1a1a1a', gray:'#9ca3af', border:'rgba(255,255,255,0.08)' };
+
+        const stakeholders = [
+            { id:'athletes', label:'Athlètes', cat:'public', icon:'🏃', role:'Participants', members:'10 714 Athlètes', desc:'Ils participent aux compétitions et représentent leur pays. Les athlètes sont le cœur des Jeux Olympiques, incarnant l\'esprit sportif et l\'excellence.', connections:['cojo','fans','media'] },
+            { id:'ioc', label:'CIO', cat:'governance', icon:'🏛️', role:'Gouvernance', members:'206 Membres', desc:'Le Comité international olympique supervise le Mouvement olympique et assure la célébration régulière des Jeux.', connections:['cojo','sponsors','media'] },
+            { id:'cojo', label:'Comité d\'Organisation', cat:'governance', icon:'👔', role:'Organisateur', members:'4 000 Employés', desc:'L\'événement est supervisé par le Comité international olympique et le comité d\'organisation local, qui planifie, organise et délivre les Jeux.', connections:['ioc','city','sponsors','security'] },
+            { id:'sponsors', label:'Sponsors', cat:'commercial', icon:'🤝', role:'Financement', members:'14 Partenaires TOP', desc:'Les partenaires financiers contribuent au financement des Jeux. Airbnb, Coca-Cola, Samsung et d\'autres fournissent des ressources essentielles.', connections:['ioc','cojo','media'] },
+            { id:'media', label:'Médias', cat:'commercial', icon:'🎥', role:'Diffusion', members:'4 Mrd Téléspectateurs', desc:'Ils diffusent les compétitions à l\'échelle mondiale. Les services de diffusion olympique et les détenteurs de droits apportent les Jeux à un public global.', connections:['ioc','fans','athletes'] },
+            { id:'city', label:'Ville Hôte', cat:'public', icon:'🏙️', role:'Infrastructure', members:'Paris + 7 Villes', desc:'La ville organisatrice développe les infrastructures nécessaires. Paris et les autres villes hôtes fournissent les sites, les transports et les services publics.', connections:['cojo','security','fans'] },
+            { id:'fans', label:'Spectateurs', cat:'public', icon:'🎫', role:'Expérience', members:'13,4M Billets', desc:'Des millions de spectateurs assistent aux événements et des milliards regardent dans le monde entier, créant l\'atmosphère olympique unique.', connections:['city','athletes','media'] },
+            { id:'security', label:'Sécurité', cat:'governance', icon:'🛡️', role:'Sûreté', members:'45 000 Agents', desc:'Police, sécurité privée et militaire assurent la sécurité de tous les participants et spectateurs pendant les Jeux.', connections:['city','cojo'] }
+        ];
+
+        /* Build stakeholder list */
+        function buildList() {
+            const list = document.getElementById('stakeholder-list');
+            list.innerHTML = stakeholders.map(s => `
+                <div class="stakeholder-item" onclick="selectNode('${s.id}')">
+                    <span class="s-icon">${s.icon}</span>
+                    <div>
+                        <div class="s-name">${s.label}</div>
+                        <div class="s-role">${s.role}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /* Build network SVG */
+        function buildNetwork() {
+            const container = document.getElementById('network-container');
+            const w = container.clientWidth || 700;
+            const h = container.clientHeight || 650;
+            const cx = w/2, cy = h/2, radius = Math.min(w,h)*0.35;
+
+            let svg = `<svg width="100%" height="100%" viewBox="0 0 ${w} ${h}">`;
+
+            /* Lines from center to nodes */
+            stakeholders.forEach((s,i) => {
+                const angle = (i * 2 * Math.PI) / stakeholders.length - Math.PI/2;
+                const x = cx + radius * Math.cos(angle);
+                const y = cy + radius * Math.sin(angle);
+                svg += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${colors.border}" stroke-width="1" stroke-dasharray="5,5">
+                    <animate attributeName="stroke-dashoffset" from="100" to="0" dur="20s" repeatCount="indefinite"/>
+                </line>`;
+            });
+
+            /* Inter-node connections */
+            stakeholders.forEach((s,i) => {
+                const a1 = (i * 2 * Math.PI) / stakeholders.length - Math.PI/2;
+                const x1 = cx + radius * Math.cos(a1);
+                const y1 = cy + radius * Math.sin(a1);
+                s.connections.forEach(cid => {
+                    const j = stakeholders.findIndex(x => x.id === cid);
+                    if(j > i) {
+                        const a2 = (j * 2 * Math.PI) / stakeholders.length - Math.PI/2;
+                        const x2 = cx + radius * Math.cos(a2);
+                        const y2 = cy + radius * Math.sin(a2);
+                        svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgba(0,196,160,0.15)" stroke-width="1"/>`;
+                    }
+                });
+            });
+
+            /* Center node */
+            svg += `<g class="network-node">
+                <circle cx="${cx}" cy="${cy}" r="55" fill="${colors.dark}" stroke="${colors.teal}" stroke-width="2" class="node-pulse"/>
+                <text x="${cx}" y="${cy-8}" text-anchor="middle" fill="white" font-family="Barlow Condensed" font-weight="bold" font-size="16">JEUX</text>
+                <text x="${cx}" y="${cy+12}" text-anchor="middle" fill="${colors.teal}" font-family="Barlow Condensed" font-weight="bold" font-size="16">OLYMPIQUES</text>
+            </g>`;
+
+            /* Outer nodes */
+            stakeholders.forEach((s,i) => {
+                const angle = (i * 2 * Math.PI) / stakeholders.length - Math.PI/2;
+                const x = cx + radius * Math.cos(angle);
+                const y = cy + radius * Math.sin(angle);
+                svg += `<g class="network-node" onclick="selectNode('${s.id}')" data-cat="${s.cat}" data-id="${s.id}">
+                    <circle cx="${x}" cy="${y}" r="38" fill="${colors.surface}" stroke="${colors.border}" stroke-width="2"/>
+                    <text x="${x}" y="${y-8}" text-anchor="middle" font-size="22">${s.icon}</text>
+                    <text x="${x}" y="${y+14}" text-anchor="middle" fill="white" font-family="Inter" font-size="11" font-weight="500">${s.label}</text>
+                </g>`;
+            });
+
+            svg += '</svg>';
+            container.innerHTML = svg;
+        }
+
+        /* Select a node */
+        function selectNode(id) {
+            const s = stakeholders.find(x => x.id === id);
+            if(!s) return;
+
+            const panel = document.getElementById('detail-panel');
+            panel.classList.remove('visible');
+
+            setTimeout(() => {
+                document.getElementById('panel-icon').textContent = s.icon;
+                document.getElementById('panel-title').textContent = s.label;
+                document.getElementById('panel-category').textContent = s.cat === 'governance' ? 'Organisation' : s.cat === 'commercial' ? 'Commercial' : 'Public';
+                document.getElementById('panel-desc').textContent = s.desc;
+                document.getElementById('panel-stat-1').textContent = s.members;
+                document.getElementById('panel-stat-2').textContent = s.role;
+
+                const conns = s.connections.map(c => {
+                    const linked = stakeholders.find(x => x.id === c);
+                    return linked ? `<span class="tag">${linked.label}</span>` : '';
+                }).join('');
+                document.getElementById('panel-connections').innerHTML = conns;
+
+                panel.classList.add('visible');
+            }, 300);
+
+            /* Highlight node in SVG */
+            document.querySelectorAll('.network-node[data-id]').forEach(n => {
+                n.style.opacity = n.dataset.id === id ? '1' : '0.4';
+            });
+        }
+
+        /* Filter by category */
+        function filterNetwork(cat, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            document.querySelectorAll('.network-node[data-cat]').forEach(n => {
+                n.style.opacity = (cat === 'all' || n.dataset.cat === cat) ? '1' : '0.15';
+            });
+        }
+
+        /* Init */
+        buildList();
+        buildNetwork();
+        window.addEventListener('resize', buildNetwork);
+    </script>
+</body>
+</html>

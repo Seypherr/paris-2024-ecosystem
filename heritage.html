@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Héritage Olympique | Paris 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <a href="index.html" class="brand">
+                <div class="brand-icon">Y</div>
+                <span class="brand-text">PARIS 2024 <span>ECOSYSTEM</span></span>
+            </a>
+            <button class="nav-hamburger" id="hamburger" onclick="document.getElementById('hamburger').classList.toggle('open');document.getElementById('nav-links').classList.toggle('open');">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" class="gradient-border-bottom">Accueil</a>
+                <a href="ecosysteme.html" class="gradient-border-bottom">Écosystème des JO</a>
+                <a href="dashboard.html" class="gradient-border-bottom">Dashboard Athlète</a>
+                <a href="heritage.html" class="gradient-border-bottom active">Héritage Olympique</a>
+                <a href="innovations.html" class="gradient-border-bottom">Innovations</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-blobs"><div class="blob-teal"></div><div class="blob-magenta"></div></div>
+
+    <main class="page-main page-padded">
+        <div class="container-narrow">
+            <!-- Intro -->
+            <div class="legacy-intro appear">
+                <h2>Un <span>Héritage</span> Durable</h2>
+                <p>Les Jeux Olympiques peuvent laisser un héritage durable pour la ville organisatrice et ses habitants. Découvrez comment Paris 2024 transforme la ville pour les générations à venir.</p>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline-wrap">
+                <div class="timeline-line"></div>
+
+                <!-- Chapter 01 — Introduction / Impact Urbain -->
+                <div class="legacy-chapter appear">
+                    <div class="chapter-dot" style="background:#00c4a0;"></div>
+                    <span class="chapter-label" style="color:#00c4a0;">Chapitre 01</span>
+                    <h3>Impact Urbain</h3>
+                    <p class="chapter-text">
+                        Les Jeux accélèrent la construction d'infrastructures et la rénovation de certains quartiers. 
+                        La Seine-Saint-Denis a vu une accélération des infrastructures publiques de 15 ans grâce aux Jeux.
+                    </p>
+
+                    <div class="quote-card" style="margin-bottom:1.5rem;">
+                        <p class="quote-text">Le village olympique situé à <strong style="color:#00c4a0;">Saint-Denis</strong> sera transformé en logements après les Jeux, offrant un héritage concret pour les habitants du quartier.</p>
+                        <div class="author">
+                            <div class="author-avatar"></div>
+                            <div>
+                                <div class="author-name">Anne Hidalgo</div>
+                                <div class="author-role">Maire de Paris</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="counter-card">
+                            <div class="counter-value color-teal counter" data-target="50">0</div>
+                            <div class="counter-label">% Réduction Carbone</div>
+                        </div>
+                        <div class="counter-card">
+                            <div class="counter-value color-magenta counter" data-target="6">0</div>
+                            <div class="counter-label">Nouvelles Stations Métro</div>
+                        </div>
+                        <div class="counter-card">
+                            <div class="counter-value color-gold counter" data-target="95">0</div>
+                            <div class="counter-label">% Sites Existants</div>
+                        </div>
+                        <div class="counter-card">
+                            <div class="counter-value color-white counter" data-target="3200">0</div>
+                            <div class="counter-label">Logements Créés</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter 02 — Impact Économique -->
+                <div class="legacy-chapter appear">
+                    <div class="chapter-dot" style="background:#e91e8c;"></div>
+                    <span class="chapter-label" style="color:#e91e8c;">Chapitre 02</span>
+                    <h3>Impact Économique</h3>
+                    <p class="chapter-text">
+                        Les Jeux génèrent des retombées économiques considérables pour la ville hôte et le pays organisateur.
+                    </p>
+
+                    <div class="grid-3 mb-2">
+                        <div class="card" style="text-align:center;">
+                            <div class="eco-counter-icon">💼</div>
+                            <div class="eco-counter-value color-teal counter" data-target="181000">0</div>
+                            <div class="eco-counter-label">Emplois Créés</div>
+                        </div>
+                        <div class="card" style="text-align:center;">
+                            <div class="eco-counter-icon">✈️</div>
+                            <div class="eco-counter-value color-magenta counter" data-target="15">0</div>
+                            <div class="eco-counter-label">Millions Touristes</div>
+                        </div>
+                        <div class="card" style="text-align:center;">
+                            <div class="eco-counter-icon">💰</div>
+                            <div class="eco-counter-value color-gold counter" data-target="9">0</div>
+                            <div class="eco-counter-label">Milliards € Investis</div>
+                        </div>
+                    </div>
+
+                    <!-- Impact bar chart -->
+                    <div class="chart-card">
+                        <h3 style="font-size:1.2rem;">Répartition des Investissements</h3>
+                        <div id="invest-chart" style="min-height:200px;"></div>
+                    </div>
+                </div>
+
+                <!-- Chapter 03 — Témoignage -->
+                <div class="legacy-chapter appear">
+                    <div class="chapter-dot" style="background:#ffd60a;"></div>
+                    <span class="chapter-label" style="color:#ffd60a;">Chapitre 03</span>
+                    <h3>Témoignage d'un Habitant</h3>
+
+                    <div class="quote-card">
+                        <p class="quote-text">"Depuis l'annonce des JO, notre quartier a complètement changé. De nouvelles lignes de transport, des espaces verts, et surtout un sentiment de fierté pour notre communauté. On voit enfin des investissements ici, et ça change tout pour nos enfants."</p>
+                        <div class="author">
+                            <div class="author-avatar" style="background:linear-gradient(135deg,#00c4a0,#e91e8c);"></div>
+                            <div>
+                                <div class="author-name">Fatima B.</div>
+                                <div class="author-role">Résidente de Saint-Denis</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter 04 — Avant / Après -->
+                <div class="legacy-chapter appear">
+                    <div class="chapter-dot" style="background:#fff;"></div>
+                    <span class="chapter-label" style="color:#9ca3af;">Chapitre 04</span>
+                    <h3>Avant / Après</h3>
+                    <p class="chapter-text">Visualisez la transformation des sites olympiques.</p>
+
+                    <div class="before-after" id="before-after">
+                        <div class="ba-side ba-before">
+                            <div style="text-align:center;">
+                                <div style="font-size:3rem;margin-bottom:0.5rem;">🏗️</div>
+                                <div style="font-size:1.5rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;">AVANT</div>
+                                <div style="font-size:0.8rem;color:#6b7280;">Terrain industriel — 2020</div>
+                            </div>
+                        </div>
+                        <div class="ba-side ba-after">
+                            <div style="text-align:center;">
+                                <div style="font-size:3rem;margin-bottom:0.5rem;">🏘️</div>
+                                <div style="font-size:1.5rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#00c4a0;">APRÈS</div>
+                                <div style="font-size:0.8rem;color:#9ca3af;">Village Olympique — 2024</div>
+                            </div>
+                        </div>
+                        <div class="ba-divider" id="ba-divider"></div>
+                    </div>
+                </div>
+
+                <!-- Chapter 05 — Carte Interactive -->
+                <div class="legacy-chapter appear">
+                    <div class="chapter-dot" style="background:#00c4a0;"></div>
+                    <span class="chapter-label" style="color:#00c4a0;">Chapitre 05</span>
+                    <h3>Carte des Infrastructures</h3>
+
+                    <div class="map-card">
+                        <svg width="100%" height="100%" viewBox="0 0 800 450" style="min-height:380px;">
+                            <!-- Simplified map paths -->
+                            <path fill="none" stroke="#333" stroke-width="1" d="M100,225 Q250,125 400,225 T700,225"/>
+                            <path fill="none" stroke="#333" stroke-width="1" d="M200,400 Q400,280 600,400"/>
+                            <path fill="none" stroke="#333" stroke-width="1" d="M350,50 L350,420"/>
+                            <path fill="none" stroke="#333" stroke-width="1" d="M100,350 Q400,200 700,350"/>
+
+                            <!-- Seine river -->
+                            <path fill="none" stroke="rgba(0,196,160,0.2)" stroke-width="8" d="M50,280 Q200,220 400,260 Q600,300 750,240" stroke-linecap="round"/>
+
+                            <!-- Points of interest -->
+                            <g class="map-point" onclick="showMapInfo('stade')" style="cursor:pointer;">
+                                <circle cx="400" cy="180" r="10" fill="#e91e8c" opacity="0.3"><animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite"/></circle>
+                                <circle cx="400" cy="180" r="5" fill="#e91e8c"/>
+                                <text x="400" y="165" text-anchor="middle" fill="#fff" font-size="10" font-family="Inter" font-weight="600">Stade de France</text>
+                            </g>
+
+                            <g class="map-point" onclick="showMapInfo('village')" style="cursor:pointer;">
+                                <circle cx="300" cy="140" r="10" fill="#00c4a0" opacity="0.3"><animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite" begin="0.5s"/></circle>
+                                <circle cx="300" cy="140" r="5" fill="#00c4a0"/>
+                                <text x="300" y="125" text-anchor="middle" fill="#fff" font-size="10" font-family="Inter" font-weight="600">Village Olympique</text>
+                            </g>
+
+                            <g class="map-point" onclick="showMapInfo('aquatic')" style="cursor:pointer;">
+                                <circle cx="500" cy="220" r="10" fill="#ffd60a" opacity="0.3"><animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite" begin="1s"/></circle>
+                                <circle cx="500" cy="220" r="5" fill="#ffd60a"/>
+                                <text x="500" y="245" text-anchor="middle" fill="#fff" font-size="10" font-family="Inter" font-weight="600">Centre Aquatique</text>
+                            </g>
+
+                            <g class="map-point" onclick="showMapInfo('roland')" style="cursor:pointer;">
+                                <circle cx="250" cy="320" r="10" fill="#e91e8c" opacity="0.3"><animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite" begin="1.5s"/></circle>
+                                <circle cx="250" cy="320" r="5" fill="#e91e8c"/>
+                                <text x="250" y="340" text-anchor="middle" fill="#fff" font-size="10" font-family="Inter" font-weight="600">Roland-Garros</text>
+                            </g>
+
+                            <g class="map-point" onclick="showMapInfo('trocadero')" style="cursor:pointer;">
+                                <circle cx="580" cy="310" r="10" fill="#00c4a0" opacity="0.3"><animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite" begin="0.7s"/></circle>
+                                <circle cx="580" cy="310" r="5" fill="#00c4a0"/>
+                                <text x="580" y="330" text-anchor="middle" fill="#fff" font-size="10" font-family="Inter" font-weight="600">Trocadéro</text>
+                            </g>
+                        </svg>
+
+                        <div class="map-tooltip" id="map-tooltip">
+                            <h4 id="map-title">Stade de France</h4>
+                            <p id="map-desc">Cliquez sur un point pour voir les détails de l'infrastructure.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="brand-icon">Y</div>
+                <div class="footer-info">
+                    <span class="title">Paris 2024 Olympic Ecosystem</span><br>
+                    Projet Ynov Campus
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="team-name">Team Gold</div>
+                <div>Alexandre DUPONT &bull; Sarah MARTIN &bull; Thomas BERNARD</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* ---- Scroll Appear Observer ---- */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+
+                    /* Counter animation */
+                    entry.target.querySelectorAll('.counter').forEach(c => {
+                        const target = +c.dataset.target;
+                        let count = 0;
+                        const step = target / 60;
+                        const update = () => {
+                            count += step;
+                            if(count < target) {
+                                c.textContent = Math.ceil(count).toLocaleString('fr-FR');
+                                requestAnimationFrame(update);
+                            } else {
+                                c.textContent = target.toLocaleString('fr-FR');
+                            }
+                        };
+                        update();
+                    });
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.appear').forEach(el => observer.observe(el));
+
+        /* ---- Investment Chart ---- */
+        (function drawInvestChart() {
+            const el = document.getElementById('invest-chart');
+            const data = [
+                { label:'Transport', val:55, color:'#00c4a0' },
+                { label:'Sites sportifs', val:35, color:'#e91e8c' },
+                { label:'Logements', val:25, color:'#ffd60a' },
+                { label:'Sécurité', val:20, color:'#9ca3af' },
+                { label:'Numérique', val:15, color:'#3b82f6' }
+            ];
+            const maxVal = 60;
+
+            let html = '';
+            data.forEach((d,i) => {
+                html += `
+                <div class="invest-bar-row appear">
+                    <div class="invest-bar-label">${d.label}</div>
+                    <div class="invest-bar-track">
+                        <div class="invest-bar-fill" style="background:${d.color};transition-delay:${i*0.15}s;" class="invest-bar" data-width="${(d.val/maxVal)*100}%"></div>
+                    </div>
+                    <div class="invest-bar-value" style="color:${d.color};">${d.val}%</div>
+                </div>`;
+            });
+            el.innerHTML = html;
+
+            /* Animate bars on scroll */
+            setTimeout(() => {
+                document.querySelectorAll('.invest-bar').forEach(bar => {
+                    bar.style.width = bar.dataset.width;
+                });
+            }, 500);
+        })();
+
+        /* ---- Map Info ---- */
+        const mapData = {
+            stade: { title:'Stade de France', desc:'Pièce maîtresse des Jeux, accueillant l\'athlétisme et le rugby à 7. Capacité : 80 000 places. Rénové pour l\'occasion.' },
+            village: { title:'Village Olympique', desc:'Situé à Saint-Denis, il accueillera 14 500 athlètes. Après les Jeux, il sera transformé en 2 800 logements et bureaux.' },
+            aquatic: { title:'Centre Aquatique Olympique', desc:'Nouveau bâtiment de 5 000 places alimenté par des panneaux solaires. Accueille la natation et le plongeon.' },
+            roland: { title:'Roland-Garros', desc:'Le célèbre stade de tennis accueille les épreuves de tennis et de boxe. 15 000 places au court Philippe-Chatrier.' },
+            trocadero: { title:'Trocadéro', desc:'Site emblématique face à la Tour Eiffel, accueillant les épreuves de cyclisme sur route et le triathlon.' }
+        };
+
+        function showMapInfo(id) {
+            const info = mapData[id];
+            if(!info) return;
+            const tooltip = document.getElementById('map-tooltip');
+            tooltip.style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('map-title').textContent = info.title;
+                document.getElementById('map-desc').textContent = info.desc;
+                tooltip.style.opacity = '1';
+                tooltip.style.transition = 'opacity 0.3s';
+            }, 150);
+        }
+
+        /* ---- Before/After slider ---- */
+        (function() {
+            const container = document.getElementById('before-after');
+            const divider = document.getElementById('ba-divider');
+            let dragging = false;
+
+            function move(x) {
+                const rect = container.getBoundingClientRect();
+                let pct = ((x - rect.left) / rect.width) * 100;
+                pct = Math.max(5, Math.min(95, pct));
+                divider.style.left = pct + '%';
+                container.querySelector('.ba-before').style.right = (100-pct) + '%';
+                container.querySelector('.ba-after').style.left = pct + '%';
+            }
+
+            container.addEventListener('mousedown', () => dragging = true);
+            window.addEventListener('mouseup', () => dragging = false);
+            window.addEventListener('mousemove', e => { if(dragging) move(e.clientX); });
+            container.addEventListener('touchmove', e => move(e.touches[0].clientX));
+        })();
+    </script>
+</body>
+</html>

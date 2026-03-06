@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paris 2024 Ecosystem | Accueil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <a href="index.html" class="brand">
+                <div class="brand-icon">Y</div>
+                <span class="brand-text">PARIS 2024 <span>ECOSYSTEM</span></span>
+            </a>
+            <button class="nav-hamburger" id="hamburger" onclick="document.getElementById('hamburger').classList.toggle('open');document.getElementById('nav-links').classList.toggle('open');">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" class="gradient-border-bottom active">Accueil</a>
+                <a href="ecosysteme.html" class="gradient-border-bottom">Écosystème des JO</a>
+                <a href="dashboard.html" class="gradient-border-bottom">Dashboard Athlète</a>
+                <a href="heritage.html" class="gradient-border-bottom">Héritage Olympique</a>
+                <a href="innovations.html" class="gradient-border-bottom">Innovations</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Background blobs -->
+    <div class="bg-blobs">
+        <div class="blob-teal"></div>
+        <div class="blob-magenta"></div>
+    </div>
+
+    <main class="page-main hero-main">
+        <div class="container hero-grid">
+            <!-- Left -->
+            <div class="fade-in-up hero-left">
+                <div class="hero-badge">Projet Interactif</div>
+                <h1 class="hero-title">
+                    PARIS<br>
+                    <span class="gradient-text">2024</span><br>
+                    ECOSYSTEM
+                </h1>
+                <p class="hero-desc">
+                    Explorez le réseau complexe d'acteurs, les performances des athlètes, l'héritage olympique et les innovations technologiques qui façonnent les Jeux Olympiques modernes.
+                </p>
+                <div class="hero-actions">
+                    <a href="ecosysteme.html" class="btn-primary">Explorer le Réseau</a>
+                    <a href="dashboard.html" class="btn-secondary">Voir les Données</a>
+                </div>
+            </div>
+
+            <!-- Right – decorative -->
+            <div class="fade-in-up anim-delay-2 hero-right">
+                <!-- spinning rings -->
+                <div class="hero-ring hero-ring-1"></div>
+                <div class="hero-ring hero-ring-2"></div>
+                <div class="hero-ring hero-ring-3"></div>
+
+                <!-- floating cards -->
+                <div class="float-anim hero-float-card teal-glow">
+                    <svg class="icon-svg color-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <div class="float-anim float-anim-delay-1 hero-float-card magenta-glow">
+                    <svg class="icon-svg color-magenta" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                </div>
+                <div class="float-anim float-anim-delay-2 hero-float-card neutral">
+                    <svg class="icon-svg-sm color-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+
+                <!-- Big "24" watermark -->
+                <div class="hero-watermark">24</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="brand-icon">Y</div>
+                <div class="footer-info">
+                    <span class="title">Paris 2024 Olympic Ecosystem</span><br>
+                    Projet Ynov Campus
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="team-name">Team Gold</div>
+                <div>Alexandre DUPONT &bull; Sarah MARTIN &bull; Thomas BERNARD</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
