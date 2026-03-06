@@ -285,7 +285,7 @@
                 <div class="invest-bar-row appear">
                     <div class="invest-bar-label">${d.label}</div>
                     <div class="invest-bar-track">
-                        <div class="invest-bar-fill" style="background:${d.color};transition-delay:${i*0.15}s;" class="invest-bar" data-width="${(d.val/maxVal)*100}%"></div>
+                        <div class="invest-bar-fill" style="background:${d.color};transition-delay:${i*0.15}s;" data-width="${(d.val/maxVal)*100}%"></div>
                     </div>
                     <div class="invest-bar-value" style="color:${d.color};">${d.val}%</div>
                 </div>`;
@@ -294,7 +294,7 @@
 
             /* Animate bars on scroll */
             setTimeout(() => {
-                document.querySelectorAll('.invest-bar').forEach(bar => {
+                document.querySelectorAll('.invest-bar-fill').forEach(bar => {
                     bar.style.width = bar.dataset.width;
                 });
             }, 500);
