@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Performance Athlète | Paris 2024</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -67,7 +67,7 @@
                 <div class="athlete-avatar">LM</div>
                 <div class="athlete-info">
                     <h3 class="athlete-name">Léon Marchand</h3>
-                    <p class="athlete-sub">Natation — France 🇫🇷 &nbsp;|&nbsp; Né le 17 mai 2002 à Toulouse</p>
+                    <p class="athlete-sub">Natation — France <span class="flag-badge">FR</span> &nbsp;|&nbsp; Né le 17 mai 2002 à Toulouse</p>
                     <div class="athlete-meta">
                         <span class="athlete-meta-item">Spécialité: <strong class="highlight">4 Nages / Papillon</strong></span>
                         <span class="athlete-meta-item">Entraîneur: <strong>Bob Bowman</strong></span>
@@ -80,7 +80,7 @@
                 <div class="stat-card" id="card-medals">
                     <div class="stat-label">Médailles</div>
                     <div class="stat-value color-gold" id="stat-medals">5</div>
-                    <div class="stat-sub" id="stat-medals-sub">🥇 4 Or &bull; 🥈 1 Argent</div>
+                    <div class="stat-sub" id="stat-medals-sub"><span class="medal-dot gold"></span> 4 Or &bull; <span class="medal-dot silver"></span> 1 Argent</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Records Personnels</div>
@@ -149,18 +149,30 @@
 
     <!-- Footer -->
     <footer class="site-footer">
-        <div class="footer-inner">
+        <div class="footer-inner footer-grid">
             <div class="footer-brand">
-                <div class="brand-icon">Y</div>
+                <div class="brand-icon">P24</div>
                 <div class="footer-info">
                     <span class="title">Paris 2024 Olympic Ecosystem</span><br>
-                    Projet Ynov Campus
+                    Projet académique — Ynov Campus
                 </div>
             </div>
-            <div class="footer-right">
-                <div class="team-name">Team Gold</div>
-                <div>Alexandre DUPONT &bull; Sarah MARTIN &bull; Thomas BERNARD</div>
+            <div class="footer-nav">
+                <h4 class="footer-heading">Navigation</h4>
+                <a href="index.html">Accueil</a>
+                <a href="ecosysteme.html">Écosystème</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="heritage.html">Héritage</a>
+                <a href="innovations.html">Innovations</a>
             </div>
+            <div class="footer-legal">
+                <h4 class="footer-heading">Légal</h4>
+                <a href="pages/mentions-legales.html">Mentions légales</a>
+                <a href="pages/politique-confidentialite.html">Politique de confidentialité</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2024 Paris 2024 Olympic Ecosystem — Projet académique</span>
         </div>
     </footer>
 
@@ -169,16 +181,16 @@
 
         /* ---- DATA ---- */
         const results = [
-            { year:2021, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m Papillon', eventKey:'200pap', time:'1:55.40', medal:'—', medalColor:colors.gray },
-            { year:2022, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m Papillon', eventKey:'200pap', time:'1:53.37', medal:'🥇', medalColor:colors.gold },
-            { year:2022, comp:'Championnats du Monde', compKey:'mondiaux', event:'400m 4 Nages', eventKey:'400qn', time:'4:04.28', medal:'🥇', medalColor:colors.gold },
-            { year:2023, comp:'Championnats du Monde', compKey:'mondiaux', event:'400m 4 Nages', eventKey:'400qn', time:'4:02.50', medal:'🥇', medalColor:colors.gold },
-            { year:2023, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m 4 Nages', eventKey:'200qn', time:'1:55.22', medal:'🥇', medalColor:colors.gold },
-            { year:2023, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m Brasse', eventKey:'200br', time:'2:05.48', medal:'🥈', medalColor:'#c0c0c0' },
-            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'400m 4 Nages', eventKey:'400qn', time:'4:02.95', medal:'🥇', medalColor:colors.gold },
-            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'200m Papillon', eventKey:'200pap', time:'1:51.21', medal:'🥇', medalColor:colors.gold },
-            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'200m 4 Nages', eventKey:'200qn', time:'1:54.06', medal:'🥇', medalColor:colors.gold },
-            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'200m Brasse', eventKey:'200br', time:'2:05.85', medal:'🥇', medalColor:colors.gold }
+            { year:2021, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m Papillon', eventKey:'200pap', time:'1:55.40', medal:'—', medalType:'none', medalColor:colors.gray },
+            { year:2022, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m Papillon', eventKey:'200pap', time:'1:53.37', medal:'Or', medalType:'gold', medalColor:colors.gold },
+            { year:2022, comp:'Championnats du Monde', compKey:'mondiaux', event:'400m 4 Nages', eventKey:'400qn', time:'4:04.28', medal:'Or', medalType:'gold', medalColor:colors.gold },
+            { year:2023, comp:'Championnats du Monde', compKey:'mondiaux', event:'400m 4 Nages', eventKey:'400qn', time:'4:02.50', medal:'Or', medalType:'gold', medalColor:colors.gold },
+            { year:2023, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m 4 Nages', eventKey:'200qn', time:'1:55.22', medal:'Or', medalType:'gold', medalColor:colors.gold },
+            { year:2023, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m Brasse', eventKey:'200br', time:'2:05.48', medal:'Argent', medalType:'silver', medalColor:'#c0c0c0' },
+            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'400m 4 Nages', eventKey:'400qn', time:'4:02.95', medal:'Or', medalType:'gold', medalColor:colors.gold },
+            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'200m Papillon', eventKey:'200pap', time:'1:51.21', medal:'Or', medalType:'gold', medalColor:colors.gold },
+            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'200m 4 Nages', eventKey:'200qn', time:'1:54.06', medal:'Or', medalType:'gold', medalColor:colors.gold },
+            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'200m Brasse', eventKey:'200br', time:'2:05.85', medal:'Or', medalType:'gold', medalColor:colors.gold }
         ];
 
         const perfEvolution = [
@@ -364,7 +376,7 @@
                     <td class="td-comp">${r.comp}</td>
                     <td class="td-event">${r.event}</td>
                     <td class="td-time">${r.time}</td>
-                    <td class="td-medal">${r.medal}</td>
+                    <td class="td-medal">${r.medalType !== 'none' ? `<span class="medal-dot ${r.medalType}"></span> ${r.medal}` : '—'}</td>
                 </tr>
             `).join('');
 
@@ -373,11 +385,11 @@
             }
 
             /* Update stat cards */
-            const golds = filtered.filter(r => r.medal === '🥇').length;
-            const silvers = filtered.filter(r => r.medal === '🥈').length;
+            const golds = filtered.filter(r => r.medalType === 'gold').length;
+            const silvers = filtered.filter(r => r.medalType === 'silver').length;
             const totalMedals = golds + silvers;
             document.getElementById('stat-medals').textContent = totalMedals || '—';
-            document.getElementById('stat-medals-sub').innerHTML = `🥇 ${golds} Or &bull; 🥈 ${silvers} Argent`;
+            document.getElementById('stat-medals-sub').innerHTML = `<span class="medal-dot gold"></span> ${golds} Or &bull; <span class="medal-dot silver"></span> ${silvers} Argent`;
         }
 
         /* ---- Filtered Bar Chart ---- */
@@ -387,9 +399,9 @@
             const compMap = {};
             filtered.forEach(r => {
                 if(!compMap[r.comp]) compMap[r.comp] = { gold:0, silver:0, bronze:0 };
-                if(r.medal === '🥇') compMap[r.comp].gold++;
-                else if(r.medal === '🥈') compMap[r.comp].silver++;
-                else if(r.medal === '🥉') compMap[r.comp].bronze++;
+                if(r.medalType === 'gold') compMap[r.comp].gold++;
+                else if(r.medalType === 'silver') compMap[r.comp].silver++;
+                else if(r.medalType === 'bronze') compMap[r.comp].bronze++;
             });
 
             const compKeys = Object.keys(compMap);

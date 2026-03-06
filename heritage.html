@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Héritage Olympique | Paris 2024</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -55,7 +55,7 @@
                     <div class="quote-card" style="margin-bottom:1.5rem;">
                         <p class="quote-text">Le village olympique situé à <strong style="color:#00c4a0;">Saint-Denis</strong> sera transformé en logements après les Jeux, offrant un héritage concret pour les habitants du quartier.</p>
                         <div class="author">
-                            <div class="author-avatar"></div>
+                            <div class="author-avatar" style="background-image:url('img/Anne_Hidalgo.jpg');background-size:cover;background-position:center;"></div>
                             <div>
                                 <div class="author-name">Anne Hidalgo</div>
                                 <div class="author-role">Maire de Paris</div>
@@ -94,17 +94,17 @@
 
                     <div class="grid-3 mb-2">
                         <div class="card" style="text-align:center;">
-                            <div class="eco-counter-icon">💼</div>
+                            <div class="eco-counter-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00c4a0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
                             <div class="eco-counter-value color-teal counter" data-target="181000">0</div>
                             <div class="eco-counter-label">Emplois Créés</div>
                         </div>
                         <div class="card" style="text-align:center;">
-                            <div class="eco-counter-icon">✈️</div>
+                            <div class="eco-counter-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#e91e8c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></div>
                             <div class="eco-counter-value color-magenta counter" data-target="15">0</div>
                             <div class="eco-counter-label">Millions Touristes</div>
                         </div>
                         <div class="card" style="text-align:center;">
-                            <div class="eco-counter-icon">💰</div>
+                            <div class="eco-counter-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#ffd60a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
                             <div class="eco-counter-value color-gold counter" data-target="9">0</div>
                             <div class="eco-counter-label">Milliards € Investis</div>
                         </div>
@@ -145,14 +145,14 @@
                     <div class="before-after" id="before-after">
                         <div class="ba-side ba-before">
                             <div style="text-align:center;">
-                                <div style="font-size:3rem;margin-bottom:0.5rem;">🏗️</div>
+                                <div style="font-size:3rem;margin-bottom:0.5rem;"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="16" rx="2"/><path d="M2 10h20"/><path d="M17 2v4"/><path d="M7 2v4"/><path d="M7 14h3v3H7z"/></svg></div>
                                 <div style="font-size:1.5rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;">AVANT</div>
                                 <div style="font-size:0.8rem;color:#6b7280;">Terrain industriel — 2020</div>
                             </div>
                         </div>
                         <div class="ba-side ba-after">
                             <div style="text-align:center;">
-                                <div style="font-size:3rem;margin-bottom:0.5rem;">🏘️</div>
+                                <div style="font-size:3rem;margin-bottom:0.5rem;"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#00c4a0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l2-2h4l2 2v14"/><path d="M13 21V11l2-2h4l2 2v12"/><path d="M7 10h2"/><path d="M7 14h2"/><path d="M15 14h2"/><path d="M15 18h2"/></svg></div>
                                 <div style="font-size:1.5rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#00c4a0;">APRÈS</div>
                                 <div style="font-size:0.8rem;color:#9ca3af;">Village Olympique — 2024</div>
                             </div>
@@ -223,18 +223,30 @@
 
     <!-- Footer -->
     <footer class="site-footer">
-        <div class="footer-inner">
+        <div class="footer-inner footer-grid">
             <div class="footer-brand">
-                <div class="brand-icon">Y</div>
+                <div class="brand-icon">P24</div>
                 <div class="footer-info">
                     <span class="title">Paris 2024 Olympic Ecosystem</span><br>
-                    Projet Ynov Campus
+                    Projet académique — Ynov Campus
                 </div>
             </div>
-            <div class="footer-right">
-                <div class="team-name">Team Gold</div>
-                <div>Alexandre DUPONT &bull; Sarah MARTIN &bull; Thomas BERNARD</div>
+            <div class="footer-nav">
+                <h4 class="footer-heading">Navigation</h4>
+                <a href="index.html">Accueil</a>
+                <a href="ecosysteme.html">Écosystème</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="heritage.html">Héritage</a>
+                <a href="innovations.html">Innovations</a>
             </div>
+            <div class="footer-legal">
+                <h4 class="footer-heading">Légal</h4>
+                <a href="pages/mentions-legales.html">Mentions légales</a>
+                <a href="pages/politique-confidentialite.html">Politique de confidentialité</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2024 Paris 2024 Olympic Ecosystem — Projet académique</span>
         </div>
     </footer>
 

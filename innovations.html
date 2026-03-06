@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Innovations Technologiques | Paris 2024</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -104,59 +104,87 @@
 
     <!-- Footer -->
     <footer class="site-footer">
-        <div class="footer-inner">
+        <div class="footer-inner footer-grid">
             <div class="footer-brand">
-                <div class="brand-icon">Y</div>
+                <div class="brand-icon">P24</div>
                 <div class="footer-info">
                     <span class="title">Paris 2024 Olympic Ecosystem</span><br>
-                    Projet Ynov Campus
+                    Projet académique — Ynov Campus
                 </div>
             </div>
-            <div class="footer-right">
-                <div class="team-name">Team Gold</div>
-                <div>Alexandre DUPONT &bull; Sarah MARTIN &bull; Thomas BERNARD</div>
+            <div class="footer-nav">
+                <h4 class="footer-heading">Navigation</h4>
+                <a href="index.html">Accueil</a>
+                <a href="ecosysteme.html">Écosystème</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="heritage.html">Héritage</a>
+                <a href="innovations.html">Innovations</a>
             </div>
+            <div class="footer-legal">
+                <h4 class="footer-heading">Légal</h4>
+                <a href="pages/mentions-legales.html">Mentions légales</a>
+                <a href="pages/politique-confidentialite.html">Politique de confidentialité</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2024 Paris 2024 Olympic Ecosystem — Projet académique</span>
         </div>
     </footer>
 
     <script>
         const colors = { teal:'#00c4a0', magenta:'#e91e8c', dark:'#0e0e0e', gold:'#ffd60a', surface:'#1a1a1a', gray:'#9ca3af' };
 
+        /* SVG icon library for innovations */
+        const innoIcons = {
+            leaf: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34"/><path d="M20.13 3.87C17 6 14 8 8 10"/><path d="M21 3s-4 2-7 3c-3 2-7 5-7 5"/></svg>',
+            sun: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>',
+            recycle: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19H4.815a1.83 1.83 0 01-1.57-.881 1.785 1.785 0 01-.004-1.784L7.196 9.5"/><path d="M11 19h8.203a1.83 1.83 0 001.556-.89 1.784 1.784 0 00-.009-1.78l-3.96-6.88"/><path d="M14.27 4.22L12 2 9.73 4.22"/><path d="M9.1 17.36L7 19.93l2.82 1.57"/><path d="M20.73 13.57L19 16.82l-3-1.25"/></svg>',
+            sensor: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h2"/><path d="M20 12h2"/><path d="M12 2v2"/><path d="M12 20v2"/><circle cx="12" cy="12" r="4"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M4.93 19.07l1.41-1.41"/><path d="M17.66 6.34l1.41-1.41"/></svg>',
+            brain: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 014 4c0 1.95-1.4 3.57-3.25 3.92"/><path d="M8 6a4 4 0 014-4"/><path d="M5 9a3 3 0 013-3"/><path d="M4 14a3 3 0 011-5"/><path d="M6 18a3 3 0 01-2-4"/><path d="M9 22a3 3 0 01-3-4"/><path d="M12 22a3 3 0 010-6"/><path d="M15 22a3 3 0 003-4"/><path d="M18 18a3 3 0 002-4"/><path d="M20 14a3 3 0 00-1-5"/><path d="M19 9a3 3 0 00-3-3"/></svg>',
+            swimmer: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="4" r="2"/><path d="M2 18c2 0 3-1 4.5-2.5S9 13 12 13s3 1 4.5 2.5S19 18 22 18"/><path d="M13 13l-3-3 3-3 4 4"/></svg>',
+            camera: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>',
+            glasses: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a5 5 0 005 5h2a2 2 0 002-2 2 2 0 012-2h2a2 2 0 012 2 2 2 0 002 2h2a5 5 0 005-5V7H2v5z"/></svg>',
+            mobile: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>',
+            chart: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>',
+            party: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.8 11.3L2 22l10.7-3.79"/><path d="M4 3h.01"/><path d="M22 8h.01"/><path d="M15 2h.01"/><path d="M22 20h.01"/><path d="M22 2l-2.24.75a2.9 2.9 0 00-1.96 3.12v0c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10"/><path d="M22 13l-1.34-.45a2.9 2.9 0 01-1.96-3.12v0c-.1-.86.57-1.63 1.45-1.63h.38"/></svg>',
+            signal: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 4v16"/></svg>'
+        };
+
         const innovations = [
-            { id:1, title:'Neutralité Carbone', cat:'durabilite', catLabel:'Durabilité', icon:'🌱', impact:95,
+            { id:1, title:'Neutralité Carbone', cat:'durabilite', catLabel:'Durabilité', icon:'leaf', impact:95,
               desc:'Utilisation de 95% de sites existants et d\'énergies renouvelables pour réduire drastiquement l\'empreinte carbone des Jeux.',
               details:'Paris 2024 est le premier événement sportif à s\'aligner sur l\'Accord de Paris. Les émissions de CO₂ sont réduites de 50% par rapport aux éditions précédentes grâce à l\'utilisation de sites existants et de matériaux recyclés.' },
-            { id:2, title:'Panneaux Solaires Flottants', cat:'durabilite', catLabel:'Durabilité', icon:'☀️', impact:82,
+            { id:2, title:'Panneaux Solaires Flottants', cat:'durabilite', catLabel:'Durabilité', icon:'sun', impact:82,
               desc:'Des panneaux solaires flottants alimentent le Centre Aquatique Olympique en énergie propre.',
               details:'Cette innovation permet de produire 1 MW d\'électricité verte, suffisant pour alimenter l\'ensemble du centre aquatique pendant les compétitions. Une première mondial pour un événement olympique.' },
-            { id:3, title:'Infrastructures Éco-conçues', cat:'durabilite', catLabel:'Durabilité', icon:'♻️', impact:88,
+            { id:3, title:'Infrastructures Éco-conçues', cat:'durabilite', catLabel:'Durabilité', icon:'recycle', impact:88,
               desc:'Bâtiments construits avec des matériaux biosourcés et un bilan carbone minimal.',
               details:'Le village olympique utilise du bois massif et des matériaux géosourcés. Les bâtiments sont conçus pour être transformés en logements après les Jeux, réduisant le gaspillage de construction.' },
-            { id:4, title:'Capteurs Biométriques', cat:'sport', catLabel:'Tech Sportive', icon:'📡', impact:90,
+            { id:4, title:'Capteurs Biométriques', cat:'sport', catLabel:'Tech Sportive', icon:'sensor', impact:90,
               desc:'Des capteurs portables mesurent en temps réel les performances des athlètes.',
               details:'Les capteurs analysent la fréquence cardiaque, la vitesse, l\'accélération et la fatigue musculaire. Ces données aident les entraîneurs à optimiser les programmes d\'entraînement et à prévenir les blessures.' },
-            { id:5, title:'IA Analyse de Performance', cat:'sport', catLabel:'Tech Sportive', icon:'🤖', impact:88,
+            { id:5, title:'IA Analyse de Performance', cat:'sport', catLabel:'Tech Sportive', icon:'brain', impact:88,
               desc:'L\'intelligence artificielle assiste les juges et analyse les mouvements des athlètes en gymnastique.',
               details:'Le système utilise la vision par ordinateur pour détecter les mouvements avec une précision de 99.5%. Il assiste les juges en fournissant des données objectives sur la technique et la difficulté des enchaînements.' },
-            { id:6, title:'Combinaisons Intelligentes', cat:'sport', catLabel:'Tech Sportive', icon:'🏊', impact:75,
+            { id:6, title:'Combinaisons Intelligentes', cat:'sport', catLabel:'Tech Sportive', icon:'swimmer', impact:75,
               desc:'Textiles hydrodynamiques réduisant la traînée de 3% pour les nageurs.',
               details:'Développées en collaboration avec des laboratoires textiles, ces combinaisons utilisent des fibres spéciales qui réduisent la friction avec l\'eau et améliorent la glisse des nageurs en compétition.' },
-            { id:7, title:'Caméras 4K / 8K', cat:'media', catLabel:'Diffusion Média', icon:'📺', impact:85,
+            { id:7, title:'Caméras 4K / 8K', cat:'media', catLabel:'Diffusion Média', icon:'camera', impact:85,
               desc:'Diffusion en ultra-haute définition avec faible latence pour une expérience immersive.',
               details:'Plus de 120 caméras 4K et 30 caméras 8K sont déployées sur les sites. La diffusion utilise le protocole SRT pour une latence inférieure à 200ms, offrant une qualité d\'image sans précédent.' },
-            { id:8, title:'Réalité Augmentée', cat:'media', catLabel:'Diffusion Média', icon:'👓', impact:78,
+            { id:8, title:'Réalité Augmentée', cat:'media', catLabel:'Diffusion Média', icon:'glasses', impact:78,
               desc:'Expériences AR permettant aux téléspectateurs de visualiser les statistiques en direct.',
               details:'Grâce à l\'AR, les spectateurs peuvent afficher en temps réel les vitesses, trajectoires et statistiques des athlètes sur leur écran. Compatible avec smartphones et tablettes via l\'application officielle.' },
-            { id:9, title:'Application Mobile Officielle', cat:'spectateur', catLabel:'Exp. Spectateur', icon:'📱', impact:92,
+            { id:9, title:'Application Mobile Officielle', cat:'spectateur', catLabel:'Exp. Spectateur', icon:'mobile', impact:92,
               desc:'Application centralisant billetterie, résultats en temps réel et navigation dans les sites.',
               details:'L\'app intègre la navigation GPS dans les sites, les résultats en direct, la billetterie, un système de commande de nourriture et un guide de transport multimodal. Plus de 20 millions de téléchargements.' },
-            { id:10, title:'Statistiques Temps Réel', cat:'spectateur', catLabel:'Exp. Spectateur', icon:'📊', impact:87,
+            { id:10, title:'Statistiques Temps Réel', cat:'spectateur', catLabel:'Exp. Spectateur', icon:'chart', impact:87,
               desc:'Accès instantané aux données des compétitions pour les spectateurs dans les stades.',
               details:'Des écrans géants et l\'application mobile affichent les vitesses, records, classements et données biométriques des athlètes en temps réel, enrichissant l\'expérience sur site.' },
-            { id:11, title:'Fan Zones Connectées', cat:'spectateur', catLabel:'Exp. Spectateur', icon:'🎉', impact:70,
+            { id:11, title:'Fan Zones Connectées', cat:'spectateur', catLabel:'Exp. Spectateur', icon:'party', impact:70,
               desc:'Espaces publics avec retransmission et interactivité pour les fans sans billets.',
               details:'Plus de 30 fan zones dans Paris et les villes hôtes, équipées d\'écrans géants, de Wi-Fi haut débit et d\'expériences interactives. Capacité totale de 500 000 personnes.' },
-            { id:12, title:'Réseau 5G Dédié', cat:'media', catLabel:'Diffusion Média', icon:'📶', impact:80,
+            { id:12, title:'Réseau 5G Dédié', cat:'media', catLabel:'Diffusion Média', icon:'signal', impact:80,
               desc:'Infrastructure 5G déployée sur tous les sites pour une connectivité optimale.',
               details:'Un réseau 5G privé couvre les 35 sites de compétition, permettant la diffusion en temps réel de données massives, le streaming en haute qualité et la connectivité de 100 000+ appareils simultanés.' }
         ];
@@ -253,7 +281,7 @@
             grid.innerHTML = filtered.map((item, index) => `
                 <div class="card fade-in-up" style="animation-delay:${index*0.08}s;cursor:pointer;" onclick="openModal(${item.id})">
                     <div class="innovation-card-header">
-                        <div class="innovation-icon-box">${item.icon}</div>
+                        <div class="innovation-icon-box">${innoIcons[item.icon]}</div>
                         <span class="innovation-tag">${item.catLabel}</span>
                     </div>
                     <h3 class="innovation-card-title">${item.title}</h3>
@@ -278,7 +306,7 @@
             const item = innovations.find(i => i.id === id);
             if(!item) return;
 
-            document.getElementById('modal-icon').textContent = item.icon;
+            document.getElementById('modal-icon').innerHTML = innoIcons[item.icon];
             document.getElementById('modal-title').textContent = item.title;
             document.getElementById('modal-cat').textContent = item.catLabel;
             document.getElementById('modal-desc').textContent = item.details;
