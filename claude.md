@@ -12,15 +12,17 @@ Le projet est réalisé dans le cadre d'un exercice académique (Ynov 2025-2026)
 
 ```
 ├── index.html                  # Page d'accueil (hero + présentation)
-├── ecosysteme.html             # Cartographie des parties prenantes
-├── dashboard.html              # Tableau de bord des résultats sportifs
-├── heritage.html               # Héritage socio-économique et urbain
-├── innovations.html            # Innovations technologiques et durables
+├── 404.html                    # Page d'erreur avec redirection automatique
 ├── css/
-│   └── style.css               # Feuille de style partagée (~1 500 lignes)
+│   └── style.css               # Feuille de style partagée (~1 600 lignes)
 ├── img/
-│   └── Anne_Hidalgo.jpg        # Photo portrait d'Anne Hidalgo (section héritage)
+│   ├── Anne_Hidalgo.jpg        # Photo portrait d'Anne Hidalgo (section héritage)
+│   └── Leon_Marchand.jpg       # Photo de Léon Marchand (section dashboard)
 ├── pages/
+│   ├── ecosysteme.html         # Cartographie des parties prenantes
+│   ├── dashboard.html          # Tableau de bord des résultats sportifs
+│   ├── heritage.html           # Héritage socio-économique et urbain
+│   ├── innovations.html        # Innovations technologiques et durables
 │   ├── mentions-legales.html   # Mentions légales
 │   └── politique-confidentialite.html  # Politique de confidentialité
 ├── claude.md                   # Documentation du projet (ce fichier)

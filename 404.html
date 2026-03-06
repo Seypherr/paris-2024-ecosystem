@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page non trouvée | Paris 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="site-nav">
+        <div class="nav-inner">
+            <a href="index.html" class="brand">
+                <div class="brand-icon">Y</div>
+                <span class="brand-text">PARIS 2024 <span>ECOSYSTEM</span></span>
+            </a>
+            <button class="nav-hamburger" id="hamburger" onclick="document.getElementById('hamburger').classList.toggle('open');document.getElementById('nav-links').classList.toggle('open');">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" class="gradient-border-bottom">Accueil</a>
+                <a href="pages/ecosysteme.html" class="gradient-border-bottom">Écosystème des JO</a>
+                <a href="pages/dashboard.html" class="gradient-border-bottom">Dashboard Athlète</a>
+                <a href="pages/heritage.html" class="gradient-border-bottom">Héritage Olympique</a>
+                <a href="pages/innovations.html" class="gradient-border-bottom">Innovations</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-main" style="min-height:80vh;display:flex;align-items:center;justify-content:center;">
+        <div class="container" style="text-align:center;max-width:600px;padding:4rem 1.5rem;">
+
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:8rem;font-weight:800;line-height:1;margin-bottom:1rem;">
+                <span style="background:linear-gradient(135deg,#00c4a0,#e91e8c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">404</span>
+            </div>
+
+            <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:700;text-transform:uppercase;color:#fff;margin-bottom:1rem;">Page non trouvée</h1>
+
+            <p style="color:#9ca3af;font-size:1rem;line-height:1.7;margin-bottom:2.5rem;">
+                La page que vous cherchez n'existe pas ou a été déplacée.<br>
+                Utilisez les liens ci-dessous pour retrouver votre chemin.
+            </p>
+
+            <div style="display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;margin-bottom:3rem;">
+                <a href="index.html" class="btn-primary" style="text-decoration:none;">Accueil</a>
+                <a href="pages/ecosysteme.html" class="btn-secondary" style="text-decoration:none;">Écosystème</a>
+                <a href="pages/dashboard.html" class="btn-secondary" style="text-decoration:none;">Dashboard</a>
+                <a href="pages/heritage.html" class="btn-secondary" style="text-decoration:none;">Héritage</a>
+                <a href="pages/innovations.html" class="btn-secondary" style="text-decoration:none;">Innovations</a>
+            </div>
+
+            <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:2rem;">
+                <p style="color:#6b7280;font-size:0.85rem;">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+                    Vous serez redirigé automatiquement vers l'accueil dans <strong id="countdown" style="color:#00c4a0;">10</strong> secondes.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner footer-grid">
+            <div class="footer-brand">
+                <div class="brand-icon">P24</div>
+                <div class="footer-info">
+                    <span class="title">Paris 2024 Olympic Ecosystem</span><br>
+                    Projet académique — Ynov Campus
+                </div>
+            </div>
+            <div class="footer-nav">
+                <h4 class="footer-heading">Navigation</h4>
+                <a href="index.html">Accueil</a>
+                <a href="pages/ecosysteme.html">Écosystème</a>
+                <a href="pages/dashboard.html">Dashboard</a>
+                <a href="pages/heritage.html">Héritage</a>
+                <a href="pages/innovations.html">Innovations</a>
+            </div>
+            <div class="footer-legal">
+                <h4 class="footer-heading">Légal</h4>
+                <a href="pages/mentions-legales.html">Mentions légales</a>
+                <a href="pages/politique-confidentialite.html">Politique de confidentialité</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2024 Paris 2024 Olympic Ecosystem — Projet académique</span>
+        </div>
+    </footer>
+
+    <script>
+        let seconds = 10;
+        const el = document.getElementById('countdown');
+        const timer = setInterval(() => {
+            seconds--;
+            el.textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(timer);
+                window.location.href = 'index.html';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

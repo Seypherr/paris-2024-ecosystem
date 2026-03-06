@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Héritage Olympique | Paris 2024</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <!-- Navbar -->
     <nav class="site-nav">
         <div class="nav-inner">
-            <a href="index.html" class="brand">
+            <a href="../index.html" class="brand">
                 <div class="brand-icon">Y</div>
                 <span class="brand-text">PARIS 2024 <span>ECOSYSTEM</span></span>
             </a>
@@ -19,7 +19,7 @@
                 <span></span><span></span><span></span>
             </button>
             <div class="nav-links" id="nav-links">
-                <a href="index.html" class="gradient-border-bottom">Accueil</a>
+                <a href="../index.html" class="gradient-border-bottom">Accueil</a>
                 <a href="ecosysteme.html" class="gradient-border-bottom">Écosystème des JO</a>
                 <a href="dashboard.html" class="gradient-border-bottom">Dashboard Athlète</a>
                 <a href="heritage.html" class="gradient-border-bottom active">Héritage Olympique</a>
@@ -55,7 +55,7 @@
                     <div class="quote-card" style="margin-bottom:1.5rem;">
                         <p class="quote-text">Le village olympique situé à <strong style="color:#00c4a0;">Saint-Denis</strong> sera transformé en logements après les Jeux, offrant un héritage concret pour les habitants du quartier.</p>
                         <div class="author">
-                            <div class="author-avatar" style="background-image:url('img/Anne_Hidalgo.jpg');background-size:cover;background-position:center;"></div>
+                            <div class="author-avatar" style="background-image:url('../img/Anne_Hidalgo.jpg');background-size:cover;background-position:center;"></div>
                             <div>
                                 <div class="author-name">Anne Hidalgo</div>
                                 <div class="author-role">Maire de Paris</div>
@@ -233,7 +233,7 @@
             </div>
             <div class="footer-nav">
                 <h4 class="footer-heading">Navigation</h4>
-                <a href="index.html">Accueil</a>
+                <a href="../index.html">Accueil</a>
                 <a href="ecosysteme.html">Écosystème</a>
                 <a href="dashboard.html">Dashboard</a>
                 <a href="heritage.html">Héritage</a>
@@ -241,8 +241,8 @@
             </div>
             <div class="footer-legal">
                 <h4 class="footer-heading">Légal</h4>
-                <a href="pages/mentions-legales.html">Mentions légales</a>
-                <a href="pages/politique-confidentialite.html">Politique de confidentialité</a>
+                <a href="mentions-legales.html">Mentions légales</a>
+                <a href="politique-confidentialite.html">Politique de confidentialité</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -305,11 +305,17 @@
             el.innerHTML = html;
 
             /* Animate bars on scroll */
-            setTimeout(() => {
-                document.querySelectorAll('.invest-bar-fill').forEach(bar => {
-                    bar.style.width = bar.dataset.width;
+            const barObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll('.invest-bar-fill').forEach(bar => {
+                            bar.style.width = bar.dataset.width;
+                        });
+                        barObserver.disconnect();
+                    }
                 });
-            }, 500);
+            }, { threshold: 0.3 });
+            barObserver.observe(el);
         })();
 
         /* ---- Map Info ---- */

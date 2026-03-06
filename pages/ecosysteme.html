@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Écosystème des JO | Paris 2024</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <!-- Navbar -->
     <nav class="site-nav">
         <div class="nav-inner">
-            <a href="index.html" class="brand">
+            <a href="../index.html" class="brand">
                 <div class="brand-icon">Y</div>
                 <span class="brand-text">PARIS 2024 <span>ECOSYSTEM</span></span>
             </a>
@@ -19,7 +19,7 @@
                 <span></span><span></span><span></span>
             </button>
             <div class="nav-links" id="nav-links">
-                <a href="index.html" class="gradient-border-bottom">Accueil</a>
+                <a href="../index.html" class="gradient-border-bottom">Accueil</a>
                 <a href="ecosysteme.html" class="gradient-border-bottom active">Écosystème des JO</a>
                 <a href="dashboard.html" class="gradient-border-bottom">Dashboard Athlète</a>
                 <a href="heritage.html" class="gradient-border-bottom">Héritage Olympique</a>
@@ -93,7 +93,7 @@
             </div>
             <div class="footer-nav">
                 <h4 class="footer-heading">Navigation</h4>
-                <a href="index.html">Accueil</a>
+                <a href="../index.html">Accueil</a>
                 <a href="ecosysteme.html">Écosystème</a>
                 <a href="dashboard.html">Dashboard</a>
                 <a href="heritage.html">Héritage</a>
@@ -101,8 +101,8 @@
             </div>
             <div class="footer-legal">
                 <h4 class="footer-heading">Légal</h4>
-                <a href="pages/mentions-legales.html">Mentions légales</a>
-                <a href="pages/politique-confidentialite.html">Politique de confidentialité</a>
+                <a href="mentions-legales.html">Mentions légales</a>
+                <a href="politique-confidentialite.html">Politique de confidentialité</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -254,10 +254,23 @@
             });
         }
 
-        /* Init */
-        buildList();
-        buildNetwork();
-        window.addEventListener('resize', buildNetwork);
+        /* Lazy Init via IntersectionObserver */
+        let networkInitialized = false;
+
+        const lazyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !networkInitialized) {
+                    buildList();
+                    buildNetwork();
+                    window.addEventListener('resize', buildNetwork);
+                    networkInitialized = true;
+                    lazyObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        const ecoLayout = document.querySelector('.eco-layout');
+        if (ecoLayout) lazyObserver.observe(ecoLayout);
     </script>
 </body>
 </html>
