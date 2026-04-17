@@ -1,126 +1,85 @@
-# Paris 2024 — Écosystème Olympique
+# Paris 2024 Olympic Ecosystem
 
-## Présentation du projet
+## Présentation
 
-Ce site web est une vitrine interactive dédiée à l'écosystème des Jeux Olympiques de Paris 2024. Il présente les parties prenantes, les résultats sportifs, l'héritage urbain et les innovations technologiques liées à cet événement mondial.
+Ce projet est une webapp académique réalisée dans le cadre d'un exercice de Vibe Coding autour des Jeux Olympiques de Paris 2024.  
+L'objectif était de transformer quatre livrables de Session 1 en une expérience web cohérente, interactive, responsive et publiable en ligne.
 
-Le projet est réalisé dans le cadre d'un exercice académique (Ynov 2025-2026) et déployé sur GitHub Pages.
+## Correspondance entre le brief et la solution
 
----
+| Exercice Session 1 | Transposition web |
+|---|---|
+| Infographie de l'écosystème JO | [pages/ecosysteme.html](C:/Users/eporc/Desktop/ia/paris-2024-ecosystem/pages/ecosysteme.html) avec réseau SVG, filtres et panneau de détail |
+| Analyse des performances d'un athlète | [pages/dashboard.html](C:/Users/eporc/Desktop/ia/paris-2024-ecosystem/pages/dashboard.html) avec filtres, graphiques et focus interactif |
+| Héritage olympique vu par un habitant | [pages/heritage.html](C:/Users/eporc/Desktop/ia/paris-2024-ecosystem/pages/heritage.html) avec scroll storytelling, citation, avant/après et carte |
+| Innovations technologiques des JO Paris 2024 | [pages/innovations.html](C:/Users/eporc/Desktop/ia/paris-2024-ecosystem/pages/innovations.html) avec catégories filtrables, modals, jauges et radar |
 
-## Architecture du site
+## Méthodologie Vibe Coding
 
-```
-├── index.html                  # Page d'accueil (hero + présentation)
-├── 404.html                    # Page d'erreur avec redirection automatique
-├── css/
-│   └── style.css               # Feuille de style partagée (~1 600 lignes)
-├── img/
-│   ├── Anne_Hidalgo.jpg        # Photo portrait d'Anne Hidalgo (section héritage)
-│   └── Leon_Marchand.jpg       # Photo de Léon Marchand (section dashboard)
-├── pages/
-│   ├── ecosysteme.html         # Cartographie des parties prenantes
-│   ├── dashboard.html          # Tableau de bord des résultats sportifs
-│   ├── heritage.html           # Héritage socio-économique et urbain
-│   ├── innovations.html        # Innovations technologiques et durables
-│   ├── mentions-legales.html   # Mentions légales
-│   └── politique-confidentialite.html  # Politique de confidentialité
-├── claude.md                   # Documentation du projet (ce fichier)
-└── PROMPTS.md                  # Journal des prompts utilisés
-```
+Le projet a été mené selon une logique itérative:
 
----
+1. architecture et direction artistique,
+2. génération d'une page par exercice,
+3. correction des interactions et du responsive,
+4. audit qualité,
+5. documentation des prompts,
+6. préparation du déploiement et du dossier Moodle.
+
+Phrase de positionnement à reprendre dans le rendu final:
+
+> Nous avons utilisé l'IA pour générer, itérer, corriger, tester et documenter la webapp.
 
 ## Stack technique
 
-| Élément          | Technologie                                     |
-|------------------|--------------------------------------------------|
-| Langages         | HTML5, CSS3, JavaScript (vanilla)                |
-| Polices          | Google Fonts — Barlow Condensed, Inter           |
-| Graphiques       | SVG inline avec `<animate>` (courbes, barres, radar, jauges) |
-| Icônes           | SVG inline (aucune librairie externe)            |
-| Animations       | CSS @keyframes + IntersectionObserver            |
-| Hébergement      | GitHub Pages (branche `main`)                    |
-| Versioning       | Git + GitHub CLI                                 |
+| Élément | Choix |
+|---|---|
+| Front-end | HTML5, CSS3, JavaScript vanilla |
+| Graphiques | SVG inline |
+| Interactions | `onclick`, filtres dynamiques, `IntersectionObserver`, modals |
+| Typographies | Google Fonts — Barlow Condensed, Inter |
+| Hébergement ciblé | Vercel |
 
----
+## Structure du dépôt
 
-## Palette de couleurs
+```text
+index.html
+404.html
+css/style.css
+img/Anne_Hidalgo.jpg
+img/Leon_Marchand.jpg
+pages/ecosysteme.html
+pages/dashboard.html
+pages/heritage.html
+pages/innovations.html
+pages/mentions-legales.html
+pages/politique-confidentialite.html
+PROMPTS.md
+DOSSIER_MOODLE.md
+CHECKLIST_RENDU.md
+```
 
-| Couleur   | Code hex  | Utilisation                  |
-|-----------|-----------|-------------------------------|
-| Teal      | `#00c4a0` | Accent principal, liens, CTA  |
-| Magenta   | `#e91e8c` | Accent secondaire, highlights |
-| Or        | `#ffd60a` | Médailles d'or, alertes       |
-| Noir      | `#0e0e0e` | Fond global                   |
-| Surface   | `#1a1a1a` | Cartes et conteneurs          |
-| Gris      | `#6b7280` | Texte secondaire, bordures    |
-| Blanc     | `#e5e7eb` | Texte principal               |
+## Points forts du rendu
 
----
-
-## Pages détaillées
-
-### 1. Accueil (`index.html`)
-- Hero plein écran avec titre animé et bouton CTA
-- Présentation rapide du projet
-
-### 2. Écosystème (`ecosysteme.html`)
-- Diagramme réseau SVG interactif (8 nœuds)
-- Liste cliquable des parties prenantes (athlètes, CIO, COJO, sponsors, médias, ville, spectateurs, sécurité)
-- Panneau latéral de détails avec description et statistiques
-- Icônes SVG inline pour chaque catégorie
-
-### 3. Dashboard (`dashboard.html`)
-- Tableau des médailles françaises (source : données officielles Paris 2024)
-- Graphiques SVG : courbe de progression, barres par discipline, radar par catégorie
-- Filtres par discipline (Judo, Natation, Escrime, Cyclisme, Athlétisme)
-- Résultats détaillés avec indicateurs visuels (pastilles or/argent)
-
-### 4. Héritage (`heritage.html`)
-- Compteurs animés : emplois créés, touristes, investissements
-- Slider avant/après pour la transformation du Village des Athlètes
-- Timeline des projets d'héritage (2021-2030)
-- Citation d'Anne Hidalgo avec photo portrait
-- Jauges d'impact sur la satisfaction citoyenne, le transport et les espaces verts
-
-### 5. Innovations (`innovations.html`)
-- Grille de 12 innovations réparties en 4 catégories (durabilité, tech sportive, diffusion média, expérience spectateur)
-- Filtres par catégorie
-- Scores d'impact visuels
-- Modal de détails au clic
-- Icônes SVG thématiques (feuille, soleil, recyclage, capteur, cerveau, etc.)
-
----
-
-## Fonctionnalités transversales
-
-- **Navigation responsive** : barre de navigation fixe avec menu hamburger sur mobile
-- **Animations au scroll** : les éléments `.fade-in-up` apparaissent progressivement via IntersectionObserver
-- **Footer** : liens de navigation, mentions légales, politique de confidentialité
-- **Mode sombre** : design entièrement dark par défaut, optimisé pour le contraste WCAG
-
----
-
-## Données utilisées
-
-Les données présentées dans le site sont issues de sources officielles :
-- Comité d'Organisation des Jeux Olympiques (COJO Paris 2024)
-- Comité International Olympique (CIO)
-- Rapports d'impact économique de la Ville de Paris
-- Données de performance sportive issues des résultats officiels
-
----
+- identité visuelle homogène sur l'ensemble des pages,
+- navigation commune et mobile,
+- 4 sections clairement alignées avec le brief,
+- plusieurs niveaux d'interactivité visibles sans explication orale,
+- documentation méthodologique prête pour Moodle.
 
 ## Déploiement
 
-- **URL** : https://seypherr.github.io/paris-2024-ecosystem/
-- **Dépôt** : https://github.com/Seypherr/paris-2024-ecosystem
-- **Branche** : `main` (GitHub Pages legacy build)
+- URL publique: `https://paris-2024-ecosystem.vercel.app`
+- Dépôt: `https://github.com/Seypherr/paris-2024-ecosystem`
+- Type de déploiement: site statique sur Vercel
 
----
+## Membres du groupe
 
-## Outils IA utilisés
+- Matias Bouchenoire
+- Ethan Porcaro
+- Geoffrey Deverchere
+- Louis Delarue
 
-- **Claude (Anthropic)** — Génération de code HTML/CSS/JS, refactoring, documentation
-- **GitHub Copilot** — Assistance à l'édition dans VS Code
+## Personnalisation avant remise
+
+- Vérifier que l'URL publique finale est bien active
+- Ajouter si possible des captures d'écran des prompts dans le document Moodle

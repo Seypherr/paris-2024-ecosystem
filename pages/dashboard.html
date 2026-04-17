@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="site-nav">
         <div class="nav-inner">
             <a href="../index.html" class="brand">
@@ -32,11 +31,10 @@
 
     <main class="page-main page-padded">
         <div class="container">
-            <!-- Header + Filters -->
             <div class="section-header row">
                 <div>
                     <h2>Dashboard Performance Athlète</h2>
-                    <p>Analyse des performances d'un athlète olympique — <strong class="color-teal">Léon Marchand</strong></p>
+                    <p>Analyse des performances d'un athlète olympique — <strong style="color:#00c4a0;">Léon Marchand</strong></p>
                 </div>
                 <div class="filter-row">
                     <select class="custom-select" id="filter-year" onchange="updateDashboard()">
@@ -62,7 +60,6 @@
                 </div>
             </div>
 
-            <!-- Athlete profile card -->
             <div class="athlete-profile fade-in-up">
                 <div class="athlete-avatar" style="background-image:url('../img/Leon_Marchand.jpg');background-size:cover;background-position:center;font-size:0;"></div>
                 <div class="athlete-info">
@@ -71,56 +68,77 @@
                     <div class="athlete-meta">
                         <span class="athlete-meta-item">Spécialité: <strong class="highlight">4 Nages / Papillon</strong></span>
                         <span class="athlete-meta-item">Entraîneur: <strong>Bob Bowman</strong></span>
+                        <span class="athlete-meta-item">Lecture: <strong>cliquez sur un point, une barre ou une ligne</strong></span>
                     </div>
                 </div>
             </div>
 
-            <!-- Stat Cards -->
             <div class="grid-4 fade-in-up anim-delay-1 mb-2">
-                <div class="stat-card" id="card-medals">
-                    <div class="stat-label">Médailles</div>
-                    <div class="stat-value color-gold" id="stat-medals">5</div>
-                    <div class="stat-sub" id="stat-medals-sub"><span class="medal-dot gold"></span> 4 Or &bull; <span class="medal-dot silver"></span> 1 Argent</div>
+                <div class="stat-card">
+                    <div class="stat-label">Médailles filtrées</div>
+                    <div class="stat-value color-gold" id="stat-medals">4</div>
+                    <div class="stat-sub" id="stat-medals-sub"><span class="medal-dot gold"></span> 4 Or &bull; <span class="medal-dot silver"></span> 0 Argent</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Records Personnels</div>
-                    <div class="stat-value color-magenta" id="stat-records">4</div>
-                    <div class="stat-sub">Dont 1 record du monde</div>
+                    <div class="stat-label">Meilleur chrono</div>
+                    <div class="stat-value color-magenta" id="stat-best-time">1:51.21</div>
+                    <div class="stat-sub" id="stat-best-time-sub">200m Papillon — référence du filtre actif</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Participations Majeures</div>
-                    <div class="stat-value" id="stat-participations">8</div>
-                    <div class="stat-sub">JO, Mondiaux, Europe</div>
+                    <div class="stat-label">Courses analysées</div>
+                    <div class="stat-value" id="stat-races">4</div>
+                    <div class="stat-sub" id="stat-races-sub">1 compétition et 4 épreuves retenues</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Classement Mondial</div>
-                    <div class="stat-value color-teal">1<sup style="font-size:1.5rem;">er</sup></div>
-                    <div class="stat-sub">400m 4 Nages</div>
+                    <div class="stat-label">Focus actuel</div>
+                    <div class="stat-value color-teal" id="stat-focus">JO</div>
+                    <div class="stat-sub" id="stat-focus-sub">Lecture synthétique des filtres actifs</div>
                 </div>
             </div>
 
-            <!-- Charts row -->
+            <div class="analysis-grid fade-in-up anim-delay-2 mb-2">
+                <article class="analysis-card">
+                    <div class="analysis-eyebrow">Lecture guidée</div>
+                    <h3>Comprendre rapidement le profil de performance</h3>
+                    <p>Ce dashboard met en avant une lecture en trois niveaux: filtres, graphiques interactifs, puis détail ligne par ligne. Chaque clic précise un moment fort de la carrière de Léon Marchand.</p>
+                    <div class="analysis-meta" id="filter-summary"></div>
+                </article>
+                <article class="analysis-card analysis-card-highlight" id="insight-panel">
+                    <div class="analysis-eyebrow">Focus interactif</div>
+                    <h3 id="insight-title">Sélection actuelle</h3>
+                    <p class="analysis-meta" id="insight-meta">Utilisez les filtres puis cliquez sur un élément du dashboard.</p>
+                    <p id="insight-desc">Le panneau se met à jour au clic pour fournir une interprétation claire du graphique sélectionné.</p>
+                    <div class="analysis-kpis">
+                        <div class="analysis-kpi">
+                            <span class="analysis-kpi-label" id="insight-kpi-a-label">Indicateur</span>
+                            <span class="analysis-kpi-value" id="insight-kpi-a-value">—</span>
+                        </div>
+                        <div class="analysis-kpi">
+                            <span class="analysis-kpi-label" id="insight-kpi-b-label">Lecture</span>
+                            <span class="analysis-kpi-value" id="insight-kpi-b-value">—</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
             <div class="grid-2 fade-in-up anim-delay-2 mb-2" id="charts-row">
-                <!-- Line Chart -->
-                <div class="chart-card">
+                <div class="chart-card is-interactive">
                     <h3>Évolution de la Performance</h3>
-                    <p class="chart-subtitle">Progression des résultats au fil des années (400m 4 Nages — temps en secondes)</p>
-                    <div class="chart-area" id="line-chart"></div>
+                    <p class="chart-subtitle">Progression du 400m 4 nages au fil des saisons. Cliquez sur un point pour afficher le détail.</p>
+                    <div class="chart-area chart-interactive" id="line-chart"></div>
                 </div>
 
-                <!-- Bar Chart -->
-                <div class="chart-card">
+                <div class="chart-card is-interactive">
                     <h3>Résultats en Compétition</h3>
-                    <p class="chart-subtitle">Nombre de médailles par compétition</p>
-                    <div class="chart-area" id="bar-chart"></div>
+                    <p class="chart-subtitle">Répartition des podiums par compétition. Cliquez sur un groupe de barres pour lire l'analyse.</p>
+                    <div class="chart-area chart-interactive" id="bar-chart"></div>
                 </div>
             </div>
 
-            <!-- Bottom: table + radar -->
             <div class="bottom-grid fade-in-up anim-delay-3" id="bottom-section">
-                <!-- Detailed results table -->
                 <div class="chart-card">
                     <h3>Détail des Résultats</h3>
+                    <p class="chart-subtitle-sm">Chaque ligne est cliquable pour synchroniser le commentaire d'analyse avec le tableau.</p>
                     <div class="table-scroll">
                         <table class="data-table">
                             <thead>
@@ -137,17 +155,15 @@
                     </div>
                 </div>
 
-                <!-- Radar -->
                 <div class="chart-card flex-col-center">
                     <h3>Profil Athlétique</h3>
-                    <p class="chart-subtitle-sm">Dimensions de performance</p>
+                    <p class="chart-subtitle-sm">Lecture globale des dimensions de performance de l'athlète.</p>
                     <div class="flex-center" id="radar-chart"></div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="site-footer">
         <div class="footer-inner footer-grid">
             <div class="footer-brand">
@@ -166,9 +182,10 @@
                 <a href="innovations.html">Innovations</a>
             </div>
             <div class="footer-legal">
-                <h4 class="footer-heading">Légal</h4>
-                <a href="mentions-legales.html">Mentions légales</a>
-                <a href="politique-confidentialite.html">Politique de confidentialité</a>
+                <h4 class="footer-heading">Rendu</h4>
+                <a href="../PROMPTS.md">Journal de prompts</a>
+                <a href="../DOSSIER_MOODLE.md">Dossier Moodle</a>
+                <a href="../CHECKLIST_RENDU.md">Checklist finale</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -179,339 +196,409 @@
     <script>
         const colors = { teal:'#00c4a0', magenta:'#e91e8c', dark:'#0e0e0e', gold:'#ffd60a', surface:'#1a1a1a', gray:'#9ca3af' };
 
-        /* ---- DATA ---- */
         const results = [
-            { year:2021, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m Papillon', eventKey:'200pap', time:'1:55.40', medal:'—', medalType:'none', medalColor:colors.gray },
-            { year:2022, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m Papillon', eventKey:'200pap', time:'1:53.37', medal:'Or', medalType:'gold', medalColor:colors.gold },
-            { year:2022, comp:'Championnats du Monde', compKey:'mondiaux', event:'400m 4 Nages', eventKey:'400qn', time:'4:04.28', medal:'Or', medalType:'gold', medalColor:colors.gold },
-            { year:2023, comp:'Championnats du Monde', compKey:'mondiaux', event:'400m 4 Nages', eventKey:'400qn', time:'4:02.50', medal:'Or', medalType:'gold', medalColor:colors.gold },
-            { year:2023, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m 4 Nages', eventKey:'200qn', time:'1:55.22', medal:'Or', medalType:'gold', medalColor:colors.gold },
-            { year:2023, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m Brasse', eventKey:'200br', time:'2:05.48', medal:'Argent', medalType:'silver', medalColor:'#c0c0c0' },
-            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'400m 4 Nages', eventKey:'400qn', time:'4:02.95', medal:'Or', medalType:'gold', medalColor:colors.gold },
-            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'200m Papillon', eventKey:'200pap', time:'1:51.21', medal:'Or', medalType:'gold', medalColor:colors.gold },
-            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'200m 4 Nages', eventKey:'200qn', time:'1:54.06', medal:'Or', medalType:'gold', medalColor:colors.gold },
-            { year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'200m Brasse', eventKey:'200br', time:'2:05.85', medal:'Or', medalType:'gold', medalColor:colors.gold }
+            { id: 1, year:2021, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m Papillon', eventKey:'200pap', time:'1:55.40', medal:'—', medalType:'none' },
+            { id: 2, year:2022, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m Papillon', eventKey:'200pap', time:'1:53.37', medal:'Or', medalType:'gold' },
+            { id: 3, year:2022, comp:'Championnats du Monde', compKey:'mondiaux', event:'400m 4 Nages', eventKey:'400qn', time:'4:04.28', medal:'Or', medalType:'gold' },
+            { id: 4, year:2023, comp:'Championnats du Monde', compKey:'mondiaux', event:'400m 4 Nages', eventKey:'400qn', time:'4:02.50', medal:'Or', medalType:'gold' },
+            { id: 5, year:2023, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m 4 Nages', eventKey:'200qn', time:'1:55.22', medal:'Or', medalType:'gold' },
+            { id: 6, year:2023, comp:'Championnats du Monde', compKey:'mondiaux', event:'200m Brasse', eventKey:'200br', time:'2:05.48', medal:'Argent', medalType:'silver' },
+            { id: 7, year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'400m 4 Nages', eventKey:'400qn', time:'4:02.95', medal:'Or', medalType:'gold' },
+            { id: 8, year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'200m Papillon', eventKey:'200pap', time:'1:51.21', medal:'Or', medalType:'gold' },
+            { id: 9, year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'200m 4 Nages', eventKey:'200qn', time:'1:54.06', medal:'Or', medalType:'gold' },
+            { id:10, year:2024, comp:'Jeux Olympiques', compKey:'jo', event:'200m Brasse', eventKey:'200br', time:'2:05.85', medal:'Or', medalType:'gold' }
         ];
 
         const perfEvolution = [
-            { year:2020, time:265 },
-            { year:2021, time:258 },
-            { year:2022, time:244 },
-            { year:2023, time:242 },
+            { year:2020, time:265.00 },
+            { year:2021, time:258.00 },
+            { year:2022, time:244.28 },
+            { year:2023, time:242.50 },
             { year:2024, time:242.95 }
         ];
 
-        const compMedals = [
-            { label:'Championnats\ndu Monde', gold:3, silver:1, bronze:0 },
-            { label:'Jeux\nOlympiques', gold:4, silver:0, bronze:0 },
-            { label:'Championnats\nd\'Europe', gold:1, silver:0, bronze:0 }
-        ];
+        let currentInsightState = { type:'default', id:'default' };
+        
+        function formatRaceTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remaining = (seconds % 60).toFixed(2).padStart(5, '0');
+            return `${minutes}:${remaining}`;
+        }
+
+        function raceTimeToSeconds(value) {
+            if (!value || value === '—') return Number.POSITIVE_INFINITY;
+            const [minutes, seconds] = value.split(':');
+            return (parseInt(minutes, 10) * 60) + parseFloat(seconds);
+        }
 
         function getFilteredResults() {
             const year = document.getElementById('filter-year').value;
             const comp = document.getElementById('filter-competition').value;
-            const epr = document.getElementById('filter-epreuve').value;
-            return results.filter(r => {
-                if(year !== 'all' && r.year !== parseInt(year)) return false;
-                if(comp !== 'all' && r.compKey !== comp) return false;
-                if(epr !== 'all' && r.eventKey !== epr) return false;
+            const event = document.getElementById('filter-epreuve').value;
+
+            return results.filter((result) => {
+                if (year !== 'all' && result.year !== parseInt(year, 10)) return false;
+                if (comp !== 'all' && result.compKey !== comp) return false;
+                if (event !== 'all' && result.eventKey !== event) return false;
                 return true;
             });
         }
 
-        /* ---- LINE CHART ---- */
-        function drawLineChart() {
-            const el = document.getElementById('line-chart');
-            const w = 500, h = 280;
-            const pts = perfEvolution;
-            const minT = 235, maxT = 270;
-
-            let svg = `<svg width="100%" height="100%" viewBox="0 0 ${w} ${h}">`;
-            svg += `<defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${colors.teal}" stop-opacity="0.4"/><stop offset="100%" stop-color="${colors.teal}" stop-opacity="0"/></linearGradient></defs>`;
-
-            /* Grid lines */
-            for(let i=0;i<5;i++){
-                const y = 20 + i*(h-60)/4;
-                const val = (maxT - i*(maxT-minT)/4).toFixed(0);
-                svg += `<line x1="50" y1="${y}" x2="${w-20}" y2="${y}" stroke="#222" stroke-width="1" stroke-dasharray="4,4"/>`;
-                svg += `<text x="45" y="${y+4}" text-anchor="end" fill="#666" font-size="10" font-family="Inter">${Math.floor(val/60)}:${String(val%60).padStart(2,'0')}</text>`;
-            }
-
-            /* Build points */
-            const points = pts.map((p,i) => {
-                const x = 70 + i*((w-100)/(pts.length-1));
-                const y = 20 + ((maxT - p.time)/(maxT-minT)) * (h-60);
-                return {x,y,year:p.year,time:p.time};
-            });
-
-            /* Area */
-            const polyPts = points.map(p=>`${p.x},${p.y}`).join(' ');
-            svg += `<polygon points="${points[0].x},${h-40} ${polyPts} ${points[points.length-1].x},${h-40}" fill="url(#areaGrad)" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="1.5s" fill="freeze"/></polygon>`;
-
-            /* Line */
-            svg += `<polyline points="${polyPts}" fill="none" stroke="${colors.teal}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><animate attributeName="stroke-dasharray" from="0,2000" to="2000,0" dur="2s" fill="freeze"/></polyline>`;
-
-            /* Dots & labels */
-            points.forEach((p,i) => {
-                const isLast = i === points.length-1;
-                svg += `<circle cx="${p.x}" cy="${p.y}" r="${isLast?6:4}" fill="${isLast?colors.magenta:'white'}" ${isLast?`stroke="white" stroke-width="2"`:''} opacity="0"><animate attributeName="opacity" to="1" dur="0.5s" fill="freeze" begin="${0.5+i*0.3}s"/></circle>`;
-                svg += `<text x="${p.x}" y="${h-22}" text-anchor="middle" fill="${isLast?'white':'#666'}" font-size="11" font-weight="${isLast?'bold':'normal'}" font-family="Inter">${p.year}</text>`;
-                const mn = Math.floor(p.time/60);
-                const sc = (p.time%60).toFixed(2);
-                svg += `<text x="${p.x}" y="${p.y-14}" text-anchor="middle" fill="white" font-size="10" font-family="Inter" font-weight="bold" opacity="0"><animate attributeName="opacity" to="1" dur="0.5s" fill="freeze" begin="${1+i*0.3}s"/>${mn}:${sc.padStart(5,'0')}</text>`;
-            });
-
-            svg += '</svg>';
-            el.innerHTML = svg;
+        function getFilteredEvolution() {
+            const selectedYear = document.getElementById('filter-year').value;
+            if (selectedYear === 'all') return perfEvolution;
+            return perfEvolution.filter((point) => point.year <= parseInt(selectedYear, 10));
         }
 
-        /* ---- BAR CHART ---- */
-        function drawBarChart() {
-            const el = document.getElementById('bar-chart');
-            const w = 500, h = 280;
-            const maxVal = 5;
-            const barW = 35;
-            const groupW = 140;
+        function describeFocus(filtered) {
+            const year = document.getElementById('filter-year').value;
+            const comp = document.getElementById('filter-competition').value;
+            const event = document.getElementById('filter-epreuve').value;
+            const parts = [];
 
-            let svg = `<svg width="100%" height="100%" viewBox="0 0 ${w} ${h}">`;
-
-            /* Grid */
-            for(let i=0;i<=maxVal;i++){
-                const y = 20 + (maxVal-i)*(h-60)/maxVal;
-                svg += `<line x1="40" y1="${y}" x2="${w-20}" y2="${y}" stroke="#222" stroke-width="1"/>`;
-                svg += `<text x="35" y="${y+4}" text-anchor="end" fill="#666" font-size="10" font-family="Inter">${i}</text>`;
-            }
-
-            compMedals.forEach((comp,gi) => {
-                const gx = 80 + gi * groupW;
-                const vals = [
-                    { v:comp.gold, color:colors.gold, label:'Or' },
-                    { v:comp.silver, color:'#c0c0c0', label:'Ag' },
-                    { v:comp.bronze, color:'#cd7f32', label:'Br' }
-                ];
-
-                vals.forEach((bar,bi) => {
-                    const x = gx + bi*(barW+6);
-                    const bh = (bar.v/maxVal)*(h-60);
-                    const y = h-40-bh;
-                    svg += `<rect x="${x}" y="${h-40}" width="${barW}" height="0" fill="${bar.color}" rx="3" opacity="0.85">
-                        <animate attributeName="y" to="${y}" dur="0.8s" fill="freeze" begin="${0.2+gi*0.15}s"/>
-                        <animate attributeName="height" to="${bh}" dur="0.8s" fill="freeze" begin="${0.2+gi*0.15}s"/>
-                    </rect>`;
-                    if(bar.v > 0) {
-                        svg += `<text x="${x+barW/2}" y="${y-6}" text-anchor="middle" fill="white" font-size="12" font-weight="bold" font-family="Inter" opacity="0"><animate attributeName="opacity" to="1" dur="0.5s" fill="freeze" begin="1s"/>${bar.v}</text>`;
-                    }
-                });
-
-                /* Group label */
-                const lines = comp.label.split('\n');
-                lines.forEach((l,li) => {
-                    svg += `<text x="${gx+barW*1.5+6}" y="${h-10+li*13}" text-anchor="middle" fill="#999" font-size="10" font-family="Inter">${l}</text>`;
-                });
-            });
-
-            /* Legend */
-            const legendX = w-160;
-            [{c:colors.gold,l:'Or'},{c:'#c0c0c0',l:'Argent'},{c:'#cd7f32',l:'Bronze'}].forEach((lg,i) => {
-                svg += `<rect x="${legendX}" y="${10+i*18}" width="10" height="10" fill="${lg.c}" rx="2"/>`;
-                svg += `<text x="${legendX+16}" y="${19+i*18}" fill="#999" font-size="10" font-family="Inter">${lg.l}</text>`;
-            });
-
-            svg += '</svg>';
-            el.innerHTML = svg;
+            parts.push(year === 'all' ? 'Toutes saisons' : `Saison ${year}`);
+            parts.push(comp === 'all' ? 'toutes compétitions' : filtered[0]?.comp || 'compétition ciblée');
+            parts.push(event === 'all' ? 'toutes épreuves' : filtered[0]?.event || 'épreuve ciblée');
+            return parts.join(' • ');
         }
 
-        /* ---- RADAR CHART ---- */
-        function drawRadar() {
-            const el = document.getElementById('radar-chart');
-            const dims = ['Vitesse','Endurance','Technique','Mental','Puissance','Régularité'];
-            const vals = [0.85, 0.92, 0.95, 0.90, 0.80, 0.88];
-            const cx=100, cy=100, r=70;
-
-            let svg = `<svg width="100%" height="auto" viewBox="0 0 200 200" style="max-width:220px;">`;
-
-            /* Webs */
-            [1, 0.66, 0.33].forEach(sc => {
-                const pts = dims.map((_,i)=>{
-                    const a = (i*2*Math.PI/dims.length) - Math.PI/2;
-                    return `${cx+r*sc*Math.cos(a)},${cy+r*sc*Math.sin(a)}`;
-                }).join(' ');
-                svg += `<polygon points="${pts}" fill="none" stroke="#333" stroke-width="1"/>`;
-            });
-
-            /* Axes */
-            dims.forEach((_,i) => {
-                const a = (i*2*Math.PI/dims.length) - Math.PI/2;
-                svg += `<line x1="${cx}" y1="${cy}" x2="${cx+r*Math.cos(a)}" y2="${cy+r*Math.sin(a)}" stroke="#333" stroke-width="1"/>`;
-            });
-
-            /* Data shape */
-            const dataPts = dims.map((_,i)=>{
-                const a = (i*2*Math.PI/dims.length) - Math.PI/2;
-                return `${cx+r*vals[i]*Math.cos(a)},${cy+r*vals[i]*Math.sin(a)}`;
-            }).join(' ');
-            const zeroPts = dims.map(()=>`${cx},${cy}`).join(' ');
-
-            svg += `<polygon points="${zeroPts}" fill="${colors.magenta}" fill-opacity="0.3" stroke="${colors.magenta}" stroke-width="2"><animate attributeName="points" to="${dataPts}" dur="1s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/></polygon>`;
-
-            /* Labels */
-            dims.forEach((d,i) => {
-                const a = (i*2*Math.PI/dims.length) - Math.PI/2;
-                const lx = cx + (r+18)*Math.cos(a);
-                const ly = cy + (r+18)*Math.sin(a);
-                svg += `<text x="${lx}" y="${ly+4}" text-anchor="middle" fill="white" font-size="9" font-family="Inter" font-weight="500">${d}</text>`;
-            });
-
-            svg += '</svg>';
-            el.innerHTML = svg;
+        function setInsightContent(payload, state = { type:'default', id:'default' }) {
+            currentInsightState = state;
+            document.getElementById('insight-title').textContent = payload.title;
+            document.getElementById('insight-meta').textContent = payload.meta;
+            document.getElementById('insight-desc').textContent = payload.description;
+            document.getElementById('insight-kpi-a-label').textContent = payload.kpiALabel;
+            document.getElementById('insight-kpi-a-value').textContent = payload.kpiAValue;
+            document.getElementById('insight-kpi-b-label').textContent = payload.kpiBLabel;
+            document.getElementById('insight-kpi-b-value').textContent = payload.kpiBValue;
         }
 
-        /* ---- TABLE ---- */
-        function drawTable() {
-            const filtered = getFilteredResults();
-            const tbody = document.getElementById('results-table');
-            tbody.innerHTML = filtered.map(r => `
-                <tr>
-                    <td class="td-year">${r.year}</td>
-                    <td class="td-comp">${r.comp}</td>
-                    <td class="td-event">${r.event}</td>
-                    <td class="td-time">${r.time}</td>
-                    <td class="td-medal">${r.medalType !== 'none' ? `<span class="medal-dot ${r.medalType}"></span> ${r.medal}` : '—'}</td>
-                </tr>
-            `).join('');
-
-            if(filtered.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="td-empty">Aucun résultat pour ces filtres</td></tr>';
+        function buildDefaultInsight(filtered) {
+            if (!filtered.length) {
+                return {
+                    title: 'Aucune donnée disponible',
+                    meta: 'Les filtres actifs ne renvoient aucun résultat',
+                    description: 'Réinitialisez au moins un filtre pour retrouver les résultats et les graphiques associés.',
+                    kpiALabel: 'Action conseillée',
+                    kpiAValue: 'Élargir le filtre',
+                    kpiBLabel: 'État',
+                    kpiBValue: '0 course'
+                };
             }
 
-            /* Update stat cards */
-            const golds = filtered.filter(r => r.medalType === 'gold').length;
-            const silvers = filtered.filter(r => r.medalType === 'silver').length;
-            const totalMedals = golds + silvers;
-            document.getElementById('stat-medals').textContent = totalMedals || '—';
+            const bestResult = [...filtered].sort((a, b) => raceTimeToSeconds(a.time) - raceTimeToSeconds(b.time))[0];
+            const golds = filtered.filter((result) => result.medalType === 'gold').length;
+            const silvers = filtered.filter((result) => result.medalType === 'silver').length;
+
+            return {
+                title: 'Synthèse du filtre actif',
+                meta: describeFocus(filtered),
+                description: `Le filtre met surtout en avant ${bestResult.event} sur ${bestResult.comp}. La lecture globale montre ${filtered.length} course(s) retenue(s) et ${golds + silvers} podium(s).`,
+                kpiALabel: 'Référence clé',
+                kpiAValue: bestResult.time,
+                kpiBLabel: 'Podiums',
+                kpiBValue: `${golds} or / ${silvers} argent`
+            };
+        }
+
+        function renderFilterSummary(filtered) {
+            const competitions = new Set(filtered.map((result) => result.compKey)).size;
+            const events = new Set(filtered.map((result) => result.eventKey)).size;
+            document.getElementById('filter-summary').textContent = filtered.length
+                ? `${filtered.length} course(s) • ${competitions} compétition(s) • ${events} épreuve(s)`
+                : 'Aucun résultat dans la combinaison actuelle';
+        }
+
+        function updateStatCards(filtered) {
+            const golds = filtered.filter((result) => result.medalType === 'gold').length;
+            const silvers = filtered.filter((result) => result.medalType === 'silver').length;
+            const bestResult = filtered.length ? [...filtered].sort((a, b) => raceTimeToSeconds(a.time) - raceTimeToSeconds(b.time))[0] : null;
+            const competitions = new Set(filtered.map((result) => result.comp)).size;
+            const events = new Set(filtered.map((result) => result.event)).size;
+
+            document.getElementById('stat-medals').textContent = filtered.length ? String(golds + silvers) : '—';
             document.getElementById('stat-medals-sub').innerHTML = `<span class="medal-dot gold"></span> ${golds} Or &bull; <span class="medal-dot silver"></span> ${silvers} Argent`;
+
+            document.getElementById('stat-best-time').textContent = bestResult ? bestResult.time : '—';
+            document.getElementById('stat-best-time-sub').textContent = bestResult
+                ? `${bestResult.event} — ${bestResult.comp}`
+                : 'Aucun chrono disponible dans ce filtre';
+
+            document.getElementById('stat-races').textContent = String(filtered.length);
+            document.getElementById('stat-races-sub').textContent = filtered.length
+                ? `${competitions} compétition(s) et ${events} épreuve(s) retenues`
+                : 'Réinitialisez les filtres pour relancer l’analyse';
+
+            const focusValue = document.getElementById('filter-competition').value === 'all'
+                ? 'Mix'
+                : document.getElementById('filter-competition').value.toUpperCase();
+            document.getElementById('stat-focus').textContent = focusValue;
+            document.getElementById('stat-focus-sub').textContent = describeFocus(filtered);
         }
 
-        /* ---- Filtered Bar Chart ---- */
-        function drawFilteredBarChart() {
-            const filtered = getFilteredResults();
-            /* Aggregate medals by competition */
-            const compMap = {};
-            filtered.forEach(r => {
-                if(!compMap[r.comp]) compMap[r.comp] = { gold:0, silver:0, bronze:0 };
-                if(r.medalType === 'gold') compMap[r.comp].gold++;
-                else if(r.medalType === 'silver') compMap[r.comp].silver++;
-                else if(r.medalType === 'bronze') compMap[r.comp].bronze++;
-            });
+        function insightStillValid(filtered) {
+            if (currentInsightState.type === 'default') return false;
+            if (currentInsightState.type === 'evolution') return getFilteredEvolution().some((point) => point.year === currentInsightState.id);
+            if (currentInsightState.type === 'competition') return filtered.some((result) => result.compKey === currentInsightState.id);
+            if (currentInsightState.type === 'result') return filtered.some((result) => result.id === currentInsightState.id);
+            return false;
+        }
 
-            const compKeys = Object.keys(compMap);
-            if(compKeys.length === 0) {
-                document.getElementById('bar-chart').innerHTML = '<p style="text-align:center;color:#6b7280;padding:3rem 0;">Aucune donnée pour ces filtres</p>';
+        function selectEvolutionPoint(year) {
+            const points = getFilteredEvolution();
+            const point = points.find((item) => item.year === year);
+            if (!point) return;
+
+            const pointIndex = perfEvolution.findIndex((item) => item.year === year);
+            const previous = pointIndex > 0 ? perfEvolution[pointIndex - 1] : null;
+            const delta = previous ? (previous.time - point.time).toFixed(2) : null;
+
+            setInsightContent({
+                title: `Évolution ${year}`,
+                meta: 'Lecture de la courbe de progression',
+                description: previous
+                    ? `La saison ${year} confirme la montée en puissance de Léon Marchand sur le 400m 4 nages. Le gain par rapport à ${previous.year} est de ${delta} seconde(s).`
+                    : 'Cette première valeur sert de point de départ à la lecture de progression.',
+                kpiALabel: 'Temps réalisé',
+                kpiAValue: formatRaceTime(point.time),
+                kpiBLabel: 'Variation',
+                kpiBValue: previous ? `-${delta}s` : 'Point de départ'
+            }, { type:'evolution', id:year });
+
+            drawLineChart();
+            drawTable(getFilteredResults());
+        }
+
+        function selectCompetition(compKey) {
+            const filtered = getFilteredResults().filter((result) => result.compKey === compKey);
+            if (!filtered.length) return;
+
+            const golds = filtered.filter((result) => result.medalType === 'gold').length;
+            const silvers = filtered.filter((result) => result.medalType === 'silver').length;
+
+            setInsightContent({
+                title: filtered[0].comp,
+                meta: 'Lecture du graphique des compétitions',
+                description: `Cette compétition concentre ${filtered.length} course(s) dans le filtre actif. Elle sert de bon repère pour comparer la densité des podiums et la variété des épreuves.`,
+                kpiALabel: 'Podiums',
+                kpiAValue: `${golds + silvers}`,
+                kpiBLabel: 'Répartition',
+                kpiBValue: `${golds} or / ${silvers} argent`
+            }, { type:'competition', id:compKey });
+
+            drawFilteredBarChart(getFilteredResults());
+        }
+
+        function selectResultRow(resultId) {
+            const filtered = getFilteredResults();
+            const result = filtered.find((item) => item.id === resultId);
+            if (!result) return;
+
+            setInsightContent({
+                title: `${result.event} — ${result.year}`,
+                meta: `${result.comp} • ${result.medal === '—' ? 'finale' : result.medal}`,
+                description: result.medalType === 'gold'
+                    ? `Cette course illustre un pic de performance, avec un résultat transformé en médaille d'or dans le filtre actif.`
+                    : result.medalType === 'silver'
+                        ? `Cette course met en évidence un haut niveau de performance, malgré une marge encore présente face au meilleur temps.`
+                        : `Cette course sert de repère avant les podiums suivants et montre la trajectoire de progression de l'athlète.`,
+                kpiALabel: 'Chrono',
+                kpiAValue: result.time,
+                kpiBLabel: 'Statut',
+                kpiBValue: result.medal === '—' ? 'Sans podium' : result.medal
+            }, { type:'result', id:result.id });
+
+            drawTable(filtered);
+        }
+
+        function drawLineChart() {
+            const element = document.getElementById('line-chart');
+            const points = getFilteredEvolution();
+            const width = 500;
+            const height = 280;
+            const minTime = 235;
+            const maxTime = 270;
+
+            if (points.length < 2) {
+                element.innerHTML = '<p class="chart-empty-state">Pas assez de données pour tracer une évolution.</p>';
                 return;
             }
 
-            const el = document.getElementById('bar-chart');
-            const w = 500, h = 280;
-            const maxVal = Math.max(5, ...compKeys.map(k => compMap[k].gold + compMap[k].silver + compMap[k].bronze));
-            const barW = 35;
-            const groupW = Math.min(140, (w-100)/compKeys.length);
+            let svg = `<svg width="100%" height="100%" viewBox="0 0 ${width} ${height}">`;
+            svg += `<defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${colors.teal}" stop-opacity="0.38"/><stop offset="100%" stop-color="${colors.teal}" stop-opacity="0"/></linearGradient></defs>`;
 
-            let svg = `<svg width="100%" height="100%" viewBox="0 0 ${w} ${h}">`;
-
-            for(let i=0;i<=maxVal;i++){
-                const y = 20 + (maxVal-i)*(h-60)/maxVal;
-                svg += `<line x1="40" y1="${y}" x2="${w-20}" y2="${y}" stroke="#222" stroke-width="1"/>`;
-                svg += `<text x="35" y="${y+4}" text-anchor="end" fill="#666" font-size="10" font-family="Inter">${i}</text>`;
+            for (let index = 0; index < 5; index++) {
+                const y = 20 + index * (height - 60) / 4;
+                const value = maxTime - index * (maxTime - minTime) / 4;
+                svg += `<line x1="50" y1="${y}" x2="${width - 20}" y2="${y}" stroke="#222" stroke-width="1" stroke-dasharray="4,4"/>`;
+                svg += `<text x="45" y="${y + 4}" text-anchor="end" fill="#666" font-size="10" font-family="Inter">${formatRaceTime(value)}</text>`;
             }
 
-            compKeys.forEach((comp,gi) => {
-                const gx = 80 + gi * groupW;
-                const data = compMap[comp];
-                const vals = [
-                    { v:data.gold, color:colors.gold, label:'Or' },
-                    { v:data.silver, color:'#c0c0c0', label:'Ag' },
-                    { v:data.bronze, color:'#cd7f32', label:'Br' }
-                ];
-
-                vals.forEach((bar,bi) => {
-                    const x = gx + bi*(barW+6);
-                    const bh = (bar.v/maxVal)*(h-60);
-                    const y = h-40-bh;
-                    svg += `<rect x="${x}" y="${h-40}" width="${barW}" height="0" fill="${bar.color}" rx="3" opacity="0.85">
-                        <animate attributeName="y" to="${y}" dur="0.8s" fill="freeze" begin="${0.2+gi*0.15}s"/>
-                        <animate attributeName="height" to="${bh}" dur="0.8s" fill="freeze" begin="${0.2+gi*0.15}s"/>
-                    </rect>`;
-                    if(bar.v > 0) {
-                        svg += `<text x="${x+barW/2}" y="${y-6}" text-anchor="middle" fill="white" font-size="12" font-weight="bold" font-family="Inter" opacity="0"><animate attributeName="opacity" to="1" dur="0.5s" fill="freeze" begin="1s"/>${bar.v}</text>`;
-                    }
-                });
-
-                /* Label under bars */
-                const shortLabel = comp.length > 20 ? comp.substring(0,18)+'…' : comp;
-                svg += `<text x="${gx+barW*1.5+6}" y="${h-10}" text-anchor="middle" fill="#999" font-size="9" font-family="Inter">${shortLabel}</text>`;
+            const plotPoints = points.map((point, index) => {
+                const x = 70 + index * ((width - 100) / (points.length - 1));
+                const y = 20 + ((maxTime - point.time) / (maxTime - minTime)) * (height - 60);
+                return { ...point, x, y };
             });
 
-            const legendX = w-160;
-            [{c:colors.gold,l:'Or'},{c:'#c0c0c0',l:'Argent'},{c:'#cd7f32',l:'Bronze'}].forEach((lg,i) => {
-                svg += `<rect x="${legendX}" y="${10+i*18}" width="10" height="10" fill="${lg.c}" rx="2"/>`;
-                svg += `<text x="${legendX+16}" y="${19+i*18}" fill="#999" font-size="10" font-family="Inter">${lg.l}</text>`;
+            const linePoints = plotPoints.map((point) => `${point.x},${point.y}`).join(' ');
+            svg += `<polygon points="${plotPoints[0].x},${height - 40} ${linePoints} ${plotPoints[plotPoints.length - 1].x},${height - 40}" fill="url(#areaGrad)" opacity="0.95"></polygon>`;
+            svg += `<polyline points="${linePoints}" fill="none" stroke="${colors.teal}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline>`;
+
+            plotPoints.forEach((point) => {
+                const selected = currentInsightState.type === 'evolution' && currentInsightState.id === point.year;
+                svg += `
+                    <g data-chart-action="evolution" onclick="selectEvolutionPoint(${point.year})" style="cursor:pointer;">
+                        <circle cx="${point.x}" cy="${point.y}" r="12" fill="transparent"></circle>
+                        <circle cx="${point.x}" cy="${point.y}" r="${selected ? 7 : 5}" fill="${selected ? colors.magenta : '#ffffff'}" stroke="${selected ? '#ffffff' : colors.teal}" stroke-width="${selected ? 2 : 1.5}"></circle>
+                        <text x="${point.x}" y="${height - 22}" text-anchor="middle" fill="${selected ? '#ffffff' : '#666'}" font-size="11" font-family="Inter" font-weight="${selected ? '700' : '500'}">${point.year}</text>
+                        <text x="${point.x}" y="${point.y - 14}" text-anchor="middle" fill="#ffffff" font-size="10" font-family="Inter" font-weight="700">${formatRaceTime(point.time)}</text>
+                    </g>`;
             });
 
             svg += '</svg>';
-            el.innerHTML = svg;
+            element.innerHTML = svg;
+        }
+
+        function drawFilteredBarChart(filtered) {
+            const element = document.getElementById('bar-chart');
+            const grouped = {};
+
+            filtered.forEach((result) => {
+                if (!grouped[result.compKey]) {
+                    grouped[result.compKey] = { label: result.comp, gold: 0, silver: 0, bronze: 0 };
+                }
+                if (result.medalType === 'gold') grouped[result.compKey].gold += 1;
+                if (result.medalType === 'silver') grouped[result.compKey].silver += 1;
+                if (result.medalType === 'bronze') grouped[result.compKey].bronze += 1;
+            });
+
+            const keys = Object.keys(grouped);
+            if (!keys.length) {
+                element.innerHTML = '<p class="chart-empty-state">Aucune donnée disponible pour ce croisement de filtres.</p>';
+                return;
+            }
+
+            const width = 500;
+            const height = 280;
+            const maxValue = Math.max(4, ...keys.map((key) => grouped[key].gold + grouped[key].silver + grouped[key].bronze));
+            const groupWidth = Math.min(140, (width - 100) / keys.length);
+            const barWidth = 30;
+
+            let svg = `<svg width="100%" height="100%" viewBox="0 0 ${width} ${height}">`;
+
+            for (let index = 0; index <= maxValue; index++) {
+                const y = 20 + (maxValue - index) * (height - 60) / maxValue;
+                svg += `<line x1="40" y1="${y}" x2="${width - 20}" y2="${y}" stroke="#222" stroke-width="1"/>`;
+                svg += `<text x="35" y="${y + 4}" text-anchor="end" fill="#666" font-size="10" font-family="Inter">${index}</text>`;
+            }
+
+            keys.forEach((key, groupIndex) => {
+                const xOrigin = 80 + groupIndex * groupWidth;
+                const values = [
+                    { value: grouped[key].gold, color: colors.gold },
+                    { value: grouped[key].silver, color: '#c0c0c0' },
+                    { value: grouped[key].bronze, color: '#cd7f32' }
+                ];
+                const selected = currentInsightState.type === 'competition' && currentInsightState.id === key;
+
+                values.forEach((entry, index) => {
+                    const x = xOrigin + index * (barWidth + 6);
+                    const barHeight = maxValue ? (entry.value / maxValue) * (height - 60) : 0;
+                    const y = height - 40 - barHeight;
+                    svg += `<rect x="${x}" y="${y}" width="${barWidth}" height="${barHeight}" fill="${entry.color}" rx="4" opacity="${selected ? 1 : 0.88}" stroke="${selected ? '#ffffff' : 'none'}" stroke-width="${selected ? 1.5 : 0}"></rect>`;
+                    if (entry.value > 0) {
+                        svg += `<text x="${x + (barWidth / 2)}" y="${y - 6}" text-anchor="middle" fill="#ffffff" font-size="12" font-family="Inter" font-weight="700">${entry.value}</text>`;
+                    }
+                });
+
+                svg += `
+                    <g data-chart-action="competition" onclick="selectCompetition('${key}')" style="cursor:pointer;">
+                        <rect class="bar-group-hit" x="${xOrigin - 12}" y="20" width="${barWidth * 3 + 30}" height="${height - 40}" fill="transparent"></rect>
+                        <text x="${xOrigin + barWidth + 6}" y="${height - 10}" text-anchor="middle" fill="${selected ? '#ffffff' : '#999'}" font-size="10" font-family="Inter" font-weight="${selected ? '700' : '500'}">${grouped[key].label}</text>
+                    </g>`;
+            });
+
+            svg += '</svg>';
+            element.innerHTML = svg;
+        }
+
+        function drawRadar() {
+            const element = document.getElementById('radar-chart');
+            const dimensions = ['Vitesse', 'Endurance', 'Technique', 'Mental', 'Puissance', 'Régularité'];
+            const values = [0.85, 0.92, 0.95, 0.90, 0.80, 0.88];
+            const centerX = 100;
+            const centerY = 100;
+            const radius = 70;
+
+            let svg = `<svg width="100%" height="auto" viewBox="0 0 200 200" style="max-width:220px;">`;
+
+            [1, 0.66, 0.33].forEach((scale) => {
+                const polygonPoints = dimensions.map((_, index) => {
+                    const angle = (index * 2 * Math.PI / dimensions.length) - Math.PI / 2;
+                    return `${centerX + radius * scale * Math.cos(angle)},${centerY + radius * scale * Math.sin(angle)}`;
+                }).join(' ');
+                svg += `<polygon points="${polygonPoints}" fill="none" stroke="#333" stroke-width="1"/>`;
+            });
+
+            dimensions.forEach((_, index) => {
+                const angle = (index * 2 * Math.PI / dimensions.length) - Math.PI / 2;
+                svg += `<line x1="${centerX}" y1="${centerY}" x2="${centerX + radius * Math.cos(angle)}" y2="${centerY + radius * Math.sin(angle)}" stroke="#333" stroke-width="1"/>`;
+            });
+
+            const dataPoints = dimensions.map((_, index) => {
+                const angle = (index * 2 * Math.PI / dimensions.length) - Math.PI / 2;
+                return `${centerX + radius * values[index] * Math.cos(angle)},${centerY + radius * values[index] * Math.sin(angle)}`;
+            }).join(' ');
+
+            svg += `<polygon points="${dataPoints}" fill="${colors.magenta}" fill-opacity="0.28" stroke="${colors.magenta}" stroke-width="2"></polygon>`;
+
+            dimensions.forEach((label, index) => {
+                const angle = (index * 2 * Math.PI / dimensions.length) - Math.PI / 2;
+                const x = centerX + (radius + 18) * Math.cos(angle);
+                const y = centerY + (radius + 18) * Math.sin(angle);
+                svg += `<text x="${x}" y="${y + 4}" text-anchor="middle" fill="#ffffff" font-size="9" font-family="Inter" font-weight="500">${label}</text>`;
+            });
+
+            svg += '</svg>';
+            element.innerHTML = svg;
+        }
+
+        function drawTable(filtered) {
+            const tableBody = document.getElementById('results-table');
+            if (!filtered.length) {
+                tableBody.innerHTML = '<tr><td colspan="5" class="td-empty">Aucun résultat pour ces filtres.</td></tr>';
+                return;
+            }
+
+            tableBody.innerHTML = filtered.map((result) => {
+                const selected = currentInsightState.type === 'result' && currentInsightState.id === result.id;
+                return `
+                    <tr class="result-row-button${selected ? ' active-row' : ''}" onclick="selectResultRow(${result.id})">
+                        <td class="td-year">${result.year}</td>
+                        <td class="td-comp">${result.comp}</td>
+                        <td class="td-event">${result.event}</td>
+                        <td class="td-time">${result.time}</td>
+                        <td class="td-medal">${result.medalType !== 'none' ? `<span class="medal-dot ${result.medalType}"></span> ${result.medal}` : '—'}</td>
+                    </tr>`;
+            }).join('');
         }
 
         function updateDashboard() {
-            drawTable();
-            drawFilteredBarChart();
+            const filtered = getFilteredResults();
             drawLineChart();
-        }
-
-        /* ---- Lazy Init via IntersectionObserver ---- */
-        let chartsRendered = false;
-        let bottomRendered = false;
-
-        function initCharts() {
-            if (!chartsRendered) {
-                drawLineChart();
-                drawBarChart();
-                chartsRendered = true;
-            }
-        }
-
-        function initBottom() {
-            if (!bottomRendered) {
-                drawRadar();
-                drawTable();
-                bottomRendered = true;
-            }
-        }
-
-        const lazyObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    if (entry.target.id === 'charts-row') initCharts();
-                    if (entry.target.id === 'bottom-section') initBottom();
-                    lazyObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        const chartsRow = document.getElementById('charts-row');
-        const bottomSection = document.getElementById('bottom-section');
-        if (chartsRow) lazyObserver.observe(chartsRow);
-        if (bottomSection) lazyObserver.observe(bottomSection);
-
-        /* Override updateDashboard to force-init if filters used before scroll */
-        const _origUpdate = updateDashboard;
-        updateDashboard = function() {
-            chartsRendered = true;
-            bottomRendered = true;
-            _origUpdate();
+            drawFilteredBarChart(filtered);
+            drawTable(filtered);
             drawRadar();
-        };
+            updateStatCards(filtered);
+            renderFilterSummary(filtered);
+
+            if (!insightStillValid(filtered)) {
+                setInsightContent(buildDefaultInsight(filtered));
+                currentInsightState = { type:'default', id:'default' };
+            }
+        }
+
+        updateDashboard();
     </script>
-
-
 </body>
 </html>
